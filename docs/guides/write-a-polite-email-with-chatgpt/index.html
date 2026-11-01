@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eef2f6">
+<title>Write a polite email with ChatGPT in one tap</title>
+<meta name="description" content="Your AI asks who it&#x27;s to and what you want to say, then writes a short, friendly email with a subject line. Free, no typing up front.">
+<link rel="canonical" href="https://switchkitai.com/guides/write-a-polite-email-with-chatgpt/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Switch Kit AI">
+<meta property="og:title" content="Write a polite email with ChatGPT in one tap">
+<meta property="og:description" content="Your AI asks who it&#x27;s to and what you want to say, then writes a short, friendly email with a subject line. Free, no typing up front.">
+<meta property="og:image" content="https://switchkitai.com/assets/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://switchkitai.com/guides/write-a-polite-email-with-chatgpt/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap"><style>
+:root{--desk:#eef2f6;--card:#fcfcf6;--rule:#a7c7e7;--margin:#d94a40;--hi:#ffe45c;--ink:#1c2b4f;--pencil:#5c6578;--line:#d9e2ec;--ok:#1d6b4c;
+--display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;--body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.15rem;line-height:1.55;overflow-wrap:break-word}
+.wrap{max-width:38rem;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+a{color:var(--ink)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.brand{font-family:var(--display);font-weight:800;font-size:1.12rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.mark{width:22px;height:26px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;display:inline-block}
+.mark:before{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--margin)}
+.mark:after{content:"";position:absolute;left:3px;right:5px;top:12px;height:6px;background:var(--hi);border-radius:2px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,8vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:800;font-size:1.4rem;margin:34px 0 8px}
+.lede{color:var(--pencil);margin:0 0 18px}
+.card{background:var(--card);border-radius:6px;box-shadow:0 18px 40px -24px rgba(28,43,79,.45);border-top:3px solid var(--margin);padding:16px}
+.words{background:#fff;border:1.5px dashed var(--rule);border-radius:8px;padding:12px 14px;margin:0 0 14px;font-size:1.05rem}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:700 1.2rem var(--body);text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation}
+.btn.done{background:var(--ok)}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 0 0;font-size:1rem;color:var(--pencil)}
+.under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
+.toast{margin:10px 0 0;font-size:1rem;color:var(--ok);font-weight:700}
+.toast:empty{display:none}
+.tip{margin-top:16px;padding:12px 14px;border-left:4px solid var(--hi);background:rgba(255,255,255,.6)}
+ul.more{list-style:none;padding:0;margin:0}
+ul.more li{background:var(--card);border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:12px 14px}
+ul.more li:first-child{border-radius:6px 6px 0 0}ul.more li:last-child{border-radius:0 0 6px 6px;border-bottom:0}
+ul.more span{flex:1}
+.go{flex:none;font:700 .95rem var(--body);background:var(--ink);color:#fff;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;text-decoration:none}
+.go.done{background:var(--ok)}
+.cta{margin-top:34px;background:var(--hi);border-radius:6px;padding:18px}
+.cta h2{margin:0 0 6px}
+.cta p{margin:0 0 14px}
+.list a{display:block;background:var(--card);padding:14px 16px;border-bottom:1px solid var(--rule);font-weight:700;text-decoration:none}
+.list a span{display:block;font-weight:400;color:var(--pencil);font-size:1rem;margin-top:2px}
+footer{margin-top:40px;font-size:.95rem;color:var(--pencil)}footer a{color:var(--pencil)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+</style><script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Turn a rough note into a polite email", "description": "Your AI asks who it's to and what you want to say, then writes a short, friendly email with a subject line. Free, no typing up front.", "step": [{"@type": "HowToStep", "text": "Tap Try it now. Your AI opens with the words already typed in."}, {"@type": "HowToStep", "text": "Answer its quick questions or ask it to change anything."}]}</script>
+</head>
+<body><div class="wrap"><div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/guides/">All free shortcuts</a></div>
+<h1>Turn a rough note into a polite email</h1><p class="lede">Know what you want to say but not how to say it? Tap the button. Your AI asks two quick questions, who it&#x27;s to and what you need, then writes a short, polite email with a subject line.</p><div class="card"><p style="margin:0 0 8px;font-weight:700">The words your AI gets:</p><p class="words">Help me write a short, polite email. Ask me who it&#x27;s to and what I want to say, then write it in plain, friendly language with a subject line. Keep it short and simple. Use plain English.</p><a class="btn" href="#" target="_blank" rel="noopener" data-p="Help me write a short, polite email. Ask me who it&#x27;s to and what I want to say, then write it in plain, friendly language with a subject line. Keep it short and simple. Use plain English.">Try it now, free</a><div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option><option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select><span>Free. No sign-up here.</span></div><p class="toast" id="toast" role="status"></p></div><div class="tip"><b>Tip:</b> Say &quot;make it warmer&quot;, &quot;shorter&quot; or &quot;more firm&quot; to get a new version in seconds.</div><h2>More ready-made requests</h2><ul class="more"><li><span>Write a polite email to my landlord asking when a repair will be done. It&#x27;s been two weeks.</span><a class="go" href="#" target="_blank" rel="noopener" data-p="Write a polite email to my landlord asking when a repair will be done. It&#x27;s been two weeks.">Tap</a></li><li><span>Write a short email to my child&#x27;s teacher asking for a quick meeting.</span><a class="go" href="#" target="_blank" rel="noopener" data-p="Write a short email to my child&#x27;s teacher asking for a quick meeting.">Tap</a></li><li><span>Write a friendly follow-up email to someone who hasn&#x27;t replied in a week.</span><a class="go" href="#" target="_blank" rel="noopener" data-p="Write a friendly follow-up email to someone who hasn&#x27;t replied in a week.">Tap</a></li></ul><h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li><li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li><li>Answer its quick questions, or ask it to change anything.</li></ol><p><b>Good to know:</b> Read it once before you send it. Add any names, dates or details only you know.</p><div class="cta"><h2>Want 60 more like this?</h2><p>Answer 4 quick questions and get a cheat sheet of one-tap shortcuts made for your life: dinners, emails, bills, trips, home and more. Your first 10 are free.</p><a class="btn" href="/?utm_content=guide#make">Make my free cheat sheet</a></div><footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div><script>
+(function(){
+var AIS={chatgpt:{n:"ChatGPT",u:function(p){return "https://chatgpt.com/?q="+encodeURIComponent(p);},f:1},
+claude:{n:"Claude",u:function(p){return "https://claude.ai/new?q="+encodeURIComponent(p);},f:1},
+gemini:{n:"Gemini",u:function(){return "https://gemini.google.com/app";}},
+copilot:{n:"Copilot",u:function(){return "https://copilot.microsoft.com/";}}};
+var sel=document.getElementById("ai");if(!sel)return;
+try{var s=JSON.parse(localStorage.getItem("macs-ai"));if(s&&AIS[s])sel.value=s;}catch(e){}
+sel.addEventListener("change",function(){try{localStorage.setItem("macs-ai",JSON.stringify(sel.value));}catch(e){}});
+var ad;try{ad=(new URLSearchParams(location.search).get("utm_content")||"guide").slice(0,40);}catch(e){ad="guide";}
+function copyNow(t){var a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");a.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(a);if(!ok){try{navigator.clipboard.writeText(t);ok=true;}catch(e){}}return ok;}
+Array.prototype.forEach.call(document.querySelectorAll("[data-p]"),function(b){b.addEventListener("click",function(){
+var ai=AIS[sel.value],t=b.getAttribute("data-p");b.href=ai.u(t);var c=copyNow(t);b.classList.add("done");
+document.getElementById("toast").textContent=ai.f?(ai.n+" is opening with the words typed in."+(c?" If the box is empty, paste: we copied it too.":"")):(c?"Copied. Paste it into "+ai.n+" and press send.":"Press and hold to copy, then paste it into "+ai.n+".");
+try{if(window.umami)umami.track("free-tap",{ad:ad});}catch(e){}});});
+})();
+</script></body>
+</html>
