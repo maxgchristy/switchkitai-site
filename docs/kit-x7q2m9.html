@@ -68,6 +68,11 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(2.15rem,9.4vw,3.1r
   .row:active .go{transform:scale(.95)}
 }
 @media (hover:hover) and (pointer:fine){.row:not(.locked):hover .t:before{transform:scaleX(1);background:var(--hi-soft)}.row.done:hover .t:before{background:var(--hi)}}
+.hero{padding:0 0 18px}
+.heroChips{padding:14px 16px 0}
+.btn.heroGo{margin:16px 16px 0;width:calc(100% - 32px);min-height:64px;font-size:1.25rem}
+.btn.heroGo.done{background:var(--ok)}
+.heroNote{margin:10px 16px 0;font-size:.98rem;color:var(--pencil)}
 .cat{padding:0 16px;height:var(--row);display:flex;align-items:flex-end;padding-bottom:9px;font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--margin)}
 
 .under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 2px 0;font-size:1rem;color:var(--pencil)}
@@ -139,11 +144,17 @@ footer a{color:var(--pencil)}
 
   <!-- First screen: free shortcuts, nothing to fill in -->
   <div id="intro">
-    <h1 id="h1">Never know what to ask AI?</h1>
-    <p class="lede" id="lede">Tap a line. Your AI opens with the words already written and does the rest.</p>
-    <div class="card" id="freeCard">
-      <div class="head">Try one, free</div>
-      <ul class="rows" id="freeRows"></ul>
+    <h1 id="h1">What's for dinner this week?</h1>
+    <p class="lede" id="lede">One tap and your AI plans 5 easy dinners and writes the shopping list. Free. No typing.</p>
+    <div class="card hero" id="heroCard">
+      <div class="head" id="heroHead">Cooking for</div>
+      <div class="chips heroChips" id="heroChips">
+        <button class="chip" type="button" data-v="solo">Just me</button>
+        <button class="chip" type="button" data-v="two">Two of us</button>
+        <button class="chip" type="button" data-v="kids">Family with kids</button>
+      </div>
+      <a class="btn heroGo" id="heroGo" href="#" target="_blank" rel="noopener">Plan my week's dinners</a>
+      <p class="heroNote" id="heroNote">Opens ChatGPT with the words already typed in. Works on the free version.</p>
     </div>
     <div class="under"><label for="ai">Opens in</label>
       <select id="ai">
@@ -155,12 +166,16 @@ footer a{color:var(--pencil)}
       <span>No sign-up here.</span>
     </div>
     <p class="toast" id="toast" role="status"></p>
+    <div class="card" id="freeCard" style="margin-top:22px">
+      <div class="head">More free shortcuts</div>
+      <ul class="rows" id="freeRows"></ul>
+    </div>
   </div>
 
   <!-- Make it yours -->
   <section id="make" class="noprint">
     <h2 id="makeH">Get a cheat sheet made for your life</h2>
-    <p class="lede" id="makeLede">Four quick taps. You'll see your first shortcuts free.</p>
+    <p class="lede" id="makeLede">Four quick taps. Your first 10 shortcuts are free to use.</p>
     <div class="q" data-q="home"><p>Who's at home?</p><div class="chips">
       <button class="chip" type="button" data-v="solo">Just me</button>
       <button class="chip" type="button" data-v="two">Two of us</button>
@@ -349,7 +364,7 @@ var LIB = [
 
 (function(){
   var UNLOCKED=true;
-  var FREE_IDS=["m1","e1","t1"], PREVIEW_OPEN=5, PREVIEW_LOCKED=9;
+  var FREE_IDS=["e1","p2","b1","h1","t1"], PREVIEW_OPEN=10, PREVIEW_LOCKED=8;
   var KEY_A="macs-answers", KEY_AI="macs-ai";
   var $=function(id){return document.getElementById(id);};
   function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -357,12 +372,10 @@ var LIB = [
 
   // Which ad brought them (for counting and the matching headline). Never which AI or answers.
   var ad=(function(){try{return (new URLSearchParams(location.search).get("utm_content")||"none").slice(0,40);}catch(e){return "none";}})();
-  var HERO={
-    ad_dinner:["Dinner planned in one tap.","Tap a line. Your AI writes the week's dinners and the shopping list."],
-    ad_email:["A polite email in one tap.","Tap a line. Your AI asks two quick questions and writes it for you."],
-    ad_sheet:["Your cheat sheet for AI.","Tap a line. Your AI opens with the words already written and does the rest."]
-  };
-  if(HERO[ad]){$("h1").textContent=HERO[ad][0];$("lede").textContent=HERO[ad][1];}
+  // The big card on the first screen: dinner for everyone, except the email ad gets the email shortcut.
+  var HERO_ID="m1";
+  if(ad==="ad_email"){HERO_ID="e1";$("h1").textContent="A polite email in one tap.";$("lede").textContent="Your AI asks two quick questions, then writes it for you. Free. No typing.";
+    $("heroHead").textContent="Try it now";$("heroChips").hidden=true;$("heroGo").textContent="Write my email";}
   function count(name,extra){try{if(window.umami&&typeof umami.track==="function"){var d={ad:ad};if(extra)for(var k in extra)d[k]=extra[k];umami.track(name,d);}}catch(e){}}
 
   var AIS={
@@ -420,7 +433,24 @@ var LIB = [
     li.appendChild(a); return li;
   }
 
-  // First screen
+  // First screen: the big card
+  if(HERO_ID==="e1"){var fi=FREE_IDS.indexOf("e1"); if(fi>=0) FREE_IDS.splice(fi,1,"m1");}
+  var heroChips=$("heroChips").querySelectorAll(".chip");
+  function paintHero(){Array.prototype.forEach.call(heroChips,function(c){c.setAttribute("aria-pressed",answers.home===c.dataset.v?"true":"false");});}
+  Array.prototype.forEach.call(heroChips,function(c){c.addEventListener("click",function(){
+    answers.home=(answers.home===c.dataset.v)?null:c.dataset.v; store(KEY_A,answers); paintHero(); paintAll();});});
+  paintHero();
+  function heroNote(){var ai=AIS[sel.value]; $("heroNote").textContent=ai.fill?("Opens "+ai.n+" with the words already typed in. Works on the free version."):("Opens "+ai.n+". We copy the words, you paste and press send.");}
+  heroNote(); sel.addEventListener("change",heroNote);
+  $("heroGo").addEventListener("click",function(){
+    var ai=AIS[sel.value], text=fill(byId(HERO_ID).p), go=$("heroGo");
+    go.href=ai.url(text);
+    var copied=copyNow(text);
+    go.classList.add("done"); go.textContent="Opened. Tap again anytime";
+    $("toast").textContent=ai.fill?(ai.n+" is opening with the words typed in."+(copied?" If the box is empty, paste: we copied it too.":"")):(copied?"Copied. Paste it into "+ai.n+" and press send.":"Press and hold to copy, then paste it into "+ai.n+".");
+    count("free-tap"); tapped=true;
+    if(!UNLOCKED) $("bar").hidden=false;
+  });
   FREE_IDS.forEach(function(id){$("freeRows").appendChild(rowFor(byId(id),false,"free"));});
   sel.addEventListener("change",function(){store(KEY_AI,sel.value);});
 
@@ -428,7 +458,8 @@ var LIB = [
   var helpBox=$("helpChips");
   CATS.forEach(function(c){ if(c[0]==="switch") return;
     var b=document.createElement("button"); b.className="chip"; b.type="button"; b.dataset.v=c[0]; b.textContent=c[1]; helpBox.appendChild(b); });
-  var started=false;
+  var started=false, painters=[];
+  function paintAll(){painters.forEach(function(f){f();});}
   Array.prototype.forEach.call(document.querySelectorAll(".q"),function(q){
     var key=q.dataset.q, multi=!!q.dataset.multi;
     var chips=q.querySelectorAll(".chip");
@@ -439,9 +470,9 @@ var LIB = [
       if(multi){var arr=(answers[key]||[]).slice(); var i=arr.indexOf(c.dataset.v);
         if(i>=0) arr.splice(i,1); else { if(key==="help"&&arr.length>=4) arr.shift(); arr.push(c.dataset.v);} answers[key]=arr;}
       else answers[key]=(answers[key]===c.dataset.v)?null:c.dataset.v;
-      store(KEY_A,answers); paint();
+      store(KEY_A,answers); paint(); if(key==="home") paintHero();
     });});
-    paint();
+    painters.push(paint); paint();
   });
 
   function ordered(){
