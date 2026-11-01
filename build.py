@@ -51,38 +51,38 @@ kit = src.replace("{{HEADEXTRA}}", '<meta name="robots" content="noindex, nofoll
     "var UNLOCKED=false; /*UNLOCK-FLAG*/", "var UNLOCKED=true;")
 
 DOC_STYLE = """<style>
-:root{--desk:#eef2f6;--card:#fcfcf6;--ink:#1c2b4f;--pencil:#5c6578;--line:#d9e2ec;--margin:#d94a40;--hi:#ffe45c;
---display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;--body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;color-scheme:light}
+:root{--paper:#ffffff;--ink:#1d2433;--muted:#5b6475;--line:#e2e5ea;--edge:#c9d2ce;--green:#1f5d4c;--green-dark:#164536;--tint:#eef4f1;
+--font:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.15rem;line-height:1.6;overflow-wrap:break-word}
-.wrap{max-width:40rem;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
-a{color:var(--ink)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
-.brand{font-family:var(--display);font-weight:800;font-size:1.15rem;text-decoration:none;display:flex;align-items:center;gap:10px}
-.mark{width:22px;height:26px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;display:inline-block}
-.mark:before{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--margin)}
-.mark:after{content:"";position:absolute;left:3px;right:5px;top:12px;height:6px;background:var(--hi);border-radius:2px}
-.sheet{background:var(--card);border-radius:6px;padding:20px 18px 24px;box-shadow:0 18px 40px -26px rgba(28,43,79,.45);border-top:3px solid var(--margin)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,7vw,2.5rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 4px}
-h2{font-family:var(--display);font-weight:700;font-size:1.3rem;margin:28px 0 6px}
-p,ul{margin:0 0 12px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-wrap:break-word}
+.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green-dark)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:36px}
+.top a{font-size:1rem;color:var(--muted)}
+.top a.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.mark{width:14px;height:14px;border-radius:4px;background:var(--green);display:inline-block;flex:none}
+h1{font-weight:800;font-size:clamp(2.1rem,8.5vw,3rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 14px}
+h2{font-weight:800;font-size:1.45rem;line-height:1.15;letter-spacing:-.015em;margin:44px 0 8px}
+p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
-.updated,.lede{color:var(--pencil)}
-footer{margin-top:32px;font-size:.95rem;color:var(--pencil)}
-footer a{color:var(--pencil)}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.updated,.lede{color:var(--muted)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer a{color:var(--muted)}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+h1{font-size:clamp(2rem,7vw,2.5rem)}
+h2{font-size:1.3rem;margin-top:32px}
 </style>"""
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">')
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&display=swap">')
 
 def doc(title, inner, desc, path):
     url = SITE + path
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#eef2f6">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#ffffff">\n'
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + DOC_STYLE + '\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/">Try a shortcut free</a></div>\n'
-            '<div class="sheet">' + inner + '</div>\n<footer>Switch Kit AI is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
+            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/">Try it free</a></div>\n'
+            '<main>' + inner + '</main>\n<footer>Switch Kit AI is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
             '<a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div></body>\n</html>\n')
 
 def redirect(to):
@@ -126,45 +126,51 @@ def lib_prompt(sid):
     return re.sub(r"\s+", " ", m.group(1).replace("{for}", HOUSE).replace("{style}", G_STYLE)).strip()
 
 GUIDE_CSS = """<style>
-:root{--desk:#eef2f6;--card:#fcfcf6;--rule:#a7c7e7;--margin:#d94a40;--hi:#ffe45c;--ink:#1c2b4f;--pencil:#5c6578;--line:#d9e2ec;--ok:#1d6b4c;
---display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;--body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;color-scheme:light}
+:root{--paper:#ffffff;--ink:#1d2433;--muted:#5b6475;--line:#e2e5ea;--edge:#c9d2ce;--green:#1f5d4c;--green-dark:#164536;--tint:#eef4f1;
+--font:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.15rem;line-height:1.55;overflow-wrap:break-word}
-.wrap{max-width:38rem;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
-a{color:var(--ink)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
-.brand{font-family:var(--display);font-weight:800;font-size:1.12rem;text-decoration:none;display:flex;align-items:center;gap:10px}
-.mark{width:22px;height:26px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;display:inline-block}
-.mark:before{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--margin)}
-.mark:after{content:"";position:absolute;left:3px;right:5px;top:12px;height:6px;background:var(--hi);border-radius:2px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,8vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
-h2{font-family:var(--display);font-weight:800;font-size:1.4rem;margin:34px 0 8px}
-.lede{color:var(--pencil);margin:0 0 18px}
-.card{background:var(--card);border-radius:6px;box-shadow:0 18px 40px -24px rgba(28,43,79,.45);border-top:3px solid var(--margin);padding:16px}
-.words{background:#fff;border:1.5px dashed var(--rule);border-radius:8px;padding:12px 14px;margin:0 0 14px;font-size:1.05rem}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:700 1.2rem var(--body);text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation}
-.btn.done{background:var(--ok)}
-.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 0 0;font-size:1rem;color:var(--pencil)}
-.under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
-.toast{margin:10px 0 0;font-size:1rem;color:var(--ok);font-weight:700}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-wrap:break-word}
+.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green-dark)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:36px}
+.top a{font-size:1rem;color:var(--muted)}
+.top a.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.mark{width:14px;height:14px;border-radius:4px;background:var(--green);display:inline-block;flex:none}
+h1{font-weight:800;font-size:clamp(2.1rem,8.5vw,3rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 14px}
+h2{font-weight:800;font-size:1.45rem;line-height:1.15;letter-spacing:-.015em;margin:44px 0 8px}
+p,ul,ol{margin:0 0 14px}
+li{margin-bottom:6px}
+.updated,.lede{color:var(--muted)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer a{color:var(--muted)}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+
+.lede{font-size:1.15rem;margin-bottom:24px}
+.panel{background:var(--tint);border-radius:16px;padding:20px}
+.panel .label{margin:0 0 8px;font-weight:600;font-size:1rem}
+.words{margin:0 0 4px;padding:2px 0 2px 14px;border-left:3px solid var(--green);font-size:1.05rem}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 1.15rem var(--font);text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation}
+.btn:hover{background:var(--green-dark)}
+.btn.done{background:var(--green-dark)}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 0;font-size:.98rem;color:var(--muted)}
+.under select{font:600 1rem var(--font);color:var(--ink);background:var(--paper);border:1.5px solid var(--edge);border-radius:8px;padding:8px 10px;min-height:44px}
+.toast{margin:12px 0 0;font-size:1rem;color:var(--green-dark);font-weight:600}
 .toast:empty{display:none}
-.share{display:flex;align-items:center;gap:10px;margin:14px 2px 0;padding:12px 14px;background:rgba(255,255,255,.6);border-radius:10px;font-size:1rem}
-.share span{flex:1;color:var(--pencil)}
-.share button{flex:none;font:700 1rem var(--body);color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
-.tip{margin-top:16px;padding:12px 14px;border-left:4px solid var(--hi);background:rgba(255,255,255,.6)}
-ul.more{list-style:none;padding:0;margin:0}
-ul.more li{background:var(--card);border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:12px 14px}
-ul.more li:first-child{border-radius:6px 6px 0 0}ul.more li:last-child{border-radius:0 0 6px 6px;border-bottom:0}
-ul.more span{flex:1}
-.go{flex:none;font:700 .95rem var(--body);background:var(--ink);color:#fff;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;text-decoration:none}
-.go.done{background:var(--ok)}
-.cta{margin-top:34px;background:var(--hi);border-radius:6px;padding:18px}
-.cta h2{margin:0 0 6px}
-.cta p{margin:0 0 14px}
-.list a{display:block;background:var(--card);padding:14px 16px;border-bottom:1px solid var(--rule);font-weight:700;text-decoration:none}
-.list a span{display:block;font-weight:400;color:var(--pencil);font-size:1rem;margin-top:2px}
-footer{margin-top:40px;font-size:.95rem;color:var(--pencil)}footer a{color:var(--pencil)}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.share{margin:20px 0 0;font-size:1rem;color:var(--muted)}
+.share button{background:none;border:0;padding:0;font:600 1rem var(--font);color:var(--green-dark);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tip{margin-top:28px}
+ul.list{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line)}
+ul.list li{margin:0;border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:14px;min-height:60px;padding:14px 2px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.08rem;line-height:1.35}
+.row span{flex:1}
+.row small{display:block;font-weight:400;color:var(--muted);font-size:.98rem;margin-top:3px}
+.row::after{content:"\203A";flex:none;font-size:1.7rem;line-height:1;color:var(--green)}
+.row.done::after{content:"\2713";font-size:1.15rem}
+@media (hover:hover){.row:hover span{text-decoration:underline;text-underline-offset:3px}}
+ol{padding-left:1.2em}
+.cta{margin-top:48px;border:1.5px solid var(--green);border-radius:16px;padding:22px}
+.cta h2{margin:0 0 8px}
+.cta p{margin:0}
 </style>"""
 
 GUIDE_JS = """<script>
@@ -195,17 +201,16 @@ try{if(window.umami)umami.track("free-tap",{ad:ad});}catch(e){}});});
 def picker():
     return ('<div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option>'
             '<option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select>'
-            '<span>Free. No sign-up here.</span></div><p class="toast" id="toast" role="status"></p>'
-            '<div class="share"><span>Know someone who\'d find this handy?</span><button type="button" id="shareBtn">Send it</button></div>')
+            '<span>Free, no sign-up.</span></div><p class="toast" id="toast" role="status"></p>')
 
 def guide_shell(title, desc, path, body, ld):
     url = SITE + path
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#eef2f6">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#ffffff">\n'
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + GUIDE_CSS + STATS +
             '<script type="application/ld+json">' + json.dumps(ld) + '</script>\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/guides/">All free shortcuts</a></div>\n'
+            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/guides/">All shortcuts</a></div>\n'
             + body +
             '<footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. '
             '<a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div>' + GUIDE_JS + '</body>\n</html>\n')
@@ -219,30 +224,31 @@ for g in GUIDES:
     prompt = lib_prompt(g["id"])
     path = "/guides/" + g["slug"] + "/"
     guide_paths.append(path)
-    more = "".join(f'<li><span>{html.escape(m)}</span>{tapbtn(m, "Tap", "go")}</li>' for m in g["more"])
+    more = "".join(f'<li>{tapbtn(m, m, "row")}</li>' for m in g["more"])
     body = (f'<h1>{html.escape(g["h1"])}</h1><p class="lede">{html.escape(g["intro"])}</p>'
-            '<div class="card"><p style="margin:0 0 8px;font-weight:700">The words your AI gets:</p>'
+            '<div class="panel"><p class="label">Your AI gets these words:</p>'
             f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + picker() + '</div>'
-            f'<div class="tip"><b>Tip:</b> {html.escape(g["tip"])}</div>'
-            '<h2>More ready-made requests</h2><ul class="more">' + more + '</ul>'
+            f'<p class="tip"><b>Tip:</b> {html.escape(g["tip"])}</p>'
+            '<h2>More ready-made requests</h2><ul class="list">' + more + '</ul>'
             '<h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li>'
             '<li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li>'
             '<li>Answer its quick questions, or ask it to change anything.</li></ol>'
             f'<p><b>Good to know:</b> {html.escape(g["know"])}</p>'
-            '<div class="cta"><h2>Want 60 more like this?</h2><p>Answer 4 quick questions and get a cheat sheet of one-tap shortcuts made for your life: dinners, emails, bills, trips, home and more. Your first 10 are free.</p>'
-            '<a class="btn" href="/?utm_content=guide#make">Make my free cheat sheet</a></div>')
+            '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button></p>'
+            '<div class="cta"><h2>Want about 60 more like this?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
+            '<a class="btn" href="/?utm_content=guide#make">Make my cheat sheet</a></div>')
     ld = {"@context": "https://schema.org", "@type": "HowTo", "name": g["h1"], "description": g["desc"],
           "step": [{"@type": "HowToStep", "text": "Tap Try it now. Your AI opens with the words already typed in."},
                    {"@type": "HowToStep", "text": "Answer its quick questions or ask it to change anything."}]}
     os.makedirs(os.path.join(DIST, "guides", g["slug"]), exist_ok=True)
     open(os.path.join(DIST, "guides", g["slug"], "index.html"), "w").write(guide_shell(g["title"], g["desc"], path, body, ld))
 
-hub_items = "".join(f'<a href="/guides/{g["slug"]}/">{html.escape(g["h1"])}<span>{html.escape(g["desc"].split(". ")[0])}.</span></a>' for g in GUIDES)
-hub_body = ('<h1>Free AI shortcuts for everyday life</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job below. '
-            'Each page has a one-tap button that opens your AI with the words already written. No typing, no sign-up.</p>'
-            '<div class="card list" style="padding:0">' + hub_items + '</div>'
-            '<div class="cta"><h2>Get a cheat sheet made for you</h2><p>Four quick taps and you get one-tap shortcuts for your household. Your first 10 are free.</p>'
-            '<a class="btn" href="/?utm_content=guides_hub#make">Make my free cheat sheet</a></div>')
+hub_items = "".join(f'<li><a class="row" href="/guides/{g["slug"]}/"><span>{html.escape(g["h1"])}<small>{html.escape(g["desc"].split(". ")[0])}.</small></span></a></li>' for g in GUIDES)
+hub_body = ('<h1>Free shortcuts for everyday jobs</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job. '
+            'Each page has one button that opens your AI with the words already written.</p>'
+            '<ul class="list">' + hub_items + '</ul>'
+            '<div class="cta"><h2>Get a cheat sheet made for you</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
+            '<a class="btn" href="/?utm_content=guides_hub#make">Make my cheat sheet</a></div>')
 hub_ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Free AI shortcuts for everyday life",
           "hasPart": [{"@type": "WebPage", "name": g["h1"], "url": SITE + "/guides/" + g["slug"] + "/"} for g in GUIDES]}
 open(os.path.join(DIST, "guides", "index.html"), "w").write(guide_shell(

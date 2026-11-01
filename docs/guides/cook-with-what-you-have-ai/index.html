@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eef2f6">
+<meta name="theme-color" content="#ffffff">
 <title>What can I make with what&#x27;s in my fridge? Ask AI</title>
 <meta name="description" content="Your AI asks what you&#x27;ve got, then suggests 3 meals and walks you through the best one. No trip to the store. Free, one tap.">
 <link rel="canonical" href="https://switchkitai.com/guides/cook-with-what-you-have-ai/">
@@ -19,51 +19,57 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap"><style>
-:root{--desk:#eef2f6;--card:#fcfcf6;--rule:#a7c7e7;--margin:#d94a40;--hi:#ffe45c;--ink:#1c2b4f;--pencil:#5c6578;--line:#d9e2ec;--ok:#1d6b4c;
---display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;--body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;color-scheme:light}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&display=swap"><style>
+:root{--paper:#ffffff;--ink:#1d2433;--muted:#5b6475;--line:#e2e5ea;--edge:#c9d2ce;--green:#1f5d4c;--green-dark:#164536;--tint:#eef4f1;
+--font:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.15rem;line-height:1.55;overflow-wrap:break-word}
-.wrap{max-width:38rem;margin:0 auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
-a{color:var(--ink)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
-.brand{font-family:var(--display);font-weight:800;font-size:1.12rem;text-decoration:none;display:flex;align-items:center;gap:10px}
-.mark{width:22px;height:26px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;display:inline-block}
-.mark:before{content:"";position:absolute;left:3px;right:3px;top:7px;height:2px;background:var(--margin)}
-.mark:after{content:"";position:absolute;left:3px;right:5px;top:12px;height:6px;background:var(--hi);border-radius:2px}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,8vw,2.7rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
-h2{font-family:var(--display);font-weight:800;font-size:1.4rem;margin:34px 0 8px}
-.lede{color:var(--pencil);margin:0 0 18px}
-.card{background:var(--card);border-radius:6px;box-shadow:0 18px 40px -24px rgba(28,43,79,.45);border-top:3px solid var(--margin);padding:16px}
-.words{background:#fff;border:1.5px dashed var(--rule);border-radius:8px;padding:12px 14px;margin:0 0 14px;font-size:1.05rem}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:700 1.2rem var(--body);text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation}
-.btn.done{background:var(--ok)}
-.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 0 0;font-size:1rem;color:var(--pencil)}
-.under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
-.toast{margin:10px 0 0;font-size:1rem;color:var(--ok);font-weight:700}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-wrap:break-word}
+.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green-dark)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:36px}
+.top a{font-size:1rem;color:var(--muted)}
+.top a.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.mark{width:14px;height:14px;border-radius:4px;background:var(--green);display:inline-block;flex:none}
+h1{font-weight:800;font-size:clamp(2.1rem,8.5vw,3rem);line-height:1.05;letter-spacing:-.03em;margin:0 0 14px}
+h2{font-weight:800;font-size:1.45rem;line-height:1.15;letter-spacing:-.015em;margin:44px 0 8px}
+p,ul,ol{margin:0 0 14px}
+li{margin-bottom:6px}
+.updated,.lede{color:var(--muted)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer a{color:var(--muted)}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+
+.lede{font-size:1.15rem;margin-bottom:24px}
+.panel{background:var(--tint);border-radius:16px;padding:20px}
+.panel .label{margin:0 0 8px;font-weight:600;font-size:1rem}
+.words{margin:0 0 4px;padding:2px 0 2px 14px;border-left:3px solid var(--green);font-size:1.05rem}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 1.15rem var(--font);text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation}
+.btn:hover{background:var(--green-dark)}
+.btn.done{background:var(--green-dark)}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 0;font-size:.98rem;color:var(--muted)}
+.under select{font:600 1rem var(--font);color:var(--ink);background:var(--paper);border:1.5px solid var(--edge);border-radius:8px;padding:8px 10px;min-height:44px}
+.toast{margin:12px 0 0;font-size:1rem;color:var(--green-dark);font-weight:600}
 .toast:empty{display:none}
-.share{display:flex;align-items:center;gap:10px;margin:14px 2px 0;padding:12px 14px;background:rgba(255,255,255,.6);border-radius:10px;font-size:1rem}
-.share span{flex:1;color:var(--pencil)}
-.share button{flex:none;font:700 1rem var(--body);color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
-.tip{margin-top:16px;padding:12px 14px;border-left:4px solid var(--hi);background:rgba(255,255,255,.6)}
-ul.more{list-style:none;padding:0;margin:0}
-ul.more li{background:var(--card);border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:12px 14px}
-ul.more li:first-child{border-radius:6px 6px 0 0}ul.more li:last-child{border-radius:0 0 6px 6px;border-bottom:0}
-ul.more span{flex:1}
-.go{flex:none;font:700 .95rem var(--body);background:var(--ink);color:#fff;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;text-decoration:none}
-.go.done{background:var(--ok)}
-.cta{margin-top:34px;background:var(--hi);border-radius:6px;padding:18px}
-.cta h2{margin:0 0 6px}
-.cta p{margin:0 0 14px}
-.list a{display:block;background:var(--card);padding:14px 16px;border-bottom:1px solid var(--rule);font-weight:700;text-decoration:none}
-.list a span{display:block;font-weight:400;color:var(--pencil);font-size:1rem;margin-top:2px}
-footer{margin-top:40px;font-size:.95rem;color:var(--pencil)}footer a{color:var(--pencil)}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.share{margin:20px 0 0;font-size:1rem;color:var(--muted)}
+.share button{background:none;border:0;padding:0;font:600 1rem var(--font);color:var(--green-dark);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tip{margin-top:28px}
+ul.list{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line)}
+ul.list li{margin:0;border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:14px;min-height:60px;padding:14px 2px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.08rem;line-height:1.35}
+.row span{flex:1}
+.row small{display:block;font-weight:400;color:var(--muted);font-size:.98rem;margin-top:3px}
+.row::after{content:"A";flex:none;font-size:1.7rem;line-height:1;color:var(--green)}
+.row.done::after{content:"¹3";font-size:1.15rem}
+@media (hover:hover){.row:hover span{text-decoration:underline;text-underline-offset:3px}}
+ol{padding-left:1.2em}
+.cta{margin-top:48px;border:1.5px solid var(--green);border-radius:16px;padding:22px}
+.cta h2{margin:0 0 8px}
+.cta p{margin:0}
 </style><script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "Cook dinner with what's already in the fridge", "description": "Your AI asks what you've got, then suggests 3 meals and walks you through the best one. No trip to the store. Free, one tap.", "step": [{"@type": "HowToStep", "text": "Tap Try it now. Your AI opens with the words already typed in."}, {"@type": "HowToStep", "text": "Answer its quick questions or ask it to change anything."}]}</script>
 </head>
-<body><div class="wrap"><div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/guides/">All free shortcuts</a></div>
-<h1>Cook dinner with what&#x27;s already in the fridge</h1><p class="lede">No plan and no time to shop? Tap the button. Your AI asks what&#x27;s in your fridge and cupboard, suggests three meals you can make right now, and walks you through the best one.</p><div class="card"><p style="margin:0 0 8px;font-weight:700">The words your AI gets:</p><p class="words">Help me make dinner for my household with what I already have, no trip to the store. Ask me what&#x27;s in my fridge and cupboard, then suggest 3 meals and how to make the best one. Keep it short and simple. Use plain English.</p><a class="btn" href="#" target="_blank" rel="noopener" data-p="Help me make dinner for my household with what I already have, no trip to the store. Ask me what&#x27;s in my fridge and cupboard, then suggest 3 meals and how to make the best one. Keep it short and simple. Use plain English.">Try it now, free</a><div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option><option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select><span>Free. No sign-up here.</span></div><p class="toast" id="toast" role="status"></p><div class="share"><span>Know someone who'd find this handy?</span><button type="button" id="shareBtn">Send it</button></div></div><div class="tip"><b>Tip:</b> List even the odd things: half an onion, leftover rice, a can of beans. That&#x27;s where the best ideas come from.</div><h2>More ready-made requests</h2><ul class="more"><li><span>I have eggs, cheese, spinach and bread. What can I make for dinner in 15 minutes?</span><a class="go" href="#" target="_blank" rel="noopener" data-p="I have eggs, cheese, spinach and bread. What can I make for dinner in 15 minutes?">Tap</a></li><li><span>Give me 3 dinners I can make from pantry staples only: pasta, rice, canned beans and canned tomatoes.</span><a class="go" href="#" target="_blank" rel="noopener" data-p="Give me 3 dinners I can make from pantry staples only: pasta, rice, canned beans and canned tomatoes.">Tap</a></li><li><span>What can I make with leftover roast chicken?</span><a class="go" href="#" target="_blank" rel="noopener" data-p="What can I make with leftover roast chicken?">Tap</a></li></ul><h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li><li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li><li>Answer its quick questions, or ask it to change anything.</li></ol><p><b>Good to know:</b> If anyone you&#x27;re cooking for has a food allergy, say so up front.</p><div class="cta"><h2>Want 60 more like this?</h2><p>Answer 4 quick questions and get a cheat sheet of one-tap shortcuts made for your life: dinners, emails, bills, trips, home and more. Your first 10 are free.</p><a class="btn" href="/?utm_content=guide#make">Make my free cheat sheet</a></div><footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div><script>
+<body><div class="wrap"><div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a href="/guides/">All shortcuts</a></div>
+<h1>Cook dinner with what&#x27;s already in the fridge</h1><p class="lede">No plan and no time to shop? Tap the button. Your AI asks what&#x27;s in your fridge and cupboard, suggests three meals you can make right now, and walks you through the best one.</p><div class="panel"><p class="label">Your AI gets these words:</p><p class="words">Help me make dinner for my household with what I already have, no trip to the store. Ask me what&#x27;s in my fridge and cupboard, then suggest 3 meals and how to make the best one. Keep it short and simple. Use plain English.</p><a class="btn" href="#" target="_blank" rel="noopener" data-p="Help me make dinner for my household with what I already have, no trip to the store. Ask me what&#x27;s in my fridge and cupboard, then suggest 3 meals and how to make the best one. Keep it short and simple. Use plain English.">Try it now, free</a><div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option><option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select><span>Free, no sign-up.</span></div><p class="toast" id="toast" role="status"></p></div><p class="tip"><b>Tip:</b> List even the odd things: half an onion, leftover rice, a can of beans. That&#x27;s where the best ideas come from.</p><h2>More ready-made requests</h2><ul class="list"><li><a class="row" href="#" target="_blank" rel="noopener" data-p="I have eggs, cheese, spinach and bread. What can I make for dinner in 15 minutes?">I have eggs, cheese, spinach and bread. What can I make for dinner in 15 minutes?</a></li><li><a class="row" href="#" target="_blank" rel="noopener" data-p="Give me 3 dinners I can make from pantry staples only: pasta, rice, canned beans and canned tomatoes.">Give me 3 dinners I can make from pantry staples only: pasta, rice, canned beans and canned tomatoes.</a></li><li><a class="row" href="#" target="_blank" rel="noopener" data-p="What can I make with leftover roast chicken?">What can I make with leftover roast chicken?</a></li></ul><h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li><li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li><li>Answer its quick questions, or ask it to change anything.</li></ol><p><b>Good to know:</b> If anyone you&#x27;re cooking for has a food allergy, say so up front.</p><p class="share">Know someone who'd find this handy? <button type="button" id="shareBtn">Send them the link</button></p><div class="cta"><h2>Want about 60 more like this?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p><a class="btn" href="/?utm_content=guide#make">Make my cheat sheet</a></div><footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div><script>
 (function(){
 var AIS={chatgpt:{n:"ChatGPT",u:function(p){return "https://chatgpt.com/?q="+encodeURIComponent(p);},f:1},
 claude:{n:"Claude",u:function(p){return "https://claude.ai/new?q="+encodeURIComponent(p);},f:1},

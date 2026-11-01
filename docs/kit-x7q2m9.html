@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eef2f6">
+<meta name="theme-color" content="#ffffff">
 <title>My AI Cheat Sheet: tap a line, your AI does the rest · Switch Kit AI</title>
 <meta name="description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
 <meta name="robots" content="noindex, nofollow">
@@ -22,165 +22,160 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&display=swap">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
 <style>
 :root{
-  --desk:#eef2f6; --card:#fcfcf6; --rule:#a7c7e7; --margin:#d94a40; --hi:#ffe45c; --hi-soft:#fff3a8;
-  --ink:#1c2b4f; --pencil:#5c6578; --line:#d9e2ec; --ok:#1d6b4c;
-  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
-  --body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;
-  --row:3.6rem; --ease:cubic-bezier(.23,1,.32,1);
+  --paper:#ffffff; --ink:#1d2433; --muted:#5b6475; --line:#e2e5ea; --edge:#c9d2ce;
+  --green:#1f5d4c; --green-dark:#164536; --tint:#eef4f1;
+  --font:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.19rem;line-height:1.5;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.55 var(--font);overflow-x:hidden}
 [hidden]{display:none!important}
-a{color:var(--ink)}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
-.wrap{max-width:35rem;margin:0 auto;padding:max(14px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 120px max(16px,env(safe-area-inset-left,0px))}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 18px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.15rem;text-decoration:none;color:var(--ink)}
-.mark{width:26px;height:30px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;flex:none}
-.mark:before{content:"";position:absolute;left:3px;right:3px;top:9px;height:2px;background:var(--margin)}
-.mark:after{content:"";position:absolute;left:3px;right:6px;top:15px;height:7px;background:var(--hi);border-radius:2px}
-.top a.small{font-size:1rem;color:var(--pencil)}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.15rem,9.4vw,3.1rem);line-height:1.02;letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
-.lede{margin:0 0 16px;color:var(--pencil);font-size:1.12rem}
+a{color:var(--green-dark)}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:36px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.mark{width:14px;height:14px;border-radius:4px;background:var(--green);flex:none}
+.top a.small{font-size:1rem;color:var(--muted)}
+h1{font-weight:800;font-size:clamp(2.5rem,10.5vw,3.75rem);line-height:1.02;letter-spacing:-.035em;margin:0 0 16px;max-width:13ch}
+.lede{margin:0 0 4px;color:var(--muted);font-size:1.15rem;max-width:34ch}
+h2{font-weight:800;font-size:clamp(1.55rem,6vw,1.9rem);line-height:1.1;letter-spacing:-.02em;margin:0 0 8px}
+section{margin-top:60px}
 
-/* The index card */
-.card{background:var(--card);border-radius:6px;box-shadow:0 1px 0 rgba(28,43,79,.08),0 18px 40px -22px rgba(28,43,79,.45);position:relative;overflow:hidden;padding-bottom:14px}
-.card .head{height:3.25rem;display:flex;align-items:flex-end;padding:0 16px 8px;border-bottom:2px solid var(--margin);font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--pencil)}
-.rows{list-style:none;margin:0;padding:0}
-.rows li{margin:0;border-bottom:1px solid var(--rule)}
-.row{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--row);padding:6px 12px 6px 16px;background:transparent;border:0;text-align:left;font:700 1.12rem/1.25 var(--body);color:var(--ink);text-decoration:none;cursor:pointer;touch-action:manipulation}
-.row .t{flex:1;position:relative;padding:2px 0}
-.row .t span{position:relative;z-index:1}
-.row .t:before{content:"";position:absolute;left:-4px;right:-4px;top:12%;bottom:8%;background:var(--hi);border-radius:3px;transform:scaleX(0);transform-origin:left;z-index:0}
-.row.done .t:before{transform:scaleX(1)}
-.row .go{flex:none;font-size:.95rem;font-weight:700;background:var(--ink);color:#fff;border-radius:999px;padding:7px 14px;white-space:nowrap}
-.row.locked{cursor:default;color:var(--pencil);font-weight:400}
-.row.locked .go{background:transparent;color:var(--pencil);border:1.5px solid var(--line);padding:5px 10px}
-@media (prefers-reduced-motion:no-preference){
-  .row .t:before{transition:transform .45s var(--ease)}
-  .row .go{transition:transform .14s var(--ease)}
-  .row:active .go{transform:scale(.95)}
-}
-@media (hover:hover) and (pointer:fine){.row:not(.locked):hover .t:before{transform:scaleX(1);background:var(--hi-soft)}.row.done:hover .t:before{background:var(--hi)}}
-.hero{padding:0 0 18px}
-.heroChips{padding:14px 16px 0}
-.btn.heroGo{margin:16px 16px 0;width:calc(100% - 32px);min-height:64px;font-size:1.25rem}
-.btn.heroGo.done{background:var(--ok)}
-.heroNote{margin:10px 16px 0;font-size:.98rem;color:var(--pencil)}
-.cat{padding:0 16px;height:var(--row);display:flex;align-items:flex-end;padding-bottom:9px;font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--margin)}
-
-.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 2px 0;font-size:1rem;color:var(--pencil)}
-.under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
-.share{display:flex;align-items:center;gap:10px;margin:14px 2px 0;padding:12px 14px;background:rgba(255,255,255,.6);border-radius:10px;font-size:1rem}
-.share span{flex:1;color:var(--pencil)}
-.share button{flex:none;font:700 1rem var(--body);color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
-.toast{margin:12px 2px 0;font-size:1rem;color:var(--ok);font-weight:700;min-height:1.4em}
+/* The dinner panel */
+.hero{background:var(--tint);border-radius:16px;padding:20px;margin-top:28px}
+.heroLabel{margin:0 0 10px;font-weight:600;font-size:1rem}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--paper);border:1.5px solid var(--edge);border-radius:10px;overflow:hidden}
+.seg .chip{border:0;border-left:1.5px solid var(--edge);border-radius:0;background:transparent;font:600 1rem/1.2 var(--font);color:var(--ink);padding:12px 6px;min-height:54px;cursor:pointer;touch-action:manipulation}
+.seg .chip:first-child{border-left:0}
+.seg .chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:0;border-radius:10px;background:var(--green);color:#fff;font:700 1.15rem var(--font);cursor:pointer;text-decoration:none;text-align:center;padding:10px 16px;touch-action:manipulation}
+.btn:hover{background:var(--green-dark)}
+.btn.heroGo{font-size:1.2rem;min-height:62px}
+.btn.done{background:var(--green-dark)}
+.btn.alt{background:var(--paper);color:var(--ink);border:1.5px solid var(--ink)}
+.heroNote{margin:10px 0 0;font-size:.95rem;color:var(--muted)}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:14px 0 0;font-size:.98rem;color:var(--muted)}
+.under select{font:600 1rem var(--font);color:var(--ink);background:var(--paper);border:1.5px solid var(--edge);border-radius:8px;padding:8px 10px;min-height:44px}
+.toast{margin:14px 0 0;font-size:1rem;color:var(--green-dark);font-weight:600}
 .toast:empty{display:none}
 
-h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,6.6vw,2.1rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 8px;text-wrap:balance}
-section{margin-top:44px}
-.q{margin:22px 0 0}
-.q p{margin:0 0 8px;font-weight:700}
-.q small{font-weight:400;color:var(--pencil)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:400 1.05rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;min-height:46px;cursor:pointer;touch-action:manipulation}
-.chip[aria-pressed="true"]{background:var(--hi);border-color:#e3c52a;font-weight:700}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;margin-top:24px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:700 1.15rem var(--body);cursor:pointer;text-decoration:none;touch-action:manipulation;text-align:center;padding:10px 16px}
-.btn.alt{background:var(--card);color:var(--ink);border:2px solid var(--ink)}
-@media (prefers-reduced-motion:no-preference){.btn{transition:transform .14s var(--ease)}.btn:active{transform:scale(.98)}}
+/* Lists of things to ask */
+.rows{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)}
+.rows li{margin:0;border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:center;gap:14px;min-height:62px;padding:14px 2px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.1rem;line-height:1.3;cursor:pointer;touch-action:manipulation}
+.row .t{flex:1}
+.row .go{flex:none;color:var(--muted);font-weight:400;font-size:.95rem}
+.row .go:empty::after{content:"\203A";font-size:1.7rem;line-height:1;color:var(--green)}
+.row.done .go:empty::after{content:"\2713";font-size:1.15rem}
+@media (hover:hover){.row:not(.locked):hover .t{text-decoration:underline;text-underline-offset:3px}}
+.row.locked{cursor:default;color:var(--muted);font-weight:400}
+.cat{padding:26px 2px 8px;font-weight:700;font-size:.98rem;color:var(--muted)}
+.card .head{display:none}
+.more{margin:16px 0 0;font-size:1.02rem}
+.share{margin:22px 0 0;font-size:1rem;color:var(--muted)}
+.share button{background:none;border:0;padding:0;font:600 1rem var(--font);color:var(--green-dark);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
-.price{margin-top:22px;background:var(--hi);border-radius:6px;padding:18px 18px 16px;box-shadow:0 18px 40px -26px rgba(28,43,79,.6)}
-.price h3{font-family:var(--display);font-weight:800;font-size:1.5rem;margin:0 0 4px;line-height:1.1}
-.price .amt{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;margin:6px 0 2px}
-.price .terms{margin:0 0 12px;font-weight:700}
-.price ul{margin:0 0 4px;padding-left:1.2em}
+/* Questions */
+.q{margin:26px 0 0}
+.q p{margin:0 0 10px;font-weight:600}
+.q small{font-weight:400;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font:400 1.02rem var(--font);color:var(--ink);background:var(--paper);border:1.5px solid var(--edge);border-radius:8px;padding:10px 14px;min-height:46px;cursor:pointer;touch-action:manipulation}
+.chips .chip[aria-pressed="true"]{border-color:var(--green);background:var(--tint);color:var(--green-dark);font-weight:600}
+#build{margin-top:28px}
+
+/* Price */
+.price{margin-top:28px;border:1.5px solid var(--green);border-radius:16px;padding:22px}
+.price h3{font-weight:700;font-size:1.3rem;margin:0}
+.price .amt{font-weight:800;font-size:2.6rem;line-height:1;margin:12px 0 4px;letter-spacing:-.02em}
+.price .terms{margin:0 0 14px;font-weight:600;color:var(--muted)}
+.price ul{margin:0;padding-left:1.15em}
 .price li{margin:0 0 6px}
-.price .btn{margin-top:14px}
-.fine{font-size:.95rem;color:var(--pencil);margin:10px 2px 0}
-.honest{margin-top:18px;padding:14px 16px;border-left:4px solid var(--rule);background:rgba(255,255,255,.55);font-size:1.02rem}
+.fine{font-size:.95rem;color:var(--muted);margin:12px 0 0}
+.honest{margin-top:22px;padding-left:14px;border-left:3px solid var(--line);color:var(--muted);font-size:1.02rem}
 .honest p{margin:0}
 
-.setup textarea{width:100%;min-height:9rem;font:1rem/1.5 var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px}
-.where{margin:14px 0 0;padding-left:1.2em}
+.setup textarea{width:100%;min-height:9rem;font:1rem/1.55 var(--font);color:var(--ink);background:var(--paper);border:1.5px solid var(--edge);border-radius:10px;padding:12px;margin-top:8px}
+.where{margin:14px 0 0;padding-left:1.15em}
 .where li{margin:0 0 8px}
 .path{font-weight:700}
-.note{font-size:1rem;color:var(--pencil)}
+.note{font-size:1rem;color:var(--muted)}
+.bar{display:none!important}
 
-.bar{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(238,242,246,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:5}
-.bar .btn{margin:0 auto;max-width:35rem;min-height:54px}
-@media (prefers-reduced-motion:no-preference){.bar{animation:up .35s var(--ease)}@keyframes up{from{transform:translateY(100%)}to{transform:none}}}
-
-.faq h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:22px 0 4px}
-.faq p{margin:0}
-footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:.95rem;color:var(--pencil)}
-footer a{color:var(--pencil)}
+/* Questions people ask */
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-of-type{border-top:1px solid var(--line);margin-top:14px}
+.faq summary{list-style:none;cursor:pointer;padding:18px 32px 18px 0;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:400;color:var(--green)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{margin:0 0 18px;color:var(--muted)}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer a{color:var(--muted)}
 
 /* Print: the fridge version */
 @media print{
   @page{margin:12mm}
-  body{background:#fff;font-size:10pt}
-  .noprint,.bar,footer,.top,.under,.toast{display:none!important}
+  body{font-size:10pt}
+  .noprint,.bar,footer,.top,.under,.toast,.share{display:none!important}
   .wrap{max-width:none;padding:0}
-  .printhead{display:block!important;font-family:var(--display);font-weight:800;font-size:18pt;margin:0 0 6pt}
-  .card{box-shadow:none;background:#fff;border:1px solid #999}
+  .printhead{display:block!important;font-weight:800;font-size:18pt;margin:0 0 6pt}
   .row .go{display:none}
-  .row{min-height:0;padding:3pt 8pt;font-size:10pt}
+  .row{min-height:0;padding:3pt 0;font-size:10pt}
   .row .p{display:block!important;font-weight:400;font-size:8.5pt;color:#333;margin-top:1pt}
-  .rows li{break-inside:avoid}
-  #sheetCard{columns:2;column-gap:10mm;padding-bottom:0}
-  .rows li{border-bottom:.5pt solid #bbb}
-  .cat{height:auto;padding:6pt 8pt 2pt;font-size:11pt;break-after:avoid}
-  .card .head{display:none}
+  .rows li{break-inside:avoid;border-bottom:.5pt solid #bbb}
+  #sheetCard{columns:2;column-gap:10mm}
+  .cat{padding:6pt 0 2pt;font-size:11pt;break-after:avoid}
 }
 .printhead,.row .p{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top noprint"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a class="small" href="/help.html">Help</a></div>
+  <div class="top noprint"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a class="small" href="/guides/">Free shortcuts</a></div>
 
-  <!-- First screen: free shortcuts, nothing to fill in -->
+  <!-- First screen: one useful thing, free -->
   <div id="intro">
     <h1 id="h1">What's for dinner this week?</h1>
-    <p class="lede" id="lede">One tap and your AI plans 5 easy dinners and writes the shopping list. Free. No typing.</p>
-    <div class="card hero" id="heroCard">
-      <div class="head" id="heroHead">Cooking for</div>
-      <div class="chips heroChips" id="heroChips">
+    <p class="lede" id="lede">Pick who you're cooking for. Your AI plans five easy dinners and writes the shopping list.</p>
+    <div class="hero" id="heroCard">
+      <p class="heroLabel" id="heroHead">Cooking for</p>
+      <div class="seg" id="heroChips" role="group" aria-label="Cooking for">
         <button class="chip" type="button" data-v="solo">Just me</button>
         <button class="chip" type="button" data-v="two">Two of us</button>
-        <button class="chip" type="button" data-v="kids">Family with kids</button>
+        <button class="chip" type="button" data-v="kids">Family</button>
       </div>
       <a class="btn heroGo" id="heroGo" href="#" target="_blank" rel="noopener">Plan my week's dinners</a>
       <p class="heroNote" id="heroNote">Opens ChatGPT with the words already typed in. Works on the free version.</p>
-    </div>
-    <div class="under"><label for="ai">Opens in</label>
-      <select id="ai">
-        <option value="chatgpt">ChatGPT</option>
-        <option value="gemini">Gemini</option>
-        <option value="claude">Claude</option>
-        <option value="copilot">Copilot</option>
-      </select>
-      <span>No sign-up here.</span>
+      <div class="under"><label for="ai">Opens in</label>
+        <select id="ai">
+          <option value="chatgpt">ChatGPT</option>
+          <option value="gemini">Gemini</option>
+          <option value="claude">Claude</option>
+          <option value="copilot">Copilot</option>
+        </select>
+      </div>
     </div>
     <p class="toast" id="toast" role="status"></p>
-    <div class="share noprint" id="shareBox"><span>Know someone who'd find this handy?</span><button type="button" id="shareBtn">Send it</button></div>
-    <div class="card" id="freeCard" style="margin-top:22px">
-      <div class="head">More free shortcuts</div>
-      <ul class="rows" id="freeRows"></ul>
-    </div>
-    <p class="fine"><a href="/guides/">See all free shortcuts</a></p>
+
+    <section id="freeSec" class="noprint">
+      <h2>Other things to ask your AI</h2>
+      <div class="card" id="freeCard"><ul class="rows" id="freeRows"></ul></div>
+      <p class="more"><a href="/guides/">See all free shortcuts</a></p>
+      <p class="share" id="shareBox">Know someone who'd find this handy? <button type="button" id="shareBtn">Send them the link</button></p>
+    </section>
   </div>
 
   <!-- Make it yours -->
   <section id="make" class="noprint">
-    <h2 id="makeH">Get a cheat sheet made for your life</h2>
-    <p class="lede" id="makeLede">Four quick taps. Your first 10 shortcuts are free to use.</p>
+    <h2 id="makeH">Your own cheat sheet</h2>
+    <p class="lede" id="makeLede">Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>
     <div class="q" data-q="home"><p>Who's at home?</p><div class="chips">
       <button class="chip" type="button" data-v="solo">Just me</button>
       <button class="chip" type="button" data-v="two">Two of us</button>
@@ -258,15 +253,11 @@ footer a{color:var(--pencil)}
   </section>
 
   <section class="faq noprint" id="faq">
-    <h2>Questions</h2>
-    <h3>Do I need to pay for ChatGPT or another AI?</h3>
-    <p>No. Every shortcut works on the free versions of ChatGPT, Gemini, Claude and Copilot.</p>
-    <h3>What actually happens when I tap a line?</h3>
-    <p>Your AI opens in a new tab. ChatGPT and Claude open with the words already typed (ChatGPT may send them by itself). In Gemini and Copilot, paste and press send; we copy the words for you.</p>
-    <h3>Do you see my chats or answers?</h3>
-    <p>No. Your answers to the four questions stay on your phone or computer, and your chats stay between you and your AI. We never ask for passwords.</p>
-    <h3>What if it's not for me?</h3>
-    <p>Email us within 14 days and we'll refund you. No questions.</p>
+    <h2>Common questions</h2>
+    <details><summary>Do I need to pay for ChatGPT or another AI?</summary><p>No. Every shortcut works on the free versions of ChatGPT, Gemini, Claude and Copilot.</p></details>
+    <details><summary>What actually happens when I tap a line?</summary><p>Your AI opens in a new tab. ChatGPT and Claude open with the words already typed (ChatGPT may send them by itself). In Gemini and Copilot, paste and press send; we copy the words for you.</p></details>
+    <details><summary>Do you see my chats or answers?</summary><p>No. Your answers to the four questions stay on your phone or computer, and your chats stay between you and your AI. We never ask for passwords.</p></details>
+    <details><summary>What if it's not for me?</summary><p>Email us within 14 days and we'll refund you. No questions.</p></details>
   </section>
 
   <footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/guides/">Free shortcuts</a> · <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
@@ -419,7 +410,7 @@ var LIB = [
     var t=document.createElement("span"); t.className="t";
     var s=document.createElement("span"); s.textContent=item.t; t.appendChild(s);
     var p=document.createElement("span"); p.className="p"; p.textContent=fill(item.p); t.appendChild(p);
-    var g=document.createElement("span"); g.className="go"; g.textContent=locked?"Locked":"Tap";
+    var g=document.createElement("span"); g.className="go"; g.textContent=locked?"Locked":"";
     a.appendChild(t); a.appendChild(g);
     if(!locked){
       a.href="#"; a.target="_blank"; a.rel="noopener";
