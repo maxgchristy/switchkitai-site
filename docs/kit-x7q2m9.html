@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fef3e5">
-<title>Kitchen Table: everyday jobs, done by your AI in one tap</title>
+<title>Switch Kit AI: everyday jobs, done by your AI in one tap</title>
 <meta name="description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Kitchen Table">
-<meta property="og:title" content="Kitchen Table: everyday jobs, done by your AI in one tap">
+<meta property="og:site_name" content="Switch Kit AI">
+<meta property="og:title" content="Switch Kit AI: everyday jobs, done by your AI in one tap">
 <meta property="og:description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
 <meta property="og:image" content="https://switchkitai.com/assets/share.png">
 <meta property="og:image:width" content="1200">
@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
 <style>
-/* Kitchen Table: brand brief (quiet luxury). Approved text pairs only:
+/* Switch Kit AI: brand brief (quiet luxury). Approved text pairs only:
    Night on Cream, Blush on Night, Green on Cream, Dusty Pink on Night, Blush on Green; Dusty Pink on Green for 24px+ only. */
 :root{
   --cream:#fef3e5; --night:#0d0d0d; --green:#274c2e; --blush:#e7c2a6; --pink:#d78f85;
@@ -229,12 +229,13 @@ footer .wordmark{color:var(--blush)}
 </head>
 <body>
 <div class="wrap">
-  <div class="top noprint"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/guides/">All shortcuts</a></div>
+  <div class="top noprint"><a class="brand" href="/" aria-label="Switch Kit AI, home"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></a><a class="small" href="/guides/">All shortcuts</a></div>
 
   <!-- First screen: one useful thing, free -->
   <div id="intro">
    <div class="band">
     <div class="heroText fade" style="--i:0">
+      <p class="label" id="eyebrow">One of 60+ everyday shortcuts</p>
       <h1 id="h1">What's for Dinner This Week?</h1>
       <p class="lede" id="lede">Pick who you're cooking for. Your AI plans five easy dinners and writes the shopping list.</p>
     </div>
@@ -302,7 +303,7 @@ footer .wordmark{color:var(--blush)}
 
   <!-- The sheet -->
   <section id="sheet" hidden>
-    <div class="printhead">My Kitchen Table cheat sheet</div>
+    <div class="printhead">My Switch Kit AI cheat sheet</div>
     <h2 class="noprint" id="sheetH">Your Cheat Sheet</h2>
     <p class="lede noprint" id="sheetLede"></p>
     <div class="card" id="sheetCard"><div class="head" id="sheetHead">Tap any line</div><ul class="rows" id="sheetRows"></ul></div>
@@ -370,13 +371,13 @@ footer .wordmark{color:var(--blush)}
     <details><summary>What if it's not for me?</summary><p>Email us within 14 days and we'll refund you. No questions.</p></details>
   </section>
 
-  <footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. <a href="/guides/">Free shortcuts</a> · <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+  <footer><div class="lockup"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/guides/">Free shortcuts</a> · <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
 </div>
 
 <div class="bar noprint" id="bar" hidden><a class="btn" href="#make" id="barBtn">Get a cheat sheet made for my life</a></div>
 
 <script>
-/* My AI Cheat Sheet — shortcut library.
+/* Switch Kit AI — shortcut library.
    {for} = who the answer is for (from "Who's at home?"), {style} = how they like answers.
    Every shortcut is plain words the user's own AI receives; nothing is sent to us. */
 var CATS = [
@@ -545,7 +546,7 @@ var LIB = [
     var ok=false;try{var a=document.createElement("textarea");a.value=url;a.style.cssText="position:fixed;opacity:0;top:0;left:0";document.body.appendChild(a);a.select();ok=document.execCommand("copy");document.body.removeChild(a);}catch(e){}
     var t=document.getElementById(toastId);if(t)t.textContent=ok?"Link copied. Paste it in a text or email to share.":"Share this link: "+url;
     try{if(window.umami)umami.track("shared",{ad:SHARE_AD});}catch(e){}}
-  $("shareBtn").addEventListener("click",function(){shareSite("Kitchen Table","https://switchkitai.com/?utm_content=share","toast");});
+  $("shareBtn").addEventListener("click",function(){shareSite("Switch Kit AI","https://switchkitai.com/?utm_content=share","toast");});
   if(UNLOCKED) $("shareBox").hidden=true;
   // First screen: the big card
   if(HERO_ID==="e1"){var fi=FREE_IDS.indexOf("e1"); if(fi>=0) FREE_IDS.splice(fi,1,"m1");}

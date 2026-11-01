@@ -1,4 +1,4 @@
-"""Build the site for switchkitai.com (Kitchen Table) into docs/ for GitHub Pages.
+"""Build the site for switchkitai.com (Switch Kit AI) into docs/ for GitHub Pages.
 Usage: python3 build.py support@example.com umami-website-id
 Outputs: index.html, kit-x7q2m9.html (paid, noindex), help/privacy/terms, sitemap.xml, robots.txt,
 CNAME (custom domain), .nojekyll, 404.html, old /card redirects, assets/.
@@ -43,7 +43,7 @@ def title_case(t):
 
 def share_meta(title, desc, url):
     a = html.escape
-    return ('<meta property="og:type" content="website">\n<meta property="og:site_name" content="Kitchen Table">\n'
+    return ('<meta property="og:type" content="website">\n<meta property="og:site_name" content="Switch Kit AI">\n'
             f'<meta property="og:title" content="{a(title)}">\n<meta property="og:description" content="{a(desc)}">\n'
             f'<meta property="og:image" content="{SITE}/assets/share.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
             f'<meta property="og:url" content="{a(url)}">\n<meta name="twitter:card" content="summary_large_image">\n'
@@ -51,7 +51,7 @@ def share_meta(title, desc, url):
             '<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">\n'
             '<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">\n')
 
-HOME_TITLE = "Kitchen Table: everyday jobs, done by your AI in one tap"
+HOME_TITLE = "Switch Kit AI: everyday jobs, done by your AI in one tap"
 HOME_DESC = "One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try."
 
 src = open(os.path.join(HERE, "index.html")).read()
@@ -109,14 +109,14 @@ def doc(title, inner, desc, path):
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#fef3e5">\n'
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + DOC_STYLE + '\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/">Try it free</a></div>\n'
-            '<main>' + inner + '</main>\n<footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Kitchen Table is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
+            '<div class="top"><a class="brand" href="/" aria-label="Switch Kit AI, home"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></a><a class="small" href="/">Try it free</a></div>\n'
+            '<main>' + inner + '</main>\n<footer><div class="lockup"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></div>Switch Kit AI is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
             '<a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div></body>\n</html>\n')
 
 def redirect(to):
     return ('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
             f'<meta http-equiv="refresh" content="0; url={to}"><link rel="canonical" href="{SITE}/">'
-            f'<title>Kitchen Table</title></head><body><a href="{to}">Continue to Kitchen Table</a>'
+            f'<title>Switch Kit AI</title></head><body><a href="{to}">Continue to Switch Kit AI</a>'
             f'<script>location.replace("{to}"+(location.search&&"{to}".indexOf("?")<0?location.search:""));</script></body></html>\n')
 
 if os.path.exists(DIST):
@@ -125,9 +125,9 @@ os.makedirs(DIST)
 open(os.path.join(DIST, "index.html"), "w").write(home)
 open(os.path.join(DIST, KIT), "w").write(kit)
 pages = {
-    "help": ("Help & refunds · Kitchen Table", "What's free, what you get for $9.99, how the shortcuts work, refunds and contact."),
-    "privacy": ("Privacy policy · Kitchen Table", "We never see your chats or ask for passwords, and your answers stay on your device."),
-    "terms": ("Terms of use · Kitchen Table", "Terms for Kitchen Table."),
+    "help": ("Help & refunds · Switch Kit AI", "What's free, what you get for $9.99, how the shortcuts work, refunds and contact."),
+    "privacy": ("Privacy policy · Switch Kit AI", "We never see your chats or ask for passwords, and your answers stay on your device."),
+    "terms": ("Terms of use · Switch Kit AI", "Terms for Switch Kit AI."),
 }
 for name, (title, desc) in pages.items():
     inner = open(os.path.join(HERE, "pages", name + ".html")).read().replace("{{EMAIL}}", EMAIL).replace("{{UPDATED}}", TODAY_LONG).replace("{{ANALYTICS}}", ANALYTICS_P)
@@ -276,9 +276,9 @@ def guide_shell(title, desc, path, body, ld):
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + GUIDE_CSS + STATS +
             '<script type="application/ld+json">' + json.dumps(ld) + '</script>\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/guides/">All shortcuts</a></div>\n'
+            '<div class="top"><a class="brand" href="/" aria-label="Switch Kit AI, home"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></a><a class="small" href="/guides/">All shortcuts</a></div>\n'
             + body +
-            '<footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. '
+            '<footer><div class="lockup"><span class="monogram" aria-hidden="true">S</span><span class="wordmark">Switch Kit AI</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. '
             '<a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div>' + GUIDE_JS + '</body>\n</html>\n')
 
 def tapbtn(prompt, label, cls="btn"):

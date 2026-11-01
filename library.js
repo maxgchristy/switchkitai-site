@@ -1,4 +1,4 @@
-/* My AI Cheat Sheet — shortcut library.
+/* Switch Kit AI — shortcut library.
    {for} = who the answer is for (from "Who's at home?"), {style} = how they like answers.
    Every shortcut is plain words the user's own AI receives; nothing is sent to us. */
 var CATS = [

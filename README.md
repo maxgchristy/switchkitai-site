@@ -1,4 +1,4 @@
-# switchkitai.com — My AI Cheat Sheet
+# switchkitai.com — Switch Kit AI
 
 Static site hosted free on GitHub Pages (from the `docs/` folder on `main`).
 
