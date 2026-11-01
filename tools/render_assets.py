@@ -1,6 +1,6 @@
 """Render the site's icons and share image into assets/.
 Usage (from the repo root): python3 tools/render_assets.py /path/to/fonts
-Fonts: `npm pack @fontsource/bricolage-grotesque @fontsource/atkinson-hyperlegible`, then untar each into a folder named after the .tgz.
+Fonts: `npm pack @fontsource/instrument-serif @fontsource-variable/montserrat @fontsource-variable/azeret-mono`, then untar each into a folder named after the package (e.g. fontsource-instrument-serif).
 """
 import os, sys, tempfile
 from playwright.sync_api import sync_playwright
