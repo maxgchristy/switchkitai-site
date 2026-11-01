@@ -111,6 +111,9 @@ open(os.path.join(DIST, "card", "index.html"), "w").write(redirect("/?utm_conten
 open(os.path.join(DIST, "404.html"), "w").write(redirect("/"))
 open(os.path.join(DIST, "robots.txt"), "w").write("User-agent: *\nDisallow: /" + KIT + "\n\nSitemap: " + SITE + "/sitemap.xml\n")
 open(os.path.join(DIST, "CNAME"), "w").write(DOMAIN + "\n")
+# IndexNow (Bing and others): key file at the site root, key kept in indexnow_key.txt
+INDEXNOW_KEY = open(os.path.join(HERE, "indexnow_key.txt")).read().strip()
+open(os.path.join(DIST, INDEXNOW_KEY + ".txt"), "w").write(INDEXNOW_KEY)
 open(os.path.join(DIST, ".nojekyll"), "w").write("")
 shutil.copytree(os.path.join(HERE, "assets"), os.path.join(DIST, "assets"))
 # ---- Free search pages (guides/) ----
