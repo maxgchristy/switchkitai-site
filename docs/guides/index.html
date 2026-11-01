@@ -81,6 +81,12 @@ ol{padding-left:1.2em}
 .cta{margin-top:48px;background:var(--butter);border-radius:12px;padding:22px}
 .cta h2{margin:0 0 8px}
 .cta p{margin:0}
+details.alt{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:48rem}
+details.alt summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:1.02rem;list-style:none;position:relative;padding-right:30px}
+details.alt summary::-webkit-details-marker{display:none}
+details.alt summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:500;color:var(--cobalt)}
+details.alt[open] summary::after{content:"2"}
+details.alt .under{margin:0 0 16px}
 
 .panel{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
 .words{border:1.5px solid rgba(20,33,61,.18);border-radius:12px}

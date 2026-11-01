@@ -121,6 +121,8 @@ section{margin-top:56px}
 .faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.6rem;font-weight:500;color:var(--cobalt)}
 .faq details[open] summary::after{content:"\2212"}
 .faq details p{margin:0 0 18px;color:var(--muted)}
+.faq details .under{margin:-8px 0 18px}
+.faq details .toast{margin:-8px 0 18px}
 footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 footer a{color:var(--muted)}
 
@@ -175,7 +177,7 @@ footer{border-top:1px solid var(--line)}
   #sheetCard .rows li{break-inside:avoid}
   .price,.honest,#paidTools{max-width:44rem}
   .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:56px;align-items:start}
-  .faq h2{grid-column:1;grid-row:1 / span 4}
+  .faq h2{grid-column:1;grid-row:1 / span 5}
   .faq details{grid-column:2}
   .faq details:first-of-type{margin-top:0}
 }
@@ -217,15 +219,6 @@ footer{border-top:1px solid var(--line)}
         <button class="chip" type="button" data-v="kids">Family</button>
       </div>
       <a class="btn heroGo" id="heroGo" href="#" target="_blank" rel="noopener">Plan my week's dinners</a>
-      <p class="heroNote" id="heroNote">Opens ChatGPT with the words already typed in. Works on the free version.</p>
-      <div class="under"><label for="ai">Opens in</label>
-        <select id="ai">
-          <option value="chatgpt">ChatGPT</option>
-          <option value="gemini">Gemini</option>
-          <option value="claude">Claude</option>
-          <option value="copilot">Copilot</option>
-        </select>
-      </div>
     </div>
     <div id="example" class="example noprint">
       <h2>What comes back</h2>
@@ -335,6 +328,15 @@ footer{border-top:1px solid var(--line)}
 
   <section class="faq noprint" id="faq">
     <h2>Common questions</h2>
+    <details><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary><p>No problem. Pick yours and every shortcut on this site opens it instead.</p>
+      <div class="under"><label for="ai">My AI</label>
+        <select id="ai">
+          <option value="chatgpt">ChatGPT</option>
+          <option value="gemini">Gemini</option>
+          <option value="claude">Claude</option>
+          <option value="copilot">Copilot</option>
+        </select>
+      </div><p class="toast" id="aiToast" role="status"></p></details>
     <details><summary>Do I need to pay for ChatGPT or another AI?</summary><p>No. Every shortcut works on the free versions of ChatGPT, Gemini, Claude and Copilot.</p></details>
     <details><summary>What actually happens when I tap a line?</summary><p>Your AI opens in a new tab. ChatGPT and Claude open with the words already typed (ChatGPT may send them by itself). In Gemini and Copilot, paste and press send; we copy the words for you.</p></details>
     <details><summary>Do you see my chats or answers?</summary><p>No. Your answers to the four questions stay on your phone or computer, and your chats stay between you and your AI. We never ask for passwords.</p></details>
@@ -434,8 +436,7 @@ footer{border-top:1px solid var(--line)}
   Array.prototype.forEach.call(heroChips,function(c){c.addEventListener("click",function(){
     answers.home=(answers.home===c.dataset.v)?null:c.dataset.v; store(KEY_A,answers); paintHero(); paintAll();});});
   paintHero();
-  function heroNote(){var ai=AIS[sel.value]; $("heroNote").textContent=ai.fill?("Opens "+ai.n+" with the words already typed in. Works on the free version."):("Opens "+ai.n+". We copy the words, you paste and press send.");}
-  heroNote(); sel.addEventListener("change",heroNote);
+  sel.addEventListener("change",function(){$("aiToast").textContent="Done. Shortcuts now open "+AIS[sel.value].n+".";});
   $("heroGo").addEventListener("click",function(){
     var ai=AIS[sel.value], text=fill(byId(HERO_ID).p), go=$("heroGo");
     go.href=ai.url(text);

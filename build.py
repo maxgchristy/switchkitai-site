@@ -200,6 +200,12 @@ ol{padding-left:1.2em}
 .cta{margin-top:48px;background:var(--butter);border-radius:12px;padding:22px}
 .cta h2{margin:0 0 8px}
 .cta p{margin:0}
+details.alt{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:48rem}
+details.alt summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:1.02rem;list-style:none;position:relative;padding-right:30px}
+details.alt summary::-webkit-details-marker{display:none}
+details.alt summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:500;color:var(--cobalt)}
+details.alt[open] summary::after{content:"\2212"}
+details.alt .under{margin:0 0 16px}
 
 .panel{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
 .words{border:1.5px solid rgba(20,33,61,.18);border-radius:12px}
@@ -248,9 +254,9 @@ try{if(window.umami)umami.track("free-tap",{ad:ad});}catch(e){}});});
 </script>"""
 
 def picker():
-    return ('<div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option>'
+    return ('<div class="under"><label for="ai">My AI</label><select id="ai"><option value="chatgpt">ChatGPT</option>'
             '<option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select>'
-            '<span>Free, no sign-up.</span></div><p class="toast" id="toast" role="status"></p>')
+            '<span>Every button on this site will open it.</span></div>')
 
 def guide_shell(title, desc, path, body, ld):
     url = SITE + path
@@ -276,12 +282,13 @@ for g in GUIDES:
     more = "".join(f'<li>{tapbtn(m, m, "row")}</li>' for m in g["more"])
     body = ('<div class="band split">' + f'<div class="bandText"><h1>{html.escape(g["h1"])}</h1><p class="lede">{html.escape(g["intro"])}</p></div>'
             '<div class="panel"><p class="label">Your AI gets these words:</p>'
-            f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + picker() + '</div></div>'
+            f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + '<p class="toast" id="toast" role="status"></p></div></div>'
             f'<p class="tip"><b>Tip:</b> {html.escape(g["tip"])}</p>'
             '<h2>More ready-made requests</h2><ul class="list">' + more + '</ul>'
             '<h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li>'
             '<li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li>'
             '<li>Answer its quick questions, or ask it to change anything.</li></ol>'
+            '<details class="alt"><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary>' + picker() + '</details>'
             f'<p><b>Good to know:</b> {html.escape(g["know"])}</p>'
             '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button></p>'
             '<div class="cta"><h2>Want about 60 more like this?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
