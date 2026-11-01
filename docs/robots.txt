@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /kit-x7q2m9.html
+
+Sitemap: https://switchkitai.com/sitemap.xml

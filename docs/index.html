@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eef2f6">
+<title>My AI Cheat Sheet: tap a line, your AI does the rest · Switch Kit AI</title>
+<meta name="description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
+<link rel="canonical" href="https://switchkitai.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Switch Kit AI">
+<meta property="og:title" content="My AI Cheat Sheet: tap a line, your AI does the rest">
+<meta property="og:description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
+<meta property="og:image" content="https://switchkitai.com/assets/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://switchkitai.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
+<style>
+:root{
+  --desk:#eef2f6; --card:#fcfcf6; --rule:#a7c7e7; --margin:#d94a40; --hi:#ffe45c; --hi-soft:#fff3a8;
+  --ink:#1c2b4f; --pencil:#5c6578; --line:#d9e2ec; --ok:#1d6b4c;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;
+  --row:3.6rem; --ease:cubic-bezier(.23,1,.32,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--body);font-size:1.19rem;line-height:1.5;overflow-x:hidden}
+[hidden]{display:none!important}
+a{color:var(--ink)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{max-width:35rem;margin:0 auto;padding:max(14px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 120px max(16px,env(safe-area-inset-left,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 18px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.15rem;text-decoration:none;color:var(--ink)}
+.mark{width:26px;height:30px;border-radius:4px;background:var(--card);border:2px solid var(--ink);position:relative;flex:none}
+.mark:before{content:"";position:absolute;left:3px;right:3px;top:9px;height:2px;background:var(--margin)}
+.mark:after{content:"";position:absolute;left:3px;right:6px;top:15px;height:7px;background:var(--hi);border-radius:2px}
+.top a.small{font-size:1rem;color:var(--pencil)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.15rem,9.4vw,3.1rem);line-height:1.02;letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
+.lede{margin:0 0 16px;color:var(--pencil);font-size:1.12rem}
+
+/* The index card */
+.card{background:var(--card);border-radius:6px;box-shadow:0 1px 0 rgba(28,43,79,.08),0 18px 40px -22px rgba(28,43,79,.45);position:relative;overflow:hidden;padding-bottom:14px}
+.card .head{height:3.25rem;display:flex;align-items:flex-end;padding:0 16px 8px;border-bottom:2px solid var(--margin);font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--pencil)}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{margin:0;border-bottom:1px solid var(--rule)}
+.row{display:flex;align-items:center;gap:12px;width:100%;min-height:var(--row);padding:6px 12px 6px 16px;background:transparent;border:0;text-align:left;font:700 1.12rem/1.25 var(--body);color:var(--ink);text-decoration:none;cursor:pointer;touch-action:manipulation}
+.row .t{flex:1;position:relative;padding:2px 0}
+.row .t span{position:relative;z-index:1}
+.row .t:before{content:"";position:absolute;left:-4px;right:-4px;top:12%;bottom:8%;background:var(--hi);border-radius:3px;transform:scaleX(0);transform-origin:left;z-index:0}
+.row.done .t:before{transform:scaleX(1)}
+.row .go{flex:none;font-size:.95rem;font-weight:700;background:var(--ink);color:#fff;border-radius:999px;padding:7px 14px;white-space:nowrap}
+.row.locked{cursor:default;color:var(--pencil);font-weight:400}
+.row.locked .go{background:transparent;color:var(--pencil);border:1.5px solid var(--line);padding:5px 10px}
+@media (prefers-reduced-motion:no-preference){
+  .row .t:before{transition:transform .45s var(--ease)}
+  .row .go{transition:transform .14s var(--ease)}
+  .row:active .go{transform:scale(.95)}
+}
+@media (hover:hover) and (pointer:fine){.row:not(.locked):hover .t:before{transform:scaleX(1);background:var(--hi-soft)}.row.done:hover .t:before{background:var(--hi)}}
+.cat{padding:0 16px;height:var(--row);display:flex;align-items:flex-end;padding-bottom:9px;font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--margin)}
+
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 2px 0;font-size:1rem;color:var(--pencil)}
+.under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
+.toast{margin:12px 2px 0;font-size:1rem;color:var(--ok);font-weight:700;min-height:1.4em}
+.toast:empty{display:none}
+
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,6.6vw,2.1rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 8px;text-wrap:balance}
+section{margin-top:44px}
+.q{margin:22px 0 0}
+.q p{margin:0 0 8px;font-weight:700}
+.q small{font-weight:400;color:var(--pencil)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:400 1.05rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;min-height:46px;cursor:pointer;touch-action:manipulation}
+.chip[aria-pressed="true"]{background:var(--hi);border-color:#e3c52a;font-weight:700}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;margin-top:24px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:700 1.15rem var(--body);cursor:pointer;text-decoration:none;touch-action:manipulation;text-align:center;padding:10px 16px}
+.btn.alt{background:var(--card);color:var(--ink);border:2px solid var(--ink)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .14s var(--ease)}.btn:active{transform:scale(.98)}}
+
+.price{margin-top:22px;background:var(--hi);border-radius:6px;padding:18px 18px 16px;box-shadow:0 18px 40px -26px rgba(28,43,79,.6)}
+.price h3{font-family:var(--display);font-weight:800;font-size:1.5rem;margin:0 0 4px;line-height:1.1}
+.price .amt{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;margin:6px 0 2px}
+.price .terms{margin:0 0 12px;font-weight:700}
+.price ul{margin:0 0 4px;padding-left:1.2em}
+.price li{margin:0 0 6px}
+.price .btn{margin-top:14px}
+.fine{font-size:.95rem;color:var(--pencil);margin:10px 2px 0}
+.honest{margin-top:18px;padding:14px 16px;border-left:4px solid var(--rule);background:rgba(255,255,255,.55);font-size:1.02rem}
+.honest p{margin:0}
+
+.setup textarea{width:100%;min-height:9rem;font:1rem/1.5 var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:12px}
+.where{margin:14px 0 0;padding-left:1.2em}
+.where li{margin:0 0 8px}
+.path{font-weight:700}
+.note{font-size:1rem;color:var(--pencil)}
+
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px max(16px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(238,242,246,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:5}
+.bar .btn{margin:0 auto;max-width:35rem;min-height:54px}
+@media (prefers-reduced-motion:no-preference){.bar{animation:up .35s var(--ease)}@keyframes up{from{transform:translateY(100%)}to{transform:none}}}
+
+.faq h3{font-family:var(--display);font-weight:700;font-size:1.15rem;margin:22px 0 4px}
+.faq p{margin:0}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:.95rem;color:var(--pencil)}
+footer a{color:var(--pencil)}
+
+/* Print: the fridge version */
+@media print{
+  @page{margin:12mm}
+  body{background:#fff;font-size:10pt}
+  .noprint,.bar,footer,.top,.under,.toast{display:none!important}
+  .wrap{max-width:none;padding:0}
+  .printhead{display:block!important;font-family:var(--display);font-weight:800;font-size:18pt;margin:0 0 6pt}
+  .card{box-shadow:none;background:#fff;border:1px solid #999}
+  .row .go{display:none}
+  .row{min-height:0;padding:3pt 8pt;font-size:10pt}
+  .row .p{display:block!important;font-weight:400;font-size:8.5pt;color:#333;margin-top:1pt}
+  .rows li{break-inside:avoid}
+  #sheetCard{columns:2;column-gap:10mm;padding-bottom:0}
+  .rows li{border-bottom:.5pt solid #bbb}
+  .cat{height:auto;padding:6pt 8pt 2pt;font-size:11pt;break-after:avoid}
+  .card .head{display:none}
+}
+.printhead,.row .p{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top noprint"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Switch Kit AI</a><a class="small" href="/help.html">Help</a></div>
+
+  <!-- First screen: free shortcuts, nothing to fill in -->
+  <div id="intro">
+    <h1 id="h1">Never know what to ask AI?</h1>
+    <p class="lede" id="lede">Tap a line. Your AI opens with the words already written and does the rest.</p>
+    <div class="card" id="freeCard">
+      <div class="head">Try one, free</div>
+      <ul class="rows" id="freeRows"></ul>
+    </div>
+    <div class="under"><label for="ai">Opens in</label>
+      <select id="ai">
+        <option value="chatgpt">ChatGPT</option>
+        <option value="gemini">Gemini</option>
+        <option value="claude">Claude</option>
+        <option value="copilot">Copilot</option>
+      </select>
+      <span>No sign-up here.</span>
+    </div>
+    <p class="toast" id="toast" role="status"></p>
+  </div>
+
+  <!-- Make it yours -->
+  <section id="make" class="noprint">
+    <h2 id="makeH">Get a cheat sheet made for your life</h2>
+    <p class="lede" id="makeLede">Four quick taps. You'll see your first shortcuts free.</p>
+    <div class="q" data-q="home"><p>Who's at home?</p><div class="chips">
+      <button class="chip" type="button" data-v="solo">Just me</button>
+      <button class="chip" type="button" data-v="two">Two of us</button>
+      <button class="chip" type="button" data-v="kids">Family with kids at home</button>
+      <button class="chip" type="button" data-v="grown">Kids are grown</button>
+    </div></div>
+    <div class="q" data-q="week" data-multi="1"><p>What fills your week? <small>Pick any</small></p><div class="chips">
+      <button class="chip" type="button" data-v="work">Work</button>
+      <button class="chip" type="button" data-v="business">My own business</button>
+      <button class="chip" type="button" data-v="retired">Retired</button>
+      <button class="chip" type="button" data-v="kids">Raising kids</button>
+      <button class="chip" type="button" data-v="care">Looking after someone</button>
+      <button class="chip" type="button" data-v="volunteer">Volunteering</button>
+    </div></div>
+    <div class="q" data-q="help" data-multi="1"><p>What would help most? <small>Pick up to 4</small></p><div class="chips" id="helpChips"></div></div>
+    <div class="q" data-q="style"><p>How do you like answers?</p><div class="chips">
+      <button class="chip" type="button" data-v="short">Short and simple</button>
+      <button class="chip" type="button" data-v="detail">A bit more detail</button>
+      <button class="chip" type="button" data-v="steps">Step by step</button>
+    </div></div>
+    <button class="btn" type="button" id="build">Show my cheat sheet</button>
+  </section>
+
+  <!-- The sheet -->
+  <section id="sheet" hidden>
+    <div class="printhead">My AI Cheat Sheet</div>
+    <h2 class="noprint" id="sheetH">Your cheat sheet</h2>
+    <p class="lede noprint" id="sheetLede"></p>
+    <div class="card" id="sheetCard"><div class="head" id="sheetHead">Tap any line</div><ul class="rows" id="sheetRows"></ul></div>
+    <p class="fine">AI can get things wrong. Double-check anything important, especially about money, health or legal matters.</p>
+
+    <div class="price noprint" id="price">
+      <h3>Unlock your full cheat sheet</h3>
+      <p class="amt">$9.99</p>
+      <p class="terms">Once. No subscription. 14-day money-back.</p>
+      <ul>
+        <li id="countLi">All 60 shortcuts, worded for your life</li>
+        <li>A printable version for the fridge or desk</li>
+        <li>A one-time setup so your AI answers like it knows you</li>
+        <li>Bonus: move what ChatGPT knows about you to another AI</li>
+      </ul>
+      <a class="btn" id="unlock" href="https://buy.stripe.com/28EfZgfqN57Gh0QdXx4ko03">Unlock my cheat sheet</a>
+      <p class="fine" style="color:var(--ink)">Secure checkout by Stripe. Works with ChatGPT, Gemini, Claude and Copilot.</p>
+    </div>
+    <div class="honest noprint" id="honest"><p>Straight answer: every shortcut is just well-chosen words for your AI. You could write them yourself. We've done the thinking and testing so you don't have to.</p></div>
+
+    <div class="noprint" id="paidTools" hidden>
+      <button class="btn alt" type="button" id="print">Print my cheat sheet</button>
+      <section class="setup" id="setup">
+        <h2>Teach your AI about you, once</h2>
+        <p class="lede">Your AI uses this every time, so answers fit your life without you explaining. Edit anything, then copy it.</p>
+        <textarea id="about" aria-label="About me, for your AI"></textarea>
+        <button class="btn" type="button" id="copyAbout">Copy my "about me"</button>
+        <p class="toast" id="aboutToast" role="status"></p>
+        <p style="margin:18px 0 6px;font-weight:700">Where to paste it</p>
+        <ul class="where">
+          <li><span class="path">ChatGPT:</span> Settings, then Personalization, then Custom instructions (in the phone app: Settings, then Customize ChatGPT). Paste it in the box about you and save.</li>
+          <li><span class="path">Claude:</span> Settings, then Memory, then Start import. Paste it and tap Add to memory.</li>
+          <li><span class="path">Gemini:</span> Settings &amp; help, then Import memory. Paste it and tap Add memory.</li>
+          <li><span class="path">Copilot, or if you can't find the setting:</span> paste it into a new chat and add "Please remember this about me."</li>
+        </ul>
+        <p class="note">Menu names change now and then. If yours look different, the last option always works.</p>
+      </section>
+      <section id="switchHow">
+        <h2>Moving to a different AI?</h2>
+        <p class="lede">Tap "See everything ChatGPT knows about you" in your sheet. Copy what ChatGPT writes, then paste it into your new AI:</p>
+        <ul class="where">
+          <li><span class="path">Claude:</span> Settings, then Memory, then Start import.</li>
+          <li><span class="path">Gemini:</span> Settings &amp; help, then Import memory.</li>
+          <li><span class="path">Copilot:</span> paste it into a chat and say "Please remember this about me."</li>
+        </ul>
+        <p class="note">Then tap "Check your new AI remembers you" with your new AI picked at the top.</p>
+      </section>
+    </div>
+  </section>
+
+  <section class="faq noprint" id="faq">
+    <h2>Questions</h2>
+    <h3>Do I need to pay for ChatGPT or another AI?</h3>
+    <p>No. Every shortcut works on the free versions of ChatGPT, Gemini, Claude and Copilot.</p>
+    <h3>What actually happens when I tap a line?</h3>
+    <p>Your AI opens in a new tab. ChatGPT and Claude open with the words already typed (ChatGPT may send them by itself). In Gemini and Copilot, paste and press send; we copy the words for you.</p>
+    <h3>Do you see my chats or answers?</h3>
+    <p>No. Your answers to the four questions stay on your phone or computer, and your chats stay between you and your AI. We never ask for passwords.</p>
+    <h3>What if it's not for me?</h3>
+    <p>Email us within 14 days and we'll refund you. No questions.</p>
+  </section>
+
+  <footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Switch Kit AI is operated by Nomad Strategies LLC. <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+</div>
+
+<div class="bar noprint" id="bar" hidden><a class="btn" href="#make" id="barBtn">Get a cheat sheet made for my life</a></div>
+
+<script>
+/* My AI Cheat Sheet — shortcut library.
+   {for} = who the answer is for (from "Who's at home?"), {style} = how they like answers.
+   Every shortcut is plain words the user's own AI receives; nothing is sent to us. */
+var CATS = [
+  ["meals", "Meals & groceries"],
+  ["msgs", "Emails & messages"],
+  ["money", "Money & bills"],
+  ["trips", "Trips & outings"],
+  ["home", "Home & garden"],
+  ["family", "Family, friends & gifts"],
+  ["learn", "Learning & hobbies"],
+  ["health", "Doctor visits & wellbeing"],
+  ["work", "Work & business"],
+  ["tech", "Phone & tech help"],
+  ["switch", "Moving to a different AI"]
+];
+var LIB = [
+  // Meals & groceries
+  {id:"m1", c:"meals", t:"Plan 5 easy dinners for this week", p:"Plan 5 easy weeknight dinners {for}. Each one should take 30 minutes or less and use everyday supermarket ingredients. Then give me one shopping list grouped by aisle. {style}"},
+  {id:"m2", c:"meals", t:"Cook with what's already in the fridge", p:"Help me make dinner {for} with what I already have, no trip to the store. Ask me what's in my fridge and cupboard, then suggest 3 meals and how to make the best one. {style}"},
+  {id:"m3", c:"meals", t:"Cut this week's grocery bill", p:"Help me spend less on groceries {for}. Ask me what I usually buy, then suggest cheaper swaps and a meal plan that uses up leftovers. {style}"},
+  {id:"m4", c:"meals", t:"One-pan dinners with hardly any washing up", p:"Give me 4 one-pan or slow-cooker dinners {for} with very little cleanup, plus a shopping list. {style}"},
+  {id:"m5", c:"meals", t:"Resize a recipe for more or fewer people", p:"I'll paste a recipe. Rewrite it for the number of people I tell you and give the amounts in cups and spoons. Ask me how many people first. {style}"},
+  {id:"m6", c:"meals", t:"Make a favorite recipe a little lighter", p:"I'll paste a recipe I love. Make it a little lighter without losing the flavor, and show me exactly what you changed. {style}"},
+  // Emails & messages
+  {id:"e1", c:"msgs", t:"Turn my rough note into a polite email", p:"Help me write a short, polite email. Ask me who it's to and what I want to say, then write it in plain, friendly language with a subject line. {style}"},
+  {id:"e2", c:"msgs", t:"Say no nicely", p:"Help me turn down a request politely without over-explaining. Ask me what the request is and who it's from, then write two versions: one warm, one firm. {style}"},
+  {id:"e3", c:"msgs", t:"Write a complaint that gets results", p:"Help me write a calm, clear complaint to a company. Ask me what happened and what I want them to do, then write it so it's likely to get a quick fix. {style}"},
+  {id:"e4", c:"msgs", t:"Reply to a tricky message", p:"I'll paste a message I received. Help me reply kindly and clearly. Give me 3 options, from short to a bit longer. {style}"},
+  {id:"e5", c:"msgs", t:"Write a heartfelt thank-you note", p:"Help me write a thank-you note. Ask me who it's for and what they did, then write it warmly but not over the top. {style}"},
+  {id:"e6", c:"msgs", t:"Fix my spelling and grammar", p:"I'll paste something I wrote. Fix the spelling and grammar, keep my own voice, and show me what you changed. {style}"},
+  {id:"e7", c:"msgs", t:"What to write in a card", p:"Help me write the message inside a card. Ask me the occasion and who it's for, then give me 3 short options. {style}"},
+  // Money & bills
+  {id:"b1", c:"money", t:"Explain a confusing bill or letter", p:"I'll paste or describe a bill or official letter. Explain in plain English what it says, what I need to do, and whether anything looks unusual. {style}"},
+  {id:"b2", c:"money", t:"Find money I'm wasting each month", p:"Help me find money I'm wasting each month {for}. Ask me about my regular bills and subscriptions, then list easy things to cancel, switch or ask to lower. {style}"},
+  {id:"b3", c:"money", t:"Set up a simple monthly budget", p:"Help me set up a simple monthly budget {for}. Ask me my rough income and main costs, then lay it out in a small, easy table. {style}"},
+  {id:"b4", c:"money", t:"A phone script to lower a bill", p:"Write me a short script for calling my phone, internet or insurance company to ask for a better price. Include what to say if they say no. {style}"},
+  {id:"b5", c:"money", t:"Compare two options side by side", p:"Help me decide between two things I'm choosing between. Ask me what they are and what matters most to me, then give me a simple pros and cons table. {style}"},
+  {id:"b6", c:"money", t:"Explain a money word in plain English", p:"Explain a money, banking or insurance term in plain English with a real-life example. Ask me which word. {style}"},
+  // Trips & outings
+  {id:"t1", c:"trips", t:"Plan a weekend away on a budget", p:"Plan a relaxed weekend away {for} on a sensible budget. Ask me where I'm starting from and what I enjoy, then give me 3 ideas with rough costs. {style}"},
+  {id:"t2", c:"trips", t:"Find day trips near me", p:"Suggest 5 day trips within 2 hours of where I live, {for}. Ask me my town and what I enjoy. Include what to do and a good place to eat. {style}"},
+  {id:"t3", c:"trips", t:"Make my packing list", p:"Make me a packing list. Ask me where I'm going, for how long and the time of year, then group it by suitcase and carry-on. {style}"},
+  {id:"t4", c:"trips", t:"Turn my trip into a day-by-day plan", p:"Turn my trip into an easy day-by-day plan with rest breaks and meal ideas, {for}. Ask me where I'm going and for how long. {style}"},
+  {id:"t5", c:"trips", t:"Rainy-day ideas", p:"Give me 10 things to do on a rainy day {for}, at home or nearby, mostly free. {style}"},
+  {id:"t6", c:"trips", t:"Plan a get-together", p:"Help me host a get-together. Ask me how many people and the occasion, then give me a simple plan: menu, shopping list and a timeline for the day. {style}"},
+  // Home & garden
+  {id:"h1", c:"home", t:"Something's broken: what to check first", p:"Something at home isn't working. Ask me what it is and what it's doing, then walk me through simple, safe things to check first, and tell me when it's time to call a professional. {style}"},
+  {id:"h2", c:"home", t:"A 20-minute-a-day cleaning plan", p:"Make me a realistic weekly cleaning plan {for} that takes about 20 minutes a day. {style}"},
+  {id:"h3", c:"home", t:"Declutter one room this weekend", p:"Help me declutter one room this weekend. Ask me which room, then give me a step-by-step plan for what to keep, donate or toss. {style}"},
+  {id:"h4", c:"home", t:"What to plant this season", p:"Help me plan what to plant this season. Ask me where I live and how much space and sun I have. Keep it beginner-friendly. {style}"},
+  {id:"h5", c:"home", t:"Questions to ask before hiring a contractor", p:"I need someone to do a job at home. Ask me what needs doing, then give me questions to ask contractors and red flags to watch for. {style}"},
+  {id:"h6", c:"home", t:"Turn my to-do list into a weekly plan", p:"I'll give you my messy list of chores and errands. Turn it into a simple plan for the week, grouped by day. {style}"},
+  // Family, friends & gifts
+  {id:"f1", c:"family", t:"Gift ideas for anyone", p:"Give me 10 gift ideas. Ask me who it's for, their age, what they love and my budget. {style}"},
+  {id:"f2", c:"family", t:"Plan a birthday celebration", p:"Help me plan a birthday celebration. Ask me who it's for, how many people and the budget, then give me a simple plan. {style}"},
+  {id:"f3", c:"family", t:"Cheap weekend activities with kids", k:"kids", p:"Give me 10 easy, cheap things to do with kids this weekend. Ask me their ages and whether we'd rather stay in or go out. {style}"},
+  {id:"f4", c:"family", t:"A fun day with the grandkids", k:"grown", p:"Give me ideas for a fun day with my grandkids. Ask me their ages and whether we're staying in or going out. {style}"},
+  {id:"f5", c:"family", t:"Write a short toast or speech", p:"Help me write a short toast or speech. Ask me the occasion and a few stories, then keep it under 2 minutes when spoken. {style}"},
+  {id:"f6", c:"family", t:"Keep in touch with people I miss", p:"Help me keep in touch with family and old friends. Give me a simple monthly plan and a few easy message ideas. {style}"},
+  // Learning & hobbies
+  {id:"l1", c:"learn", t:"Learn something new in 10 minutes a day", p:"Teach me something new in 10 minutes a day for a week. Ask me what I'm curious about, then give me day 1. {style}"},
+  {id:"l2", c:"learn", t:"Explain something everyone's talking about", p:"Explain a topic I keep hearing about, in plain English with no jargon. Ask me which topic. {style}"},
+  {id:"l3", c:"learn", t:"Books or shows I'd enjoy", p:"Recommend 5 books or TV shows I'd enjoy. Ask me about 3 I loved recently first. {style}"},
+  {id:"l4", c:"learn", t:"Start a new hobby on a small budget", p:"Help me start a new hobby on a small budget. Ask me what I'm thinking about, then give me a simple first-month plan. {style}"},
+  {id:"l5", c:"learn", t:"Start my family tree", p:"Help me start a family tree. Ask me what I already know, then tell me what to write down and where to look next. {style}"},
+  {id:"l6", c:"learn", t:"Quiz me on any topic", p:"Quiz me on a topic I choose, one question at a time, and tell me how I did at the end. Ask me the topic. {style}"},
+  // Doctor visits & wellbeing (general information only)
+  {id:"w1", c:"health", t:"Questions to bring to a doctor's appointment", p:"Help me prepare for a doctor's appointment. Ask me what it's about, then give me a short list of questions to bring. Don't try to diagnose me. {style}"},
+  {id:"w2", c:"health", t:"Explain a medical word in plain English", p:"Explain a medical word or test name in plain English. Ask me which one, and remind me to check anything personal with my doctor. {style}"},
+  {id:"w3", c:"health", t:"An easy 4-week walking plan", p:"Make me a gentle 4-week walking plan for a beginner. Ask me how much I walk now. {style}"},
+  {id:"w4", c:"health", t:"A calm wind-down routine for the evening", p:"Suggest a calm 30-minute evening routine to help me wind down before bed. Keep it simple and free. {style}"},
+  // Work & business
+  {id:"k1", c:"work", t:"Write a clear email to my boss or a client", p:"Help me write a clear, professional email to my boss or a client. Ask me what it's about and what I need from them. {style}"},
+  {id:"k2", c:"work", t:"Turn messy notes into a to-do list", p:"I'll paste messy meeting notes. Turn them into a short summary and a to-do list with who does what and by when. {style}"},
+  {id:"k3", c:"work", t:"3 social media posts for my business", p:"Write 3 short social media posts for my small business. Ask me what I sell and who my customers are. {style}"},
+  {id:"k4", c:"work", t:"Write a quote or invoice description", p:"Help me write a clear quote or invoice description for a customer. Ask me what the job is and what's included. {style}"},
+  {id:"k5", c:"work", t:"Practice a tough conversation", p:"Help me practice a tough conversation or interview. Ask me what it's about, then play the other person and give me feedback after. {style}"},
+  {id:"k6", c:"work", t:"Get a spreadsheet to do what I want", p:"Help me with a spreadsheet. Ask me what I'm trying to do, then give me step-by-step instructions for Excel or Google Sheets. {style}"},
+  {id:"k7", c:"work", t:"Update my résumé", p:"Help me update my résumé. Ask me about my last few jobs, then write clear, modern bullet points. {style}"},
+  // Phone & tech help
+  {id:"p1", c:"tech", t:"Walk me through something on my phone", p:"Help me do something on my phone. Ask me whether it's an iPhone or Android and what I'm trying to do, then give me simple numbered steps. {style}"},
+  {id:"p2", c:"tech", t:"Is this message a scam?", p:"I'll describe or paste a message, email or call I got. Tell me if it looks like a scam, what the warning signs are, and what to do next. {style}"},
+  {id:"p3", c:"tech", t:"Keep my accounts safe", p:"Explain how to keep my online accounts safe, in plain English: good passwords, two-step login, and what I should never share. {style}"},
+  {id:"p4", c:"tech", t:"Make my phone easier to read", p:"Walk me through making text bigger and my phone easier to read. Ask me if it's an iPhone or Android. {style}"},
+  {id:"p5", c:"tech", t:"Set up a video call with family", p:"Walk me through setting up a video call with family. Ask me what phones or computers we each have. {style}"},
+  {id:"p6", c:"tech", t:"Back up and sort my photos", p:"Help me back up and organize the photos on my phone. Ask me if it's an iPhone or Android. {style}"},
+  // Moving to a different AI (bonus)
+  {id:"s1", c:"switch", t:"See everything ChatGPT knows about you", p:"Write down everything you know about me, from your memories and our past chats, in one block I can copy. Leave out passwords and account numbers."},
+  {id:"s2", c:"switch", t:"Check your new AI remembers you", p:"What do you know about me? Answer in a short list."}
+];
+
+(function(){
+  var UNLOCKED=false; /*UNLOCK-FLAG*/
+  var FREE_IDS=["m1","e1","t1"], PREVIEW_OPEN=5, PREVIEW_LOCKED=9;
+  var KEY_A="macs-answers", KEY_AI="macs-ai";
+  var $=function(id){return document.getElementById(id);};
+  function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  function load(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
+
+  // Which ad brought them (for counting and the matching headline). Never which AI or answers.
+  var ad=(function(){try{return (new URLSearchParams(location.search).get("utm_content")||"none").slice(0,40);}catch(e){return "none";}})();
+  var HERO={
+    ad_dinner:["Dinner planned in one tap.","Tap a line. Your AI writes the week's dinners and the shopping list."],
+    ad_email:["A polite email in one tap.","Tap a line. Your AI asks two quick questions and writes it for you."],
+    ad_sheet:["Your cheat sheet for AI.","Tap a line. Your AI opens with the words already written and does the rest."]
+  };
+  if(HERO[ad]){$("h1").textContent=HERO[ad][0];$("lede").textContent=HERO[ad][1];}
+  function count(name,extra){try{if(window.umami&&typeof umami.track==="function"){var d={ad:ad};if(extra)for(var k in extra)d[k]=extra[k];umami.track(name,d);}}catch(e){}}
+
+  var AIS={
+    chatgpt:{n:"ChatGPT",url:function(p){return "https://chatgpt.com/?q="+encodeURIComponent(p);},fill:true},
+    claude:{n:"Claude",url:function(p){return "https://claude.ai/new?q="+encodeURIComponent(p);},fill:true},
+    gemini:{n:"Gemini",url:function(){return "https://gemini.google.com/app";}},
+    copilot:{n:"Copilot",url:function(){return "https://copilot.microsoft.com/";}}
+  };
+  var sel=$("ai"); var savedAi=load(KEY_AI); if(savedAi&&AIS[savedAi]) sel.value=savedAi;
+
+  var FOR={solo:"for one person",two:"for two people",kids:"for a family with kids",grown:"for two people"};
+  var STYLE={short:"Keep it short and simple.",detail:"Give me a bit more detail and explain why.",steps:"Lay it out as clear numbered steps."};
+  var answers=load(KEY_A)||{};
+  function fill(p){
+    var f=answers.home?FOR[answers.home]:"for my household";
+    var s=STYLE[answers.style||"short"];
+    return p.replace("{for}",f).replace("{style}",s+" Use plain English.").replace(/\s+/g," ").trim();
+  }
+  function byId(id){for(var i=0;i<LIB.length;i++) if(LIB[i].id===id) return LIB[i]; return null;}
+
+  function copyNow(text){
+    var ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
+    ta.style.cssText="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;font-size:16px";
+    document.body.appendChild(ta); ta.focus(); ta.select(); try{ta.setSelectionRange(0,text.length);}catch(e){}
+    var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+    document.body.removeChild(ta); try{window.getSelection().removeAllRanges();}catch(e){}
+    if(!ok){try{navigator.clipboard.writeText(text);ok=true;}catch(e){}}
+    return ok;
+  }
+
+  var tapped=false;
+  function rowFor(item,locked,where){
+    var li=document.createElement("li");
+    var a=document.createElement(locked?"div":"a");
+    a.className="row"+(locked?" locked":"");
+    var t=document.createElement("span"); t.className="t";
+    var s=document.createElement("span"); s.textContent=item.t; t.appendChild(s);
+    var p=document.createElement("span"); p.className="p"; p.textContent=fill(item.p); t.appendChild(p);
+    var g=document.createElement("span"); g.className="go"; g.textContent=locked?"Locked":"Tap";
+    a.appendChild(t); a.appendChild(g);
+    if(!locked){
+      a.href="#"; a.target="_blank"; a.rel="noopener";
+      a.addEventListener("click",function(e){
+        var ai=AIS[sel.value], text=fill(item.p);
+        a.href=ai.url(text);
+        var copied=copyNow(text);
+        a.classList.add("done");
+        var msg=ai.fill?(ai.n+" is opening with the words typed in."+(copied?" If the box is empty, paste: we copied it too.":"")):(copied?"Copied. Paste it into "+ai.n+" and press send.":"Press and hold to copy, then paste it into "+ai.n+".");
+        $("toast").textContent=msg;
+        count(where==="free"?"free-tap":"sheet-tap");
+        tapped=true;
+        if(!UNLOCKED) $("bar").hidden=false;
+      });
+    }
+    li.appendChild(a); return li;
+  }
+
+  // First screen
+  FREE_IDS.forEach(function(id){$("freeRows").appendChild(rowFor(byId(id),false,"free"));});
+  sel.addEventListener("change",function(){store(KEY_AI,sel.value);});
+
+  // Questions
+  var helpBox=$("helpChips");
+  CATS.forEach(function(c){ if(c[0]==="switch") return;
+    var b=document.createElement("button"); b.className="chip"; b.type="button"; b.dataset.v=c[0]; b.textContent=c[1]; helpBox.appendChild(b); });
+  var started=false;
+  Array.prototype.forEach.call(document.querySelectorAll(".q"),function(q){
+    var key=q.dataset.q, multi=!!q.dataset.multi;
+    var chips=q.querySelectorAll(".chip");
+    function paint(){Array.prototype.forEach.call(chips,function(c){
+      var v=answers[key]; var on=multi?(v||[]).indexOf(c.dataset.v)>=0:v===c.dataset.v; c.setAttribute("aria-pressed",on?"true":"false");});}
+    Array.prototype.forEach.call(chips,function(c){c.addEventListener("click",function(){
+      if(!started){started=true;count("make-start");}
+      if(multi){var arr=(answers[key]||[]).slice(); var i=arr.indexOf(c.dataset.v);
+        if(i>=0) arr.splice(i,1); else { if(key==="help"&&arr.length>=4) arr.shift(); arr.push(c.dataset.v);} answers[key]=arr;}
+      else answers[key]=(answers[key]===c.dataset.v)?null:c.dataset.v;
+      store(KEY_A,answers); paint();
+    });});
+    paint();
+  });
+
+  function ordered(){
+    var help=answers.help||[], week=answers.week||[];
+    var order=help.slice();
+    if(week.indexOf("work")>=0||week.indexOf("business")>=0) order.push("work");
+    if(week.indexOf("kids")>=0||week.indexOf("care")>=0) order.push("family");
+    CATS.forEach(function(c){if(c[0]!=="switch"&&c[0]!=="work") order.push(c[0]);});
+    order.push("work"); order.push("switch");
+    var seen={},cats=[]; order.forEach(function(c){if(!seen[c]){seen[c]=1;cats.push(c);}});
+    var items=[];
+    cats.forEach(function(c){LIB.forEach(function(it){
+      if(it.c!==c) return;
+      if(it.k==="kids"&&answers.home&&answers.home!=="kids"&&(answers.week||[]).indexOf("kids")<0) return;
+      if(it.k==="grown"&&answers.home&&answers.home!=="grown") return;
+      items.push(it);
+    });});
+    return {cats:cats,items:items};
+  }
+  function catName(c){for(var i=0;i<CATS.length;i++) if(CATS[i][0]===c) return CATS[i][1]; return c;}
+
+  function renderSheet(){
+    var o=ordered(), rows=$("sheetRows"); rows.innerHTML="";
+    var n=o.items.length;
+    $("countLi").textContent="All "+n+" shortcuts, worded for your life";
+    if(UNLOCKED){
+      $("sheetH").textContent="Your cheat sheet";
+      $("sheetLede").textContent="Thanks for buying. Bookmark this page to come back to it. "+n+" shortcuts, with what you said you want first.";
+      $("sheetHead").textContent="Tap any line";
+      o.cats.forEach(function(c){
+        var head=document.createElement("li"); head.className="cat"; head.textContent=catName(c); rows.appendChild(head);
+        o.items.forEach(function(it){ if(it.c===c) rows.appendChild(rowFor(it,false,"sheet")); });
+      });
+      $("price").hidden=true; $("honest").hidden=true; $("paidTools").hidden=false;
+      buildAbout();
+    } else {
+      $("sheetH").textContent="Your cheat sheet is ready";
+      $("sheetLede").textContent="Your first "+PREVIEW_OPEN+" are free to use now. The other "+(n-PREVIEW_OPEN)+" unlock below.";
+      $("sheetHead").textContent="Made for you";
+      o.items.slice(0,PREVIEW_OPEN).forEach(function(it){rows.appendChild(rowFor(it,false,"sheet"));});
+      o.items.slice(PREVIEW_OPEN,PREVIEW_OPEN+PREVIEW_LOCKED).forEach(function(it){rows.appendChild(rowFor(it,true));});
+      var more=document.createElement("li"); more.className="cat"; more.style.color="var(--pencil)";
+      more.textContent="and "+(n-PREVIEW_OPEN-PREVIEW_LOCKED)+" more"; rows.appendChild(more);
+    }
+    $("sheet").hidden=false;
+  }
+
+  var HOME_TXT={solo:"I live on my own.",two:"There are two of us at home.",kids:"We're a family with kids at home.",grown:"Our kids are grown and have left home."};
+  var WEEK_TXT={work:"I work.",business:"I run my own business.",retired:"I'm retired.",kids:"I'm raising kids.",care:"I look after someone in my family.",volunteer:"I volunteer."};
+  function buildAbout(){
+    var parts=["A bit about me:"];
+    if(answers.home) parts.push(HOME_TXT[answers.home]);
+    (answers.week||[]).forEach(function(w){if(WEEK_TXT[w]) parts.push(WEEK_TXT[w]);});
+    var help=(answers.help||[]).map(function(c){return catName(c).toLowerCase();});
+    if(help.length) parts.push("I'd mostly like help with "+help.join(", ").replace(/, ([^,]*)$/," and $1")+".");
+    parts.push("When you answer me: "+(STYLE[answers.style||"short"])+" Use plain English, skip the jargon, and ask me a quick question if you need more detail.");
+    $("about").value=parts.join(" ");
+  }
+
+  $("build").addEventListener("click",function(){
+    count("make-done",{n:String((answers.help||[]).length)});
+    renderSheet();
+    $("bar").hidden=true;
+    $("sheet").scrollIntoView({behavior:(matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"),block:"start"});
+  });
+  $("barBtn").addEventListener("click",function(){$("bar").hidden=true;});
+  $("unlock").addEventListener("click",function(){count("tapped-unlock");});
+  if($("print")) $("print").addEventListener("click",function(){count("printed");window.print();});
+  $("copyAbout").addEventListener("click",function(){
+    var ok=copyNow($("about").value); count("setup-copied");
+    $("aboutToast").textContent=ok?"Copied. Now paste it where the list below says.":"Press and hold the text, Select all, then Copy.";
+  });
+
+  // Paid page: show the sheet straight away (asks nothing if they already answered on this device).
+  if(UNLOCKED){
+    count("kit-open");
+    $("makeH").textContent="Your answers";
+    $("makeLede").textContent="Change any answer, then tap Show my cheat sheet to update it.";
+    $("build").textContent="Show my cheat sheet";
+    $("intro").hidden=true;
+    renderSheet();
+    var card=$("sheetCard"); card.parentNode.insertBefore(document.querySelector(".under"),card); card.parentNode.insertBefore($("toast"),card);
+    document.querySelector(".under").style.margin="0 2px 12px"; $("toast").style.margin="0 2px 12px";
+    var make=$("make"); make.parentNode.insertBefore(make,$("faq"));
+  }
+})();
+</script>
+</body>
+</html>
