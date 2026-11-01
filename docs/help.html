@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffd84d">
+<meta name="theme-color" content="#fef3e5">
 <title>Help &amp; refunds · Kitchen Table</title>
 <meta name="description" content="What&#x27;s free, what you get for $9.99, how the shortcuts work, refunds and contact.">
 <link rel="canonical" href="https://switchkitai.com/help.html">
@@ -19,53 +19,55 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap"><style>
-:root{--paper:#ffffff;--ink:#14213d;--muted:#56607a;--line:#dfe3ec;--edge:#b9c1d3;--butter:#ffd84d;--butter-deep:#f2c418;--cobalt:#2340b8;--cobalt-dark:#1a3091;--wash:#f2f4fb;
---font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap"><style>
+:root{--cream:#fef3e5;--night:#0d0d0d;--green:#274c2e;--blush:#e7c2a6;--pink:#d78f85;--hair:rgba(13,13,13,.18);--hair-light:rgba(231,194,166,.35);
+--serif:"Instrument Serif",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Azeret Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.4,0,.2,1);color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-x:hidden;overflow-wrap:break-word}
-.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
-a{color:var(--cobalt)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0 16px;margin:0 calc(50% - 50vw);padding-left:calc(50vw - 50%);padding-right:calc(50vw - 50%);background:var(--butter)}
-.top a{font-size:1rem;color:var(--ink);font-weight:600}
-.top a.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:115%;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
-.mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper);display:inline-block}
-.mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
-.band{background:var(--butter);margin:0 calc(50% - 50vw) 32px;padding:18px calc(50vw - 50%) 30px}
-h1{font-weight:800;font-stretch:118%;font-size:clamp(1.8rem,7.4vw,2.5rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
-h2{font-weight:800;font-stretch:118%;font-size:1.45rem;line-height:1.12;letter-spacing:-.015em;margin:44px 0 8px}
+body{margin:0;background:var(--cream);color:var(--night);font:400 16px/1.59 var(--sans);letter-spacing:.008em;overflow-x:hidden;overflow-wrap:break-word}
+.wrap{max-width:74rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green)}
+h1,h2,h3{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.029em;line-height:.99;margin:0}
+h1{font-size:36px;margin:0 0 18px}
+h2{font-size:36px;margin:48px 0 14px}
 p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
-.updated{color:var(--muted)}
-.lede{color:var(--ink);font-size:1.12rem;margin:0}
-footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
-footer a{color:var(--muted)}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
-.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
-.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
-footer{border-top:1px solid var(--line)}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 0 14px;border-bottom:1px solid var(--hair)}
+.top a.brand{grid-column:2;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--night)}
+.monogram{width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--blush);display:grid;place-items:center;font:italic 400 22px/1 var(--serif);padding-bottom:2px}
+.wordmark{font:italic 400 24px/.99 var(--serif);letter-spacing:-.029em}
+.top a.small{grid-column:3;justify-self:end;font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;color:var(--night);text-decoration:none;border-bottom:1px solid var(--hair)}
+.updated{font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}
+.lede{margin:0;font-size:16px;max-width:34em}
+footer{background:var(--night);color:var(--blush);margin:64px calc(50% - 50vw) 0;padding:44px calc(50vw - 50%) 48px;font-size:14px;text-align:center}
+footer a{color:var(--pink)}
+footer .lockup{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:18px}
+footer .monogram{background:var(--blush);color:var(--night)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.16;mix-blend-mode:multiply}
+.grain.dark::after{mix-blend-mode:screen;opacity:.09}
+.grain > *{position:relative;z-index:1}
 @media (min-width:980px){
-  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  .wrap{padding-left:40px;padding-right:40px}
+  h1{font-size:54px}
   main{max-width:48rem}
 }
-main h1{font-size:clamp(1.9rem,7vw,2.4rem);margin-top:32px}
-main h2{font-size:1.25rem;margin-top:32px}
-.updated{margin-top:-6px}
+main{padding-top:40px}
+main h1{font-size:36px}
+main h2{font-size:36px;margin-top:40px}
 </style>
 </head>
-<body><div class="wrap"><div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Kitchen Table</a><a href="/">Try it free</a></div>
-<main><h1>Help &amp; refunds</h1>
+<body><div class="wrap"><div class="top"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/">Try it free</a></div>
+<main><h1>Help &amp; Refunds</h1>
 <p class="updated">Updated November 1, 2026</p>
 
-<h2>What is Kitchen Table?</h2>
+<h2>What Is Kitchen Table?</h2>
 <p>A list of one-tap shortcuts for everyday jobs: planning dinners, writing emails, sorting out bills, planning trips, getting help with your phone and more. Tap a line and your AI (ChatGPT, Gemini, Claude or Copilot) opens with the words already written. You don't need to know what to type.</p>
 
-<h2>What's free and what costs money?</h2>
+<h2>What's Free and What Costs Money?</h2>
 <p>The three shortcuts on the homepage are free, and so are the first ten shortcuts on your personal cheat sheet. Unlocking the full cheat sheet costs $9.99, once. There's no subscription and nothing renews.</p>
 
-<h2>What do I get for $9.99?</h2>
+<h2>What Do I Get for $9.99?</h2>
 <ul>
 <li>All 60 or so shortcuts, put in the order you asked for and worded to fit your household and how you like answers.</li>
 <li>A printable version for the fridge or desk.</li>
@@ -73,19 +75,19 @@ main h2{font-size:1.25rem;margin-top:32px}
 <li>A bonus guide for moving what ChatGPT knows about you to a different AI.</li>
 </ul>
 
-<h2>Do I need to pay for an AI?</h2>
+<h2>Do I Need to Pay for an AI?</h2>
 <p>No. Every shortcut works with the free versions of ChatGPT, Gemini, Claude and Copilot. Some of them ask you to sign in or create a free account.</p>
 
-<h2>Couldn't I just type these myself?</h2>
+<h2>Couldn't I Just Type These Myself?</h2>
 <p>Yes. Each shortcut is just well-chosen words for your AI, and you're welcome to write your own. The cheat sheet saves you working out what to ask and how to ask it.</p>
 
-<h2>I tapped a line and nothing was typed in. What now?</h2>
+<h2>I Tapped a Line and Nothing Was Typed In. What Now?</h2>
 <p>ChatGPT and Claude usually open with the words already typed. Gemini and Copilot don't support that, so we copy the words for you: press and hold in the message box, tap Paste, then send. If you're inside the Facebook or Instagram app, tap the three dots and choose "Open in browser" for the smoothest experience.</p>
 
-<h2>I paid but lost my cheat sheet page.</h2>
+<h2>I Paid but Lost My Cheat Sheet Page.</h2>
 <p>Bookmark the page right after you pay. If you lose it, email us from the address you paid with and we'll send you the link.</p>
 
-<h2>Can AI get things wrong?</h2>
+<h2>Can AI Get Things Wrong?</h2>
 <p>Yes. AI is helpful but not always right. Double-check anything important, especially about money, health or legal matters, with a qualified person.</p>
 
 <h2>Refunds</h2>
@@ -94,5 +96,5 @@ main h2{font-size:1.25rem;margin-top:32px}
 <h2>Contact</h2>
 <p>Email <a href="mailto:switchkitai@gmail.com">switchkitai@gmail.com</a>. We usually reply within one business day.</p>
 </main>
-<footer>Kitchen Table is operated by Nomad Strategies LLC and isn't affiliated with any AI company. <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div></body>
+<footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Kitchen Table is operated by Nomad Strategies LLC and isn't affiliated with any AI company. <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div></body>
 </html>

@@ -28,6 +28,19 @@ ANALYTICS_P = ('<p>We count visits and a few taps (trying a free shortcut, start
                'It never includes which shortcut you tapped, your answers, which AI you use, your name, your email or anything you type. If your browser sends a '
                '"Do Not Track" signal, we don\'t count your visit.</p>') if UMAMI else "<p>We don't currently use any visit counting.</p>"
 
+def title_case(t):
+    words = t.split(" ")
+    out = []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if 0 < i < len(words) - 1 and lw in {"a","an","and","as","at","but","by","for","in","into","of","on","or","the","to","with"}:
+            out.append(lw)
+        elif w[:1].islower():
+            out.append(w[:1].upper() + w[1:])
+        else:
+            out.append(w)
+    return " ".join(out)
+
 def share_meta(title, desc, url):
     a = html.escape
     return ('<meta property="og:type" content="website">\n<meta property="og:site_name" content="Kitchen Table">\n'
@@ -51,51 +64,53 @@ kit = src.replace("{{HEADEXTRA}}", '<meta name="robots" content="noindex, nofoll
     "var UNLOCKED=false; /*UNLOCK-FLAG*/", "var UNLOCKED=true;")
 
 DOC_STYLE = """<style>
-:root{--paper:#ffffff;--ink:#14213d;--muted:#56607a;--line:#dfe3ec;--edge:#b9c1d3;--butter:#ffd84d;--butter-deep:#f2c418;--cobalt:#2340b8;--cobalt-dark:#1a3091;--wash:#f2f4fb;
---font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
+:root{--cream:#fef3e5;--night:#0d0d0d;--green:#274c2e;--blush:#e7c2a6;--pink:#d78f85;--hair:rgba(13,13,13,.18);--hair-light:rgba(231,194,166,.35);
+--serif:"Instrument Serif",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Azeret Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.4,0,.2,1);color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-x:hidden;overflow-wrap:break-word}
-.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
-a{color:var(--cobalt)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0 16px;margin:0 calc(50% - 50vw);padding-left:calc(50vw - 50%);padding-right:calc(50vw - 50%);background:var(--butter)}
-.top a{font-size:1rem;color:var(--ink);font-weight:600}
-.top a.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:115%;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
-.mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper);display:inline-block}
-.mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
-.band{background:var(--butter);margin:0 calc(50% - 50vw) 32px;padding:18px calc(50vw - 50%) 30px}
-h1{font-weight:800;font-stretch:118%;font-size:clamp(1.8rem,7.4vw,2.5rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
-h2{font-weight:800;font-stretch:118%;font-size:1.45rem;line-height:1.12;letter-spacing:-.015em;margin:44px 0 8px}
+body{margin:0;background:var(--cream);color:var(--night);font:400 16px/1.59 var(--sans);letter-spacing:.008em;overflow-x:hidden;overflow-wrap:break-word}
+.wrap{max-width:74rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green)}
+h1,h2,h3{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.029em;line-height:.99;margin:0}
+h1{font-size:36px;margin:0 0 18px}
+h2{font-size:36px;margin:48px 0 14px}
 p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
-.updated{color:var(--muted)}
-.lede{color:var(--ink);font-size:1.12rem;margin:0}
-footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
-footer a{color:var(--muted)}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
-.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
-.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
-footer{border-top:1px solid var(--line)}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 0 14px;border-bottom:1px solid var(--hair)}
+.top a.brand{grid-column:2;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--night)}
+.monogram{width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--blush);display:grid;place-items:center;font:italic 400 22px/1 var(--serif);padding-bottom:2px}
+.wordmark{font:italic 400 24px/.99 var(--serif);letter-spacing:-.029em}
+.top a.small{grid-column:3;justify-self:end;font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;color:var(--night);text-decoration:none;border-bottom:1px solid var(--hair)}
+.updated{font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}
+.lede{margin:0;font-size:16px;max-width:34em}
+footer{background:var(--night);color:var(--blush);margin:64px calc(50% - 50vw) 0;padding:44px calc(50vw - 50%) 48px;font-size:14px;text-align:center}
+footer a{color:var(--pink)}
+footer .lockup{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:18px}
+footer .monogram{background:var(--blush);color:var(--night)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.16;mix-blend-mode:multiply}
+.grain.dark::after{mix-blend-mode:screen;opacity:.09}
+.grain > *{position:relative;z-index:1}
 @media (min-width:980px){
-  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  .wrap{padding-left:40px;padding-right:40px}
+  h1{font-size:54px}
   main{max-width:48rem}
 }
-main h1{font-size:clamp(1.9rem,7vw,2.4rem);margin-top:32px}
-main h2{font-size:1.25rem;margin-top:32px}
-.updated{margin-top:-6px}
+main{padding-top:40px}
+main h1{font-size:36px}
+main h2{font-size:36px;margin-top:40px}
 </style>"""
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">')
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap">')
 
 def doc(title, inner, desc, path):
     url = SITE + path
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#ffd84d">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#fef3e5">\n'
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + DOC_STYLE + '\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Kitchen Table</a><a href="/">Try it free</a></div>\n'
-            '<main>' + inner + '</main>\n<footer>Kitchen Table is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
+            '<div class="top"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/">Try it free</a></div>\n'
+            '<main>' + inner + '</main>\n<footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Kitchen Table is operated by Nomad Strategies LLC and isn\'t affiliated with any AI company. '
             '<a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div></body>\n</html>\n')
 
 def redirect(to):
@@ -116,6 +131,7 @@ pages = {
 }
 for name, (title, desc) in pages.items():
     inner = open(os.path.join(HERE, "pages", name + ".html")).read().replace("{{EMAIL}}", EMAIL).replace("{{UPDATED}}", TODAY_LONG).replace("{{ANALYTICS}}", ANALYTICS_P)
+    inner = re.sub(r"<(h[12])>(.*?)</\1>", lambda m: "<%s>%s</%s>" % (m.group(1), title_case(m.group(2)), m.group(1)), inner)
     open(os.path.join(DIST, name + ".html"), "w").write(doc(title, inner, desc, "/" + name + ".html"))
 # Old links: /card and /card.html went home with a tag; /guides/* went home. Any unknown page goes home too.
 open(os.path.join(DIST, "card.html"), "w").write(redirect("/?utm_content=card"))
@@ -130,6 +146,7 @@ open(os.path.join(DIST, INDEXNOW_KEY + ".txt"), "w").write(INDEXNOW_KEY)
 open(os.path.join(DIST, ".nojekyll"), "w").write("")
 shutil.copytree(os.path.join(HERE, "assets"), os.path.join(DIST, "assets"))
 # ---- Free search pages (guides/) ----
+
 import json
 from guides import GUIDES, HOUSE, STYLE as G_STYLE
 LIBTXT = open(os.path.join(HERE, "library.js")).read()
@@ -139,92 +156,86 @@ def lib_prompt(sid):
     return re.sub(r"\s+", " ", m.group(1).replace("{for}", HOUSE).replace("{style}", G_STYLE)).strip()
 
 GUIDE_CSS = """<style>
-:root{--paper:#ffffff;--ink:#14213d;--muted:#56607a;--line:#dfe3ec;--edge:#b9c1d3;--butter:#ffd84d;--butter-deep:#f2c418;--cobalt:#2340b8;--cobalt-dark:#1a3091;--wash:#f2f4fb;
---font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
+:root{--cream:#fef3e5;--night:#0d0d0d;--green:#274c2e;--blush:#e7c2a6;--pink:#d78f85;--hair:rgba(13,13,13,.18);--hair-light:rgba(231,194,166,.35);
+--serif:"Instrument Serif",Georgia,serif;--sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Azeret Mono",ui-monospace,Menlo,monospace;--ease:cubic-bezier(.4,0,.2,1);color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.6 var(--font);overflow-x:hidden;overflow-wrap:break-word}
-.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
-a{color:var(--cobalt)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0 16px;margin:0 calc(50% - 50vw);padding-left:calc(50vw - 50%);padding-right:calc(50vw - 50%);background:var(--butter)}
-.top a{font-size:1rem;color:var(--ink);font-weight:600}
-.top a.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:115%;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
-.mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper);display:inline-block}
-.mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
-.band{background:var(--butter);margin:0 calc(50% - 50vw) 32px;padding:18px calc(50vw - 50%) 30px}
-h1{font-weight:800;font-stretch:118%;font-size:clamp(1.8rem,7.4vw,2.5rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
-h2{font-weight:800;font-stretch:118%;font-size:1.45rem;line-height:1.12;letter-spacing:-.015em;margin:44px 0 8px}
+body{margin:0;background:var(--cream);color:var(--night);font:400 16px/1.59 var(--sans);letter-spacing:.008em;overflow-x:hidden;overflow-wrap:break-word}
+.wrap{max-width:74rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green)}
+h1,h2,h3{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.029em;line-height:.99;margin:0}
+h1{font-size:36px;margin:0 0 18px}
+h2{font-size:36px;margin:48px 0 14px}
 p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
-.updated{color:var(--muted)}
-.lede{color:var(--ink);font-size:1.12rem;margin:0}
-footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
-footer a{color:var(--muted)}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
-.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
-.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
-footer{border-top:1px solid var(--line)}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 0 14px;border-bottom:1px solid var(--hair)}
+.top a.brand{grid-column:2;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--night)}
+.monogram{width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--blush);display:grid;place-items:center;font:italic 400 22px/1 var(--serif);padding-bottom:2px}
+.wordmark{font:italic 400 24px/.99 var(--serif);letter-spacing:-.029em}
+.top a.small{grid-column:3;justify-self:end;font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;color:var(--night);text-decoration:none;border-bottom:1px solid var(--hair)}
+.updated{font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}
+.lede{margin:0;font-size:16px;max-width:34em}
+footer{background:var(--night);color:var(--blush);margin:64px calc(50% - 50vw) 0;padding:44px calc(50vw - 50%) 48px;font-size:14px;text-align:center}
+footer a{color:var(--pink)}
+footer .lockup{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:18px}
+footer .monogram{background:var(--blush);color:var(--night)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.16;mix-blend-mode:multiply}
+.grain.dark::after{mix-blend-mode:screen;opacity:.09}
+.grain > *{position:relative;z-index:1}
 @media (min-width:980px){
-  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  .wrap{padding-left:40px;padding-right:40px}
+  h1{font-size:54px}
   main{max-width:48rem}
 }
 
-.panel{margin-top:22px}
-.panel .label{margin:0 0 8px;font-weight:700;font-size:1rem}
-.words{margin:0;padding:14px 16px;background:var(--paper);border:2px solid var(--ink);border-radius:10px;font-size:1.05rem}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;margin-top:14px;border:0;border-radius:8px;background:var(--cobalt);color:#fff;font:800 1.15rem var(--font);font-stretch:110%;text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation;box-shadow:0 4px 0 var(--ink)}
-.btn:hover{background:var(--cobalt-dark)}
-.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
-@media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
-.btn.done{background:var(--cobalt-dark)}
-.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:12px 0 0;font-size:.98rem;color:var(--ink)}
-.under select{font:700 1rem var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:8px;padding:7px 10px;min-height:44px}
-.toast{margin:12px 0 0;font-size:1rem;color:var(--cobalt-dark);font-weight:700}
+.band{display:grid;gap:28px;padding:40px 0 48px;border-bottom:1px solid var(--hair)}
+.panel{border:1px solid var(--hair);border-radius:4px;padding:20px}
+.panel .label{margin:0 0 10px;font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}
+.words{margin:0;padding:16px 18px;background:var(--blush);color:var(--night);border-radius:4px;font-size:16px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:14px;border:0;border-radius:0;background:var(--green);color:var(--blush);font:600 16px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;text-decoration:none;cursor:pointer;text-align:center;padding:10px 16px;touch-action:manipulation;transition:transform 600ms var(--ease)}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+.btn.done{background:var(--night)}
+.toast{margin:12px 0 0;font-size:14px;color:var(--green);font-weight:700}
 .toast:empty{display:none}
-.share{margin:20px 0 0;font-size:1rem;color:var(--muted)}
-.share button{background:none;border:0;padding:0;font:700 1rem var(--font);color:var(--cobalt);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.tip{margin-top:4px}
-ul.list{list-style:none;padding:0;margin:14px 0 0}
-ul.list li{margin:0;border-bottom:1px solid var(--line)}
-ul.list li:first-child{border-top:1px solid var(--line)}
-.row{display:flex;align-items:center;gap:14px;min-height:60px;padding:14px 2px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.08rem;line-height:1.35}
-.row:before{content:"";flex:none;width:24px;height:24px;border:2.5px solid var(--ink);border-radius:5px;background:var(--paper);align-self:flex-start;margin-top:1px}
-.row.done:before{background:var(--cobalt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat;border-color:var(--cobalt)}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 16px;font-size:14px}
+.under label{font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}
+.under select{font:400 16px var(--sans);color:var(--night);background:var(--cream);border:1px solid var(--hair);border-radius:4px;padding:8px 10px;min-height:44px}
+.share{margin:20px 0 0;font-size:14px}
+.share button{background:none;border:0;padding:0;margin-left:4px;color:var(--green);font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;cursor:pointer;border-bottom:1px solid var(--green)}
+.tip{margin-top:32px}
+ul.list{list-style:none;padding:0;margin:16px 0 0}
+ul.list li{margin:0;border-bottom:1px solid var(--hair)}
+ul.list li:first-child{border-top:1px solid var(--hair)}
+.row{display:flex;align-items:center;gap:16px;min-height:60px;padding:14px 2px;color:var(--night);text-decoration:none;font-weight:700;font-size:16px;line-height:1.4;transition:transform 600ms var(--ease)}
+@media (hover:hover){.row:hover{transform:translateY(-2px)}}
+.row:before{content:"";flex:none;width:20px;height:20px;border:1px solid var(--night);border-radius:4px;align-self:flex-start;margin-top:1px}
+.row.done:before{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23e7c2a6' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
 .row span{flex:1}
-.row small{display:block;font-weight:400;color:var(--muted);font-size:.98rem;margin-top:3px}
+.row small{display:block;font-weight:400;font-size:14px;margin-top:3px}
 .hub .row:before{display:none}
-.hub .row:after{content:"\203A";flex:none;font-size:1.8rem;line-height:1;color:var(--cobalt);font-weight:700}
-@media (hover:hover){.row:hover span{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}}
+.hub .row:after{content:"open";flex:none;font:600 13px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;color:var(--green)}
 ol{padding-left:1.2em}
-.cta{margin-top:48px;background:var(--butter);border-radius:12px;padding:22px}
-.cta h2{margin:0 0 8px}
-.cta p{margin:0}
-details.alt{margin:8px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:48rem}
-details.alt summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:1.02rem;list-style:none;position:relative;padding-right:30px}
+details.alt{margin:8px 0 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);max-width:48rem}
+details.alt summary{cursor:pointer;padding:14px 50px 14px 0;font-weight:700;list-style:none;position:relative}
 details.alt summary::-webkit-details-marker{display:none}
-details.alt summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:500;color:var(--cobalt)}
-details.alt[open] summary::after{content:"\2212"}
-details.alt .under{margin:0 0 16px}
-
-.panel{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
-.words{border:1.5px solid rgba(20,33,61,.18);border-radius:12px}
-.btn{border-radius:12px;box-shadow:0 10px 22px -10px rgba(26,48,145,.75)}
-.btn:active{transform:none;box-shadow:0 4px 12px -6px rgba(26,48,145,.75)}
-.under select{border:1.5px solid rgba(20,33,61,.3);border-radius:10px}
-.row:before{border-width:2px;border-radius:7px;border-color:rgba(20,33,61,.55)}
-.cta{border-radius:18px;background:linear-gradient(120deg,#ffd84d,#f2b62a)}
+details.alt summary::after{content:"open";position:absolute;right:0;top:50%;transform:translateY(-50%);font:600 13px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em;color:var(--green)}
+details.alt[open] summary::after{content:"close"}
+.cta{margin-top:48px;background:var(--green);color:var(--blush);border-radius:4px;padding:28px}
+.cta h2{margin:0 0 10px;color:var(--blush)}
+.cta p{margin:0}
+.cta .btn{background:var(--blush);color:var(--night)}
+@media (prefers-reduced-motion:no-preference){.fade{opacity:0;animation:fadein 600ms var(--ease) forwards;animation-delay:calc(var(--i,0) * 40ms)}@keyframes fadein{to{opacity:1}}}
+@media (prefers-reduced-motion:reduce){.btn,.row{transition:none}}
 @media (min-width:980px){
-  .band{padding-top:40px;padding-bottom:52px}
-  .band.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;align-items:start}
-  .band.split .panel{margin-top:0}
-  .band h1{font-size:clamp(2.3rem,3.2vw,2.9rem)}
-  .band .lede{font-size:1.2rem;max-width:34ch}
-  .band:not(.split) .lede{max-width:44rem}
-  .tip,.wrap > h2,.wrap > ol,.wrap > p,.cta{max-width:48rem}
-  .wrap > ul.list:not(.hub){max-width:48rem}
-  ul.list.hub{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
-  ul.list.hub li:nth-child(2){border-top:1px solid var(--line)}
+  .band{padding:56px 0 64px}
+  .band.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:72px;align-items:start}
+  .band h1{font-size:54px}
+  .band:not(.split) h1{font-size:54px}
+  .band .lede{font-size:24px;line-height:1.4;max-width:22em}
+  .tip,.wrap > h2,.wrap > ol,.wrap > p,.cta,.wrap > ul.list:not(.hub){max-width:48rem}
+  ul.list.hub{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  ul.list.hub li:nth-child(2){border-top:1px solid var(--hair)}
 }
 </style>"""
 
@@ -261,13 +272,13 @@ def picker():
 def guide_shell(title, desc, path, body, ld):
     url = SITE + path
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#ffd84d">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="theme-color" content="#fef3e5">\n'
             f'<title>{html.escape(title)}</title>\n<meta name="description" content="{html.escape(desc)}">\n<link rel="canonical" href="{url}">\n'
             + share_meta(title, desc, url) + FONTS + GUIDE_CSS + STATS +
             '<script type="application/ld+json">' + json.dumps(ld) + '</script>\n</head>\n<body><div class="wrap">'
-            '<div class="top"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Kitchen Table</a><a href="/guides/">All shortcuts</a></div>\n'
+            '<div class="top"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/guides/">All shortcuts</a></div>\n'
             + body +
-            '<footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. '
+            '<footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. '
             '<a href="/help.html">Help</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer></div>' + GUIDE_JS + '</body>\n</html>\n')
 
 def tapbtn(prompt, label, cls="btn"):
@@ -280,18 +291,18 @@ for g in GUIDES:
     path = "/guides/" + g["slug"] + "/"
     guide_paths.append(path)
     more = "".join(f'<li>{tapbtn(m, m, "row")}</li>' for m in g["more"])
-    body = ('<div class="band split">' + f'<div class="bandText"><h1>{html.escape(g["h1"])}</h1><p class="lede">{html.escape(g["intro"])}</p></div>'
-            '<div class="panel"><p class="label">Your AI gets these words:</p>'
+    body = ('<div class="band split">' + f'<div class="bandText fade" style="--i:0"><h1>{html.escape(title_case(g["h1"]))}</h1><p class="lede">{html.escape(g["intro"])}</p></div>'
+            '<div class="panel fade" style="--i:3"><p class="label">Your AI gets these words</p>'
             f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + '<p class="toast" id="toast" role="status"></p></div></div>'
             f'<p class="tip"><b>Tip:</b> {html.escape(g["tip"])}</p>'
-            '<h2>More ready-made requests</h2><ul class="list">' + more + '</ul>'
-            '<h2>How it works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li>'
+            '<h2>More Ready-Made Requests</h2><ul class="list">' + more + '</ul>'
+            '<h2>How It Works</h2><ol><li>Tap the button. Your AI opens in a new tab.</li>'
             '<li>ChatGPT and Claude open with the words already typed. For Gemini or Copilot, we copy them: paste and press send.</li>'
             '<li>Answer its quick questions, or ask it to change anything.</li></ol>'
             '<details class="alt"><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary>' + picker() + '</details>'
             f'<p><b>Good to know:</b> {html.escape(g["know"])}</p>'
             '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button></p>'
-            '<div class="cta"><h2>Want about 60 more like this?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
+            '<div class="cta grain dark"><h2>Want About 60 More Like This?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guide#make">Make my cheat sheet</a></div>')
     ld = {"@context": "https://schema.org", "@type": "HowTo", "name": g["h1"], "description": g["desc"],
           "step": [{"@type": "HowToStep", "text": "Tap Try it now. Your AI opens with the words already typed in."},
@@ -299,11 +310,11 @@ for g in GUIDES:
     os.makedirs(os.path.join(DIST, "guides", g["slug"]), exist_ok=True)
     open(os.path.join(DIST, "guides", g["slug"], "index.html"), "w").write(guide_shell(g["title"], g["desc"], path, body, ld))
 
-hub_items = "".join(f'<li><a class="row" href="/guides/{g["slug"]}/"><span>{html.escape(g["h1"])}<small>{html.escape(g["desc"].split(". ")[0])}.</small></span></a></li>' for g in GUIDES)
-hub_body = ('<div class="band"><h1>Free shortcuts for everyday jobs</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job. '
+hub_items = "".join(f'<li><a class="row" href="/guides/{g["slug"]}/"><span>{html.escape(title_case(g["h1"]))}<small>{html.escape(g["desc"].split(". ")[0])}.</small></span></a></li>' for g in GUIDES)
+hub_body = ('<div class="band"><h1>Free Shortcuts for Everyday Jobs</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job. '
             'Each page has one button that opens your AI with the words already written.</p></div>'
             '<ul class="list hub">' + hub_items + '</ul>'
-            '<div class="cta"><h2>Get a cheat sheet made for you</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
+            '<div class="cta grain dark"><h2>Get a Cheat Sheet Made for You</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guides_hub#make">Make my cheat sheet</a></div>')
 hub_ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Free AI shortcuts for everyday life",
           "hasPart": [{"@type": "WebPage", "name": g["h1"], "url": SITE + "/guides/" + g["slug"] + "/"} for g in GUIDES]}

@@ -3,215 +3,227 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffd84d">
+<meta name="theme-color" content="#fef3e5">
 <title>Kitchen Table: everyday jobs, done by your AI in one tap</title>
 <meta name="description" content="One-tap shortcuts that get ChatGPT, Gemini, Claude or Copilot to plan dinners, write emails, sort out bills and more. No typing, no tech. Free to try.">
 {{HEADEXTRA}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap">
 {{STATS}}<style>
+/* Kitchen Table: brand brief (quiet luxury). Approved text pairs only:
+   Night on Cream, Blush on Night, Green on Cream, Dusty Pink on Night, Blush on Green; Dusty Pink on Green for 24px+ only. */
 :root{
-  --paper:#ffffff; --ink:#14213d; --muted:#56607a; --line:#dfe3ec; --edge:#b9c1d3;
-  --butter:#ffd84d; --butter-deep:#f2c418; --cobalt:#2340b8; --cobalt-dark:#1a3091; --wash:#f2f4fb;
-  --font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --cream:#fef3e5; --night:#0d0d0d; --green:#274c2e; --blush:#e7c2a6; --pink:#d78f85;
+  --hair:rgba(13,13,13,.18); --hair-light:rgba(231,194,166,.35);
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Azeret Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   color-scheme:light;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 1.1875rem/1.55 var(--font);overflow-x:hidden}
+body{margin:0;background:var(--cream);color:var(--night);font:400 16px/1.59 var(--sans);letter-spacing:.008em;overflow-x:hidden}
 [hidden]{display:none!important}
-a{color:var(--cobalt)}
-:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
-.wrap{max-width:40rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 72px max(20px,env(safe-area-inset-left,0px))}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.wrap{max-width:74rem;margin:0 auto;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px))}
 
-/* Header sits on the butter band */
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 0;position:relative;z-index:1}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-stretch:115%;font-size:1.12rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
-.mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper)}
-.mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
-.top a.small{font-size:1rem;color:var(--ink);font-weight:600}
-.band{background:var(--butter);margin:0 calc(50% - 50vw);padding:0 calc(50vw - 50%) 30px}
-body:has(#intro:not([hidden])) .top{margin:0 calc(50% - 50vw);padding:18px calc(50vw - 50% + 0px) 0;background:var(--butter)}
-h1{font-weight:800;font-stretch:118%;font-size:clamp(2rem,8.4vw,3rem);line-height:1.02;letter-spacing:-.025em;margin:0 0 14px;max-width:14ch}
-.band h1{padding-top:28px}
-.lede{margin:0;color:var(--ink);font-size:1.15rem;max-width:30ch}
-h2{font-weight:800;font-stretch:118%;font-size:clamp(1.5rem,6vw,1.85rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 8px}
-section{margin-top:56px}
+/* Type */
+h1,h2,h3{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.029em;line-height:.99;margin:0}
+h1{font-size:36px;margin-bottom:18px;max-width:13em}
+h2{font-size:36px;margin-bottom:16px}
+h3{font-size:24px}
+.lede{margin:0;font-size:16px;max-width:34em}
+.label,.heroLabel,.q p,.btn,.chip,.top a.small,.row .go,.ticket b,.more a,.share button,.faq summary::after,.price .terms,.cat{font-family:var(--mono);font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.048em}
+.label,.heroLabel{font-size:14px;margin:0 0 10px}
 
-/* The dinner panel on the band */
-.hero{margin-top:24px}
-.heroLabel{margin:0 0 8px;font-weight:700;font-size:1rem}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg .chip{border:2px solid var(--ink);border-radius:8px;background:var(--paper);font:700 1rem/1.15 var(--font);color:var(--ink);padding:12px 6px;min-height:54px;cursor:pointer;touch-action:manipulation}
-.seg .chip[aria-pressed="true"]{background:var(--ink);color:#fff}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;margin-top:14px;border:0;border-radius:8px;background:var(--cobalt);color:#fff;font:800 1.15rem var(--font);font-stretch:110%;letter-spacing:-.005em;cursor:pointer;text-decoration:none;text-align:center;padding:10px 16px;touch-action:manipulation;box-shadow:0 4px 0 var(--ink)}
-.btn:hover{background:var(--cobalt-dark)}
-.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
-@media (prefers-reduced-motion:reduce){.btn:active{transform:none}}
-.btn.heroGo{font-size:1.22rem;min-height:64px}
-.btn.done{background:var(--cobalt-dark)}
-.btn.alt{background:var(--paper);color:var(--ink);border:2px solid var(--ink)}
-.heroNote{margin:14px 0 0;font-size:.98rem;color:var(--ink)}
-.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:10px 0 0;font-size:.98rem;color:var(--ink)}
-.under select{font:700 1rem var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:8px;padding:7px 10px;min-height:44px}
-.toast{margin:16px 0 0;font-size:1rem;color:var(--cobalt-dark);font-weight:700}
+/* Grain over colour areas */
+.grain{position:relative;isolation:isolate}
+.grain::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:var(--grain);opacity:.16;mix-blend-mode:multiply}
+.grain.dark::after{mix-blend-mode:screen;opacity:.09}
+.grain > *{position:relative;z-index:1}
+
+/* Header: stacked lockup centred */
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 0 14px;border-bottom:1px solid var(--hair)}
+.brand{grid-column:2;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--night)}
+.monogram{width:34px;height:34px;border-radius:50%;background:var(--green);color:var(--blush);display:grid;place-items:center;font:italic 400 22px/1 var(--serif);padding-bottom:2px}
+.wordmark{font:italic 400 24px/.99 var(--serif);letter-spacing:-.029em}
+.top a.small{grid-column:3;justify-self:end;font-size:14px;color:var(--night);text-decoration:none;border-bottom:1px solid var(--hair)}
+
+/* Hero (cream) */
+.band{display:grid;gap:28px;padding:40px 0 48px}
+.hero{border:1px solid var(--hair);border-radius:4px;padding:20px;background:var(--cream)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--hair);border-radius:4px;overflow:hidden}
+.seg .chip{border:0;border-left:1px solid var(--hair);border-radius:0;background:transparent;color:var(--night);font-size:14px;padding:12px 4px;min-height:52px;cursor:pointer;touch-action:manipulation}
+.seg .chip:first-child{border-left:0}
+.seg .chip[aria-pressed="true"]{background:var(--night);color:var(--blush)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:14px;border:0;border-radius:0;background:var(--green);color:var(--blush);font-size:15px;text-decoration:none;text-align:center;padding:10px 18px;cursor:pointer;touch-action:manipulation;transition:transform 600ms var(--ease)}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+.btn.heroGo{min-height:60px;font-size:16px}
+.btn.done{background:var(--night);color:var(--blush)}
+.btn.alt{background:transparent;color:var(--night);border:1px solid var(--night)}
+.toast{margin:14px 0 0;font-size:14px;font-weight:700;color:var(--green)}
 .toast:empty{display:none}
+.heroNote{display:none}
 
-/* What you get back */
-.example .ticket{margin-top:14px;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
-.ticket ol{list-style:none;margin:0;padding:0}
-.ticket li{display:grid;grid-template-columns:3.2rem 1fr;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:1.05rem;line-height:1.35}
-.ticket li b{font-weight:800;font-stretch:115%}
-.ticket li span em{font-style:normal;color:var(--muted);white-space:nowrap}
-.ticket .shop{background:var(--wash);padding:14px;font-size:1rem;line-height:1.5}
-.ticket .shop b{display:block;margin-bottom:2px}
+/* Example: arch motif with a Night card */
+.example{position:relative}
+.example h2{margin-bottom:8px}
+.exNote{margin:0 0 18px;font-size:14px}
+.arches{position:relative;height:190px;margin:0 0 -56px auto;width:132px;z-index:0}
+.arches i{position:absolute;left:0;right:0;bottom:0;border-radius:999px 999px 0 0}
+.arches i:nth-child(1){top:0;background:var(--green)}
+.arches i:nth-child(2){top:22px;left:16px;right:16px;background:var(--blush)}
+.arches i:nth-child(3){top:44px;left:32px;right:32px;background:var(--pink)}
+.ticket{position:relative;z-index:1;background:var(--night);color:var(--blush);border-radius:4px;overflow:hidden}
+.ticket ol{list-style:none;margin:0;padding:6px 0}
+.ticket li{display:grid;grid-template-columns:3.4rem 1fr;gap:8px;padding:10px 18px;border-bottom:1px solid rgba(231,194,166,.18);font-size:15px;line-height:1.45}
+.ticket li b{color:var(--pink);font-size:14px;padding-top:1px}
+.ticket li em{font-style:normal;opacity:1;color:var(--pink);white-space:nowrap;font-family:var(--mono);font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.048em;font-size:13px}
+.ticket .shop{padding:14px 18px 18px;font-size:14px;line-height:1.55}
+.ticket .shop b{display:block;margin-bottom:4px;color:var(--pink);font-family:var(--mono);font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.048em}
 
-/* Checklist rows */
-.rows{list-style:none;margin:16px 0 0;padding:0}
-.rows li{margin:0;border-bottom:1px solid var(--line)}
-.rows li:first-child{border-top:1px solid var(--line)}
-.row{display:flex;align-items:center;gap:14px;min-height:62px;padding:14px 2px;color:var(--ink);text-decoration:none;font-weight:600;font-size:1.1rem;line-height:1.3;cursor:pointer;touch-action:manipulation}
-.row:before{content:"";flex:none;width:24px;height:24px;border:2.5px solid var(--ink);border-radius:5px;background:var(--paper)}
-.row.done:before{background:var(--cobalt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat;border-color:var(--cobalt)}
+/* Green block: more jobs */
+.greenBlock{background:var(--green);color:var(--blush);margin:0 calc(50% - 50vw);padding:56px calc(50vw - 50%)}
+.greenBlock h2{color:var(--blush)}
+section{margin-top:0}
+.rows{list-style:none;margin:20px 0 0;padding:0}
+.rows li{margin:0;border-bottom:1px solid var(--hair)}
+.rows li:first-child{border-top:1px solid var(--hair)}
+.greenBlock .rows li{border-color:var(--hair-light)}
+.row{display:flex;align-items:center;gap:16px;min-height:60px;padding:14px 2px;color:inherit;text-decoration:none;font-weight:700;font-size:16px;line-height:1.35;cursor:pointer;touch-action:manipulation;transition:transform 600ms var(--ease)}
+@media (hover:hover){.row:not(.locked):hover{transform:translateY(-2px)}}
+.row:before{content:"";flex:none;width:20px;height:20px;border:1px solid currentColor;border-radius:4px}
+.row.done:before{background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23e7c2a6' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;border-color:var(--night)}
+.greenBlock .row.done:before{background-color:var(--blush);border-color:var(--blush);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%23274c2e' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
 .row .t{flex:1}
-.row .go{flex:none;color:var(--muted);font-weight:500;font-size:.95rem}
-@media (hover:hover){.row:not(.locked):hover .t{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}}
-.row.locked{cursor:default;color:var(--muted);font-weight:400}
-.row.locked:before{border-color:var(--edge);border-style:dashed}
-.cat{padding:28px 2px 8px;font-weight:800;font-stretch:115%;font-size:1.02rem;color:var(--ink)}
-.rows .cat{border-top:0}
+.row .go{flex:none;font-size:13px}
+.row.locked{cursor:default;font-weight:400}
+.row.locked:before{border-style:dashed}
+.cat{padding:28px 2px 8px;font-size:14px}
 .card .head{display:none}
-.more{margin:16px 0 0;font-size:1.02rem;font-weight:600}
-.share{margin:22px 0 0;font-size:1rem;color:var(--muted)}
-.share button{background:none;border:0;padding:0;font:700 1rem var(--font);color:var(--cobalt);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.more{margin:20px 0 0}
+.more a{color:var(--blush);font-size:14px;text-decoration:none;border-bottom:1px solid var(--hair-light)}
+.share{margin:18px 0 0;font-size:14px}
+.share button{background:none;border:0;padding:0;margin-left:4px;color:inherit;font-size:14px;cursor:pointer;border-bottom:1px solid currentColor}
 
 /* Questions */
+#make{padding:56px 0 8px}
 .q{margin:26px 0 0}
-.q p{margin:0 0 10px;font-weight:700}
-.q small{font-weight:400;color:var(--muted)}
+.q p{margin:0 0 10px;font-size:14px}
+.q small{font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips .chip{font:500 1.02rem var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--edge);border-radius:8px;padding:9px 14px;min-height:46px;cursor:pointer;touch-action:manipulation}
-.chips .chip[aria-pressed="true"]{border-color:var(--ink);background:var(--butter);font-weight:700}
+.chips .chip{background:transparent;color:var(--night);border:1px solid var(--hair);border-radius:0;padding:10px 14px;min-height:46px;font-size:13px;cursor:pointer;touch-action:manipulation}
+.chips .chip[aria-pressed="true"]{background:var(--night);color:var(--blush);border-color:var(--night)}
 #build{margin-top:28px}
 
-/* Price */
-.price{margin-top:28px;background:var(--butter);border-radius:12px;padding:22px}
-.price h3{font-weight:800;font-stretch:115%;font-size:1.3rem;margin:0}
-.price .amt{font-weight:800;font-stretch:125%;font-size:2.8rem;line-height:1;margin:12px 0 4px;letter-spacing:-.02em}
-.price .terms{margin:0 0 14px;font-weight:700}
-.price ul{margin:0;padding-left:1.15em}
+/* Sheet + price */
+#sheet{padding:48px 0 0}
+.price{margin-top:28px;background:var(--blush);color:var(--night);border-radius:4px;padding:24px}
+.price h3{font-size:36px}
+.price .amt{font:italic 400 54px/.99 var(--serif);letter-spacing:-.029em;margin:14px 0 6px}
+.price .terms{margin:0 0 14px;font-size:14px}
+.price ul{margin:0;padding-left:1.1em}
 .price li{margin:0 0 6px}
-.fine{font-size:.95rem;color:var(--muted);margin:12px 0 0}
-.honest{margin-top:22px;padding-left:14px;border-left:3px solid var(--butter-deep);color:var(--muted);font-size:1.02rem}
+.fine{font-size:14px;margin:12px 0 0}
+.honest{margin-top:22px;padding-left:14px;border-left:1px solid var(--night);font-size:14px}
 .honest p{margin:0}
-
-.setup textarea{width:100%;min-height:9rem;font:1rem/1.55 var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--edge);border-radius:10px;padding:12px;margin-top:8px}
-.where{margin:14px 0 0;padding-left:1.15em}
+.setup textarea{width:100%;min-height:9rem;font:16px/1.59 var(--sans);color:var(--night);background:transparent;border:1px solid var(--hair);border-radius:4px;padding:12px;margin-top:8px}
+.where{margin:14px 0 0;padding-left:1.1em}
 .where li{margin:0 0 8px}
 .path{font-weight:700}
-.note{font-size:1rem;color:var(--muted)}
+.note{font-size:14px}
 .bar{display:none!important}
+.under{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:10px 0 0;font-size:14px}
+.under label{font-family:var(--mono);font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.048em}
+.under select{font:400 16px var(--sans);color:var(--night);background:var(--cream);border:1px solid var(--hair);border-radius:4px;padding:8px 10px;min-height:44px}
 
 /* Common questions */
-.faq details{border-bottom:1px solid var(--line)}
-.faq details:first-of-type{border-top:1px solid var(--line);margin-top:14px}
+.faq{padding:56px 0 64px}
+.faq details{border-bottom:1px solid var(--hair)}
+.faq details:first-of-type{border-top:1px solid var(--hair);margin-top:16px}
 .faq summary{list-style:none;cursor:pointer;padding:18px 34px 18px 0;font-weight:700;position:relative}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.6rem;font-weight:500;color:var(--cobalt)}
-.faq details[open] summary::after{content:"\2212"}
-.faq details p{margin:0 0 18px;color:var(--muted)}
-.faq details .under{margin:-8px 0 18px}
-.faq details .toast{margin:-8px 0 18px}
-footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
-footer a{color:var(--muted)}
+.faq summary::after{content:"open";position:absolute;right:0;top:50%;transform:translateY(-50%);font-size:13px;color:var(--green)}
+.faq details[open] summary::after{content:"close"}
+.faq details p{margin:0 0 18px}
+.faq details .under,.faq details .toast{margin:-8px 0 18px}
 
+/* Footer: Night block with stacked lockup */
+footer{background:var(--night);color:var(--blush);margin:0 calc(50% - 50vw);padding:44px calc(50vw - 50%) 48px;font-size:14px;text-align:center}
+footer a{color:var(--pink)}
+footer .lockup{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:18px}
+footer .monogram{background:var(--blush);color:var(--night)}
+footer .wordmark{color:var(--blush)}
 
-/* ---- Layer 2: depth, softer edges, wide desktop ---- */
-.top,body:has(#intro:not([hidden])) .top{background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
-.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%);padding-bottom:36px}
-.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;
-  background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;
-  -webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
-.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
-.hero{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
-.heroLabel{margin-top:0}
-.seg .chip{border:1.5px solid rgba(20,33,61,.22);border-radius:12px;font-weight:600;box-shadow:0 1px 0 rgba(20,33,61,.06)}
-.seg .chip[aria-pressed="true"]{border-color:var(--ink)}
-.btn{border-radius:12px;box-shadow:0 10px 22px -10px rgba(26,48,145,.75)}
-.btn:active{transform:none;box-shadow:0 4px 12px -6px rgba(26,48,145,.75)}
-.under select{border:1.5px solid rgba(20,33,61,.3);border-radius:10px}
-.example{margin-top:22px}
-.example h2{margin:0 0 6px}
-.exNote{margin:0 0 12px;font-size:1rem;color:var(--ink)}
-.example .ticket{margin-top:0;border:0;border-radius:18px;background:var(--paper);box-shadow:0 18px 40px -22px rgba(20,33,61,.6)}
-.ticket li{border-bottom-color:#edf0f5}
-.ticket .shop{background:#f6f7fb;border-radius:0 0 18px 18px}
-.row:before{border-width:2px;border-radius:7px;border-color:rgba(20,33,61,.55)}
-.chips .chip{border-width:1.5px;border-radius:12px}
-.chips .chip[aria-pressed="true"]{border-color:var(--ink)}
-.price{border-radius:18px;background:linear-gradient(120deg,#ffd84d,#f2b62a)}
-footer{border-top:1px solid var(--line)}
+/* Calm motion: one entrance, fade only */
+@media (prefers-reduced-motion:no-preference){
+  .fade{opacity:0;animation:fadein 600ms var(--ease) forwards;animation-delay:calc(var(--i,0) * 40ms)}
+  @keyframes fadein{to{opacity:1}}
+  .arches{animation:breathe 9s var(--ease) infinite alternate;transform-origin:50% 100%}
+  @keyframes breathe{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.02) rotate(.6deg)}}
+}
+@media (prefers-reduced-motion:reduce){.btn,.row{transition:none}}
 
 @media (min-width:980px){
-  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
-  .top{padding-top:22px}
-  .band{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"text ex" "panel ex";column-gap:56px;row-gap:22px;align-items:start;padding-top:40px;padding-bottom:56px}
+  .wrap{padding-left:40px;padding-right:40px}
+  h1{font-size:54px}
+  h2{font-size:54px}
+  .lede{font-size:24px;line-height:1.4;max-width:22em}
+  .band{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"text ex" "panel ex";grid-template-rows:auto 1fr;column-gap:72px;row-gap:32px;align-items:start;padding:56px 0 72px}
   .band:has(#example[hidden]){grid-template-areas:"text panel";align-items:center}
   .heroText{grid-area:text}
-  .band h1{padding-top:0;font-size:clamp(2.6rem,3.6vw,3.3rem);max-width:13ch}
-  .lede{font-size:1.25rem;max-width:32ch}
-  .hero{grid-area:panel;margin-top:0;max-width:34rem}
-  .example{grid-area:ex;margin-top:0}
-  .ticket li{grid-template-columns:3.6rem 1fr;padding:11px 18px}
-  section{margin-top:72px}
-  #freeSec .rows{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
-  #freeSec .rows li:nth-child(2){border-top:1px solid var(--line)}
-  #make{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:56px;align-items:start}
-  #make > h2,#make > .lede{grid-column:1}
+  .hero{grid-area:panel;max-width:34rem}
+  .example{grid-area:ex}
+  .example h2{font-size:36px}
+  .greenBlock{padding-top:72px;padding-bottom:72px}
+  #freeSec .rows{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  #freeSec .rows li:nth-child(2){border-top:1px solid var(--hair-light)}
+  #make,.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:72px;align-items:start}
+  #make > .makeHead{grid-column:1;grid-row:1 / span 6}
+  #make > .makeHead .lede{font-size:16px}
   #make > .q,#make > #build{grid-column:2}
-  #make > .q:first-of-type{grid-row:1 / span 2}
-  #make > h2{grid-row:1}#make > .lede{grid-row:2;align-self:start}
-  #sheet{max-width:none}
-  #sheetCard .rows{columns:2;column-gap:48px}
-  #sheetCard .rows li{break-inside:avoid}
-  .price,.honest,#paidTools{max-width:44rem}
-  .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:56px;align-items:start}
+  #make > .q:first-of-type{margin-top:0}
   .faq h2{grid-column:1;grid-row:1 / span 5}
   .faq details{grid-column:2}
   .faq details:first-of-type{margin-top:0}
+  #sheetCard .rows{columns:2;column-gap:48px}
+  #sheetCard .rows li{break-inside:avoid}
+  .price,.honest,#paidTools{max-width:44rem}
 }
 
 /* Print: the fridge version */
 @media print{
   @page{margin:12mm}
-  body{font-size:10pt}
-  .noprint,.bar,footer,.top,.under,.toast,.share{display:none!important}
+  body{font-size:10pt;background:#fff}
+  .noprint,.bar,footer,.top,.under,.toast,.share,.greenBlock{display:none!important}
   .wrap{max-width:none;padding:0}
-  .printhead{display:block!important;font-weight:800;font-stretch:125%;font-size:18pt;margin:0 0 6pt}
-  .row:before{width:10pt;height:10pt;border-width:1pt}
+  .printhead{display:block!important;font:italic 400 22pt/1 var(--serif);margin:0 0 6pt}
   .row .go{display:none}
   .row{min-height:0;padding:3pt 0;font-size:10pt}
   .row .p{display:block!important;font-weight:400;font-size:8.5pt;color:#333;margin-top:1pt}
   .rows li{break-inside:avoid;border-bottom:.5pt solid #bbb}
   #sheetCard{columns:2;column-gap:10mm}
-  .cat{padding:6pt 0 2pt;font-size:11pt;break-after:avoid}
+  .cat{padding:6pt 0 2pt;font-size:10pt;break-after:avoid}
 }
 .printhead,.row .p{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top noprint"><a class="brand" href="/"><i class="mark" aria-hidden="true"></i>Kitchen Table</a><a class="small" href="/guides/">All shortcuts</a></div>
+  <div class="top noprint"><a class="brand" href="/" aria-label="Kitchen Table, home"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></a><a class="small" href="/guides/">All shortcuts</a></div>
 
   <!-- First screen: one useful thing, free -->
   <div id="intro">
    <div class="band">
-    <div class="heroText">
-      <h1 id="h1">What's for dinner this week?</h1>
+    <div class="heroText fade" style="--i:0">
+      <h1 id="h1">What's for Dinner This Week?</h1>
       <p class="lede" id="lede">Pick who you're cooking for. Your AI plans five easy dinners and writes the shopping list.</p>
     </div>
-    <div class="hero" id="heroCard">
+    <div class="hero fade" id="heroCard" style="--i:3">
       <p class="heroLabel" id="heroHead">Cooking for</p>
       <div class="seg" id="heroChips" role="group" aria-label="Cooking for">
         <button class="chip" type="button" data-v="solo">Just me</button>
@@ -220,10 +232,11 @@ footer{border-top:1px solid var(--line)}
       </div>
       <a class="btn heroGo" id="heroGo" href="#" target="_blank" rel="noopener">Plan my week's dinners</a>
     </div>
-    <div id="example" class="example noprint">
-      <h2>What comes back</h2>
+    <div id="example" class="example noprint fade" style="--i:6">
+      <h2>What Comes Back</h2>
       <p class="exNote">An example plan for two. Yours fits who you're cooking for, and you can ask for changes.</p>
-      <div class="ticket">
+      <div class="arches" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="ticket grain dark">
         <ol>
           <li><b>Mon</b><span>Sheet-pan lemon chicken and potatoes <em>30 min</em></span></li>
           <li><b>Tue</b><span>Beef and broccoli stir-fry with rice <em>20 min</em></span></li>
@@ -238,8 +251,8 @@ footer{border-top:1px solid var(--line)}
     <p class="toast" id="toast" role="status"></p>
 
 
-    <section id="freeSec" class="noprint">
-      <h2>More jobs, one tap each</h2>
+    <section id="freeSec" class="noprint greenBlock grain dark">
+      <h2>More Jobs, One Tap Each</h2>
       <div class="card" id="freeCard"><ul class="rows" id="freeRows"></ul></div>
       <p class="more"><a href="/guides/">See all free shortcuts</a></p>
       <p class="share" id="shareBox">Know someone who'd find this handy? <button type="button" id="shareBtn">Send them the link</button></p>
@@ -248,8 +261,8 @@ footer{border-top:1px solid var(--line)}
 
   <!-- Make it yours -->
   <section id="make" class="noprint">
-    <h2 id="makeH">Your own cheat sheet</h2>
-    <p class="lede" id="makeLede">Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>
+    <div class="makeHead"><h2 id="makeH">Your Own Cheat Sheet</h2>
+    <p class="lede" id="makeLede">Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p></div>
     <div class="q" data-q="home"><p>Who's at home?</p><div class="chips">
       <button class="chip" type="button" data-v="solo">Just me</button>
       <button class="chip" type="button" data-v="two">Two of us</button>
@@ -276,13 +289,13 @@ footer{border-top:1px solid var(--line)}
   <!-- The sheet -->
   <section id="sheet" hidden>
     <div class="printhead">My Kitchen Table cheat sheet</div>
-    <h2 class="noprint" id="sheetH">Your cheat sheet</h2>
+    <h2 class="noprint" id="sheetH">Your Cheat Sheet</h2>
     <p class="lede noprint" id="sheetLede"></p>
     <div class="card" id="sheetCard"><div class="head" id="sheetHead">Tap any line</div><ul class="rows" id="sheetRows"></ul></div>
     <p class="fine">AI can get things wrong. Double-check anything important, especially about money, health or legal matters.</p>
 
-    <div class="price noprint" id="price">
-      <h3>Unlock your full cheat sheet</h3>
+    <div class="price noprint grain" id="price">
+      <h3>Unlock Your Full Cheat Sheet</h3>
       <p class="amt">$9.99</p>
       <p class="terms">Once. No subscription. 14-day money-back.</p>
       <ul>
@@ -299,7 +312,7 @@ footer{border-top:1px solid var(--line)}
     <div class="noprint" id="paidTools" hidden>
       <button class="btn alt" type="button" id="print">Print my cheat sheet</button>
       <section class="setup" id="setup">
-        <h2>Teach your AI about you, once</h2>
+        <h2>Teach Your AI About You, Once</h2>
         <p class="lede">Your AI uses this every time, so answers fit your life without you explaining. Edit anything, then copy it.</p>
         <textarea id="about" aria-label="About me, for your AI"></textarea>
         <button class="btn" type="button" id="copyAbout">Copy my "about me"</button>
@@ -314,7 +327,7 @@ footer{border-top:1px solid var(--line)}
         <p class="note">Menu names change now and then. If yours look different, the last option always works.</p>
       </section>
       <section id="switchHow">
-        <h2>Moving to a different AI?</h2>
+        <h2>Moving to a Different AI?</h2>
         <p class="lede">Tap "See everything ChatGPT knows about you" in your sheet. Copy what ChatGPT writes, then paste it into your new AI:</p>
         <ul class="where">
           <li><span class="path">Claude:</span> Settings, then Memory, then Start import.</li>
@@ -327,7 +340,7 @@ footer{border-top:1px solid var(--line)}
   </section>
 
   <section class="faq noprint" id="faq">
-    <h2>Common questions</h2>
+    <h2>Common Questions</h2>
     <details><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary><p>No problem. Pick yours and every shortcut on this site opens it instead.</p>
       <div class="under"><label for="ai">My AI</label>
         <select id="ai">
@@ -343,7 +356,7 @@ footer{border-top:1px solid var(--line)}
     <details><summary>What if it's not for me?</summary><p>Email us within 14 days and we'll refund you. No questions.</p></details>
   </section>
 
-  <footer>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. <a href="/guides/">Free shortcuts</a> · <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+  <footer><div class="lockup"><span class="monogram" aria-hidden="true">K</span><span class="wordmark">Kitchen Table</span></div>Independent guide, not affiliated with OpenAI, Google, Anthropic or Microsoft. Kitchen Table is operated by Nomad Strategies LLC. <a href="/guides/">Free shortcuts</a> · <a href="/help.html">Help &amp; refunds</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
 </div>
 
 <div class="bar noprint" id="bar" hidden><a class="btn" href="#make" id="barBtn">Get a cheat sheet made for my life</a></div>
@@ -362,7 +375,7 @@ footer{border-top:1px solid var(--line)}
   var ad=(function(){try{return (new URLSearchParams(location.search).get("utm_content")||"none").slice(0,40);}catch(e){return "none";}})();
   // The big card on the first screen: dinner for everyone, except the email ad gets the email shortcut.
   var HERO_ID="m1";
-  if(ad==="ad_email"){HERO_ID="e1";$("h1").textContent="A polite email in one tap.";$("lede").textContent="Your AI asks two quick questions, then writes it for you. Free. No typing.";
+  if(ad==="ad_email"){HERO_ID="e1";$("h1").textContent="A Polite Email in One Tap";$("lede").textContent="Your AI asks two quick questions, then writes it for you. Free. No typing.";
     $("heroHead").textContent="Try it now";$("heroChips").hidden=true;$("heroGo").textContent="Write my email";$("example").hidden=true;}
   function count(name,extra){try{if(window.umami&&typeof umami.track==="function"){var d={ad:ad};if(extra)for(var k in extra)d[k]=extra[k];umami.track(name,d);}}catch(e){}}
 
@@ -494,7 +507,7 @@ footer{border-top:1px solid var(--line)}
     var n=o.items.length;
     $("countLi").textContent="All "+n+" shortcuts, worded for your life";
     if(UNLOCKED){
-      $("sheetH").textContent="Your cheat sheet";
+      $("sheetH").textContent="Your Cheat Sheet";
       $("sheetLede").textContent="Thanks for buying. Bookmark this page to come back to it. "+n+" shortcuts, with what you said you want first.";
       $("sheetHead").textContent="Tap any line";
       o.cats.forEach(function(c){
@@ -504,7 +517,7 @@ footer{border-top:1px solid var(--line)}
       $("price").hidden=true; $("honest").hidden=true; $("paidTools").hidden=false;
       buildAbout();
     } else {
-      $("sheetH").textContent="Your cheat sheet is ready";
+      $("sheetH").textContent="Your Cheat Sheet Is Ready";
       $("sheetLede").textContent="Your first "+PREVIEW_OPEN+" are free to use now. The other "+(n-PREVIEW_OPEN)+" unlock below.";
       $("sheetHead").textContent="Made for you";
       o.items.slice(0,PREVIEW_OPEN).forEach(function(it){rows.appendChild(rowFor(it,false,"sheet"));});
@@ -544,7 +557,7 @@ footer{border-top:1px solid var(--line)}
   // Paid page: show the sheet straight away (asks nothing if they already answered on this device).
   if(UNLOCKED){
     count("kit-open");
-    $("makeH").textContent="Your answers";
+    $("makeH").textContent="Your Answers";
     $("makeLede").textContent="Change any answer, then tap Show my cheat sheet to update it.";
     $("build").textContent="Show my cheat sheet";
     $("intro").hidden=true;
