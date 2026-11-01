@@ -23,7 +23,7 @@ STATS = ('<script defer src="https://cloud.umami.is/script.js" data-website-id="
          '" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>\n') if UMAMI else ""
 # Must match exactly what the pages send (see count() in index.html).
 ANALYTICS_P = ('<p>We count visits and a few taps (trying a free shortcut, starting and finishing the four questions, tapping a shortcut on your sheet, '
-               'tapping the payment button, opening your paid sheet, printing it, copying your "about me" note) with Umami, a privacy-friendly analytics '
+               'tapping the payment button, opening your paid sheet, printing it, copying your "about me" note, tapping "Send it" to share the site) with Umami, a privacy-friendly analytics '
                'service that doesn\'t use cookies. Each count can include which ad or link brought you and, for the questions, how many help topics you picked. '
                'It never includes which shortcut you tapped, your answers, which AI you use, your name, your email or anything you type. If your browser sends a '
                '"Do Not Track" signal, we don\'t count your visit.</p>') if UMAMI else "<p>We don't currently use any visit counting.</p>"
@@ -148,6 +148,9 @@ h2{font-family:var(--display);font-weight:800;font-size:1.4rem;margin:34px 0 8px
 .under select{font:700 1rem var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
 .toast{margin:10px 0 0;font-size:1rem;color:var(--ok);font-weight:700}
 .toast:empty{display:none}
+.share{display:flex;align-items:center;gap:10px;margin:14px 2px 0;padding:12px 14px;background:rgba(255,255,255,.6);border-radius:10px;font-size:1rem}
+.share span{flex:1;color:var(--pencil)}
+.share button{flex:none;font:700 1rem var(--body);color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:9px 16px;min-height:44px;cursor:pointer}
 .tip{margin-top:16px;padding:12px 14px;border-left:4px solid var(--hi);background:rgba(255,255,255,.6)}
 ul.more{list-style:none;padding:0;margin:0}
 ul.more li{background:var(--card);border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:12px 14px}
@@ -175,6 +178,13 @@ try{var s=JSON.parse(localStorage.getItem("macs-ai"));if(s&&AIS[s])sel.value=s;}
 sel.addEventListener("change",function(){try{localStorage.setItem("macs-ai",JSON.stringify(sel.value));}catch(e){}});
 var ad;try{ad=(new URLSearchParams(location.search).get("utm_content")||"guide").slice(0,40);}catch(e){ad="guide";}
 function copyNow(t){var a=document.createElement("textarea");a.value=t;a.setAttribute("readonly","");a.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand("copy");}catch(e){}document.body.removeChild(a);if(!ok){try{navigator.clipboard.writeText(t);ok=true;}catch(e){}}return ok;}
+var SHARE_AD=ad;
+function shareSite(title,url,toastId){var text="This makes AI easy: tap a line and it does the job. Free.";
+  try{if(navigator.share){navigator.share({title:title,text:text,url:url}).then(function(){try{if(window.umami)umami.track("shared",{ad:SHARE_AD});}catch(e){}}).catch(function(){});return;}}catch(e){}
+  var ok=false;try{var a=document.createElement("textarea");a.value=url;a.style.cssText="position:fixed;opacity:0;top:0;left:0";document.body.appendChild(a);a.select();ok=document.execCommand("copy");document.body.removeChild(a);}catch(e){}
+  var t=document.getElementById(toastId);if(t)t.textContent=ok?"Link copied. Paste it in a text or email to share.":"Share this link: "+url;
+  try{if(window.umami)umami.track("shared",{ad:SHARE_AD});}catch(e){}}
+var sb=document.getElementById("shareBtn");if(sb)sb.addEventListener("click",function(){shareSite(document.title,location.origin+location.pathname+"?utm_content=share","toast");});
 Array.prototype.forEach.call(document.querySelectorAll("[data-p]"),function(b){b.addEventListener("click",function(){
 var ai=AIS[sel.value],t=b.getAttribute("data-p");b.href=ai.u(t);var c=copyNow(t);b.classList.add("done");
 document.getElementById("toast").textContent=ai.f?(ai.n+" is opening with the words typed in."+(c?" If the box is empty, paste: we copied it too.":"")):(c?"Copied. Paste it into "+ai.n+" and press send.":"Press and hold to copy, then paste it into "+ai.n+".");
@@ -185,7 +195,8 @@ try{if(window.umami)umami.track("free-tap",{ad:ad});}catch(e){}});});
 def picker():
     return ('<div class="under"><label for="ai">Opens in</label><select id="ai"><option value="chatgpt">ChatGPT</option>'
             '<option value="gemini">Gemini</option><option value="claude">Claude</option><option value="copilot">Copilot</option></select>'
-            '<span>Free. No sign-up here.</span></div><p class="toast" id="toast" role="status"></p>')
+            '<span>Free. No sign-up here.</span></div><p class="toast" id="toast" role="status"></p>'
+            '<div class="share"><span>Know someone who\'d find this handy?</span><button type="button" id="shareBtn">Send it</button></div>')
 
 def guide_shell(title, desc, path, body, ld):
     url = SITE + path
