@@ -8,27 +8,26 @@ from playwright.sync_api import sync_playwright
 F = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/fonts"
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
 os.makedirs(OUT, exist_ok=True)
-FONTS = f"""@font-face{{font-family:PS;font-weight:800;src:url(file://{F}/fontsource-public-sans-5.3.0/package/files/public-sans-latin-800-normal.woff2)}}
-@font-face{{font-family:PS;font-weight:600;src:url(file://{F}/fontsource-public-sans-5.3.0/package/files/public-sans-latin-600-normal.woff2)}}
-@font-face{{font-family:PS;font-weight:400;src:url(file://{F}/fontsource-public-sans-5.3.0/package/files/public-sans-latin-400-normal.woff2)}}"""
+FONTS = f"""@font-face{{font-family:AR;font-weight:100 900;font-stretch:62% 125%;src:url(file://{F}/archivo/package/files/archivo-latin-wdth-normal.woff2)}}"""
 
 def icon(size, pad):
-    # Green square, three white lines with a check on the first: a simple list of things done.
+    # Butter square with a white checkbox and a cobalt tick: the Kitchen Table mark.
     r = 0 if size > 100 else size * 0.2
+    box = size * 0.58; bw = max(2, size * 0.075)
     return f"""<html><head><style>body{{margin:0}}
-.b{{width:{size}px;height:{size}px;background:#1f5d4c;border-radius:{r}px;display:flex;flex-direction:column;justify-content:center;gap:{size*0.11}px;padding:0 {size*0.24}px;box-sizing:border-box}}
-.b i{{display:block;height:{max(2,size*0.075)}px;background:#fff;border-radius:{size}px}}
-.b i:nth-child(2){{width:78%}} .b i:nth-child(3){{width:56%}}
-</style></head><body><div class="b"><i></i><i></i><i></i></div></body></html>"""
+.b{{width:{size}px;height:{size}px;background:#ffd84d;border-radius:{r}px;display:grid;place-items:center}}
+.c{{width:{box}px;height:{box}px;border:{bw}px solid #14213d;border-radius:{size*0.09}px;background:#fff;box-sizing:border-box;position:relative}}
+.c:after{{content:"";position:absolute;left:{box*0.28}px;top:{box*0.04}px;width:{box*0.22}px;height:{box*0.48}px;border:solid #2340b8;border-width:0 {bw*1.15}px {bw*1.15}px 0;transform:rotate(45deg)}}
+</style></head><body><div class="b"><div class="c"></div></div></body></html>"""
 
 share = f"""<html><head><style>{FONTS}body{{margin:0}}
-.d{{width:1200px;height:630px;background:#fff;display:flex;flex-direction:column;justify-content:center;padding:0 90px;box-sizing:border-box;font-family:PS;color:#1d2433}}
-.brand{{font-weight:600;font-size:28px;display:flex;align-items:center;gap:14px;margin-bottom:34px}}
-.brand i{{width:22px;height:22px;border-radius:6px;background:#1f5d4c}}
-h1{{font-weight:800;font-size:92px;line-height:1;letter-spacing:-3px;margin:0 0 26px;max-width:900px}}
-p{{font-size:34px;margin:0;color:#5b6475;max-width:880px}}
-.btn{{margin-top:40px;align-self:flex-start;background:#1f5d4c;color:#fff;font-weight:700;font-size:30px;border-radius:14px;padding:22px 34px}}
-</style></head><body><div class="d"><div class="brand"><i></i>Switch Kit AI</div>
+.d{{width:1200px;height:630px;background:#ffd84d;display:flex;flex-direction:column;justify-content:center;padding:0 90px;box-sizing:border-box;font-family:AR;color:#14213d}}
+.brand{{font-weight:800;font-stretch:115%;font-size:30px;display:flex;align-items:center;gap:14px;margin-bottom:30px}}
+.brand i{{width:28px;height:28px;border:4px solid #14213d;border-radius:6px;background:#fff;box-sizing:border-box}}
+h1{{font-weight:800;font-stretch:125%;font-size:96px;line-height:.98;letter-spacing:-3px;margin:0 0 26px;max-width:960px}}
+p{{font-size:34px;margin:0;max-width:880px}}
+.btn{{margin-top:38px;align-self:flex-start;background:#2340b8;color:#fff;font-weight:800;font-stretch:110%;font-size:30px;border-radius:12px;padding:22px 34px;box-shadow:0 6px 0 #14213d}}
+</style></head><body><div class="d"><div class="brand"><i></i>Kitchen Table</div>
 <h1>What's for dinner this week?</h1><p>One tap and your AI plans five easy dinners and the shopping list. Free.</p>
 <div class="btn">Plan my week's dinners</div></div></body></html>"""
 
