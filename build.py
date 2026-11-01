@@ -63,7 +63,7 @@ a{color:var(--cobalt)}
 .mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper);display:inline-block}
 .mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
 .band{background:var(--butter);margin:0 calc(50% - 50vw) 32px;padding:18px calc(50vw - 50%) 30px}
-h1{font-weight:800;font-stretch:125%;font-size:clamp(2rem,8.5vw,3rem);line-height:1;letter-spacing:-.03em;margin:0 0 14px}
+h1{font-weight:800;font-stretch:118%;font-size:clamp(1.8rem,7.4vw,2.5rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
 h2{font-weight:800;font-stretch:118%;font-size:1.45rem;line-height:1.12;letter-spacing:-.015em;margin:44px 0 8px}
 p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
@@ -151,7 +151,7 @@ a{color:var(--cobalt)}
 .mark{width:20px;height:20px;border:2.5px solid var(--ink);border-radius:4px;position:relative;flex:none;background:var(--paper);display:inline-block}
 .mark:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--cobalt);border-width:0 3px 3px 0;transform:rotate(45deg)}
 .band{background:var(--butter);margin:0 calc(50% - 50vw) 32px;padding:18px calc(50vw - 50%) 30px}
-h1{font-weight:800;font-stretch:125%;font-size:clamp(2rem,8.5vw,3rem);line-height:1;letter-spacing:-.03em;margin:0 0 14px}
+h1{font-weight:800;font-stretch:118%;font-size:clamp(1.8rem,7.4vw,2.5rem);line-height:1.04;letter-spacing:-.025em;margin:0 0 14px}
 h2{font-weight:800;font-stretch:118%;font-size:1.45rem;line-height:1.12;letter-spacing:-.015em;margin:44px 0 8px}
 p,ul,ol{margin:0 0 14px}
 li{margin-bottom:6px}
@@ -218,7 +218,7 @@ details.alt .under{margin:0 0 16px}
   .band{padding-top:40px;padding-bottom:52px}
   .band.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;align-items:start}
   .band.split .panel{margin-top:0}
-  .band h1{font-size:clamp(2.6rem,4.2vw,3.6rem)}
+  .band h1{font-size:clamp(2.3rem,3.2vw,2.9rem)}
   .band .lede{font-size:1.2rem;max-width:34ch}
   .band:not(.split) .lede{max-width:44rem}
   .tip,.wrap > h2,.wrap > ol,.wrap > p,.cta{max-width:48rem}
