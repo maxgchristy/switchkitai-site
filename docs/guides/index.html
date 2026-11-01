@@ -41,6 +41,15 @@ li{margin-bottom:6px}
 footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 footer a{color:var(--muted)}
 :focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
+.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
+.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
+footer{border-top:1px solid var(--line)}
+@media (min-width:980px){
+  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  main{max-width:48rem}
+}
 
 .panel{margin-top:22px}
 .panel .label{margin:0 0 8px;font-weight:700;font-size:1rem}
@@ -72,6 +81,26 @@ ol{padding-left:1.2em}
 .cta{margin-top:48px;background:var(--butter);border-radius:12px;padding:22px}
 .cta h2{margin:0 0 8px}
 .cta p{margin:0}
+
+.panel{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
+.words{border:1.5px solid rgba(20,33,61,.18);border-radius:12px}
+.btn{border-radius:12px;box-shadow:0 10px 22px -10px rgba(26,48,145,.75)}
+.btn:active{transform:none;box-shadow:0 4px 12px -6px rgba(26,48,145,.75)}
+.under select{border:1.5px solid rgba(20,33,61,.3);border-radius:10px}
+.row:before{border-width:2px;border-radius:7px;border-color:rgba(20,33,61,.55)}
+.cta{border-radius:18px;background:linear-gradient(120deg,#ffd84d,#f2b62a)}
+@media (min-width:980px){
+  .band{padding-top:40px;padding-bottom:52px}
+  .band.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;align-items:start}
+  .band.split .panel{margin-top:0}
+  .band h1{font-size:clamp(2.6rem,4.2vw,3.6rem)}
+  .band .lede{font-size:1.2rem;max-width:34ch}
+  .band:not(.split) .lede{max-width:44rem}
+  .tip,.wrap > h2,.wrap > ol,.wrap > p,.cta{max-width:48rem}
+  .wrap > ul.list:not(.hub){max-width:48rem}
+  ul.list.hub{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+  ul.list.hub li:nth-child(2){border-top:1px solid var(--line)}
+}
 </style><script defer src="https://cloud.umami.is/script.js" data-website-id="50f0715e-72d0-4480-b107-886be6ceffc4" data-domains="switchkitai.com,www.switchkitai.com" data-do-not-track="true" data-exclude-hash="true"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Free AI shortcuts for everyday life", "hasPart": [{"@type": "WebPage", "name": "Plan a week of dinners with ChatGPT", "url": "https://switchkitai.com/guides/plan-weekly-dinners-with-chatgpt/"}, {"@type": "WebPage", "name": "Is this message a scam? Ask your AI", "url": "https://switchkitai.com/guides/is-this-text-a-scam-ask-ai/"}, {"@type": "WebPage", "name": "Explain a confusing bill or letter in plain English", "url": "https://switchkitai.com/guides/explain-a-confusing-bill-with-ai/"}, {"@type": "WebPage", "name": "Turn a rough note into a polite email", "url": "https://switchkitai.com/guides/write-a-polite-email-with-chatgpt/"}, {"@type": "WebPage", "name": "Say no nicely, without over-explaining", "url": "https://switchkitai.com/guides/how-to-say-no-politely/"}, {"@type": "WebPage", "name": "Write a complaint that gets a quick fix", "url": "https://switchkitai.com/guides/write-a-complaint-letter-with-ai/"}, {"@type": "WebPage", "name": "Cook dinner with what's already in the fridge", "url": "https://switchkitai.com/guides/cook-with-what-you-have-ai/"}, {"@type": "WebPage", "name": "Spend less on groceries this week", "url": "https://switchkitai.com/guides/cut-grocery-bill-with-ai/"}, {"@type": "WebPage", "name": "Prepare questions for a doctor's appointment", "url": "https://switchkitai.com/guides/questions-to-ask-your-doctor-ai/"}, {"@type": "WebPage", "name": "Make your packing list in one tap", "url": "https://switchkitai.com/guides/packing-list-with-chatgpt/"}, {"@type": "WebPage", "name": "Get a phone script to lower a bill", "url": "https://switchkitai.com/guides/lower-your-bills-phone-script/"}, {"@type": "WebPage", "name": "Find a gift for anyone", "url": "https://switchkitai.com/guides/gift-ideas-with-ai/"}]}</script>
 </head>

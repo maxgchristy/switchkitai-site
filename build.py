@@ -72,6 +72,15 @@ li{margin-bottom:6px}
 footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 footer a{color:var(--muted)}
 :focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
+.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
+.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
+footer{border-top:1px solid var(--line)}
+@media (min-width:980px){
+  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  main{max-width:48rem}
+}
 main h1{font-size:clamp(1.9rem,7vw,2.4rem);margin-top:32px}
 main h2{font-size:1.25rem;margin-top:32px}
 .updated{margin-top:-6px}
@@ -151,6 +160,15 @@ li{margin-bottom:6px}
 footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 footer a{color:var(--muted)}
 :focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:4px}
+.top{position:relative;z-index:1;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;-webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
+.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
+footer{border-top:1px solid var(--line)}
+@media (min-width:980px){
+  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  main{max-width:48rem}
+}
 
 .panel{margin-top:22px}
 .panel .label{margin:0 0 8px;font-weight:700;font-size:1rem}
@@ -182,6 +200,26 @@ ol{padding-left:1.2em}
 .cta{margin-top:48px;background:var(--butter);border-radius:12px;padding:22px}
 .cta h2{margin:0 0 8px}
 .cta p{margin:0}
+
+.panel{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
+.words{border:1.5px solid rgba(20,33,61,.18);border-radius:12px}
+.btn{border-radius:12px;box-shadow:0 10px 22px -10px rgba(26,48,145,.75)}
+.btn:active{transform:none;box-shadow:0 4px 12px -6px rgba(26,48,145,.75)}
+.under select{border:1.5px solid rgba(20,33,61,.3);border-radius:10px}
+.row:before{border-width:2px;border-radius:7px;border-color:rgba(20,33,61,.55)}
+.cta{border-radius:18px;background:linear-gradient(120deg,#ffd84d,#f2b62a)}
+@media (min-width:980px){
+  .band{padding-top:40px;padding-bottom:52px}
+  .band.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;align-items:start}
+  .band.split .panel{margin-top:0}
+  .band h1{font-size:clamp(2.6rem,4.2vw,3.6rem)}
+  .band .lede{font-size:1.2rem;max-width:34ch}
+  .band:not(.split) .lede{max-width:44rem}
+  .tip,.wrap > h2,.wrap > ol,.wrap > p,.cta{max-width:48rem}
+  .wrap > ul.list:not(.hub){max-width:48rem}
+  ul.list.hub{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+  ul.list.hub li:nth-child(2){border-top:1px solid var(--line)}
+}
 </style>"""
 
 GUIDE_JS = """<script>
@@ -236,7 +274,7 @@ for g in GUIDES:
     path = "/guides/" + g["slug"] + "/"
     guide_paths.append(path)
     more = "".join(f'<li>{tapbtn(m, m, "row")}</li>' for m in g["more"])
-    body = ('<div class="band">' + f'<h1>{html.escape(g["h1"])}</h1><p class="lede">{html.escape(g["intro"])}</p>'
+    body = ('<div class="band split">' + f'<div class="bandText"><h1>{html.escape(g["h1"])}</h1><p class="lede">{html.escape(g["intro"])}</p></div>'
             '<div class="panel"><p class="label">Your AI gets these words:</p>'
             f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + picker() + '</div></div>'
             f'<p class="tip"><b>Tip:</b> {html.escape(g["tip"])}</p>'

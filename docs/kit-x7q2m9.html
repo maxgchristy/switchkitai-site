@@ -138,6 +138,62 @@ section{margin-top:56px}
 footer{margin-top:64px;padding-top:20px;border-top:2px solid var(--ink);font-size:.95rem;color:var(--muted)}
 footer a{color:var(--muted)}
 
+
+/* ---- Layer 2: depth, softer edges, wide desktop ---- */
+.top,body:has(#intro:not([hidden])) .top{background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%)}
+.band{position:relative;isolation:isolate;background:linear-gradient(90deg,#ffd84d 0%,#f9cb3a 55%,#efb22a 100%);padding-bottom:36px}
+.band::before{content:"";position:absolute;inset:-90px 0 0 0;z-index:-1;pointer-events:none;
+  background:radial-gradient(rgba(20,33,61,.26) 1.3px,transparent 1.7px) 0 0/15px 15px;
+  -webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 90%);mask-image:linear-gradient(100deg,transparent 25%,#000 90%)}
+.band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(20,33,61,.10))}
+.hero{background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-radius:18px;padding:18px;box-shadow:0 10px 30px -18px rgba(20,33,61,.55)}
+.heroLabel{margin-top:0}
+.seg .chip{border:1.5px solid rgba(20,33,61,.22);border-radius:12px;font-weight:600;box-shadow:0 1px 0 rgba(20,33,61,.06)}
+.seg .chip[aria-pressed="true"]{border-color:var(--ink)}
+.btn{border-radius:12px;box-shadow:0 10px 22px -10px rgba(26,48,145,.75)}
+.btn:active{transform:none;box-shadow:0 4px 12px -6px rgba(26,48,145,.75)}
+.under select{border:1.5px solid rgba(20,33,61,.3);border-radius:10px}
+.example{margin-top:22px}
+.example h2{margin:0 0 6px}
+.exNote{margin:0 0 12px;font-size:1rem;color:var(--ink)}
+.example .ticket{margin-top:0;border:0;border-radius:18px;background:var(--paper);box-shadow:0 18px 40px -22px rgba(20,33,61,.6)}
+.ticket li{border-bottom-color:#edf0f5}
+.ticket .shop{background:#f6f7fb;border-radius:0 0 18px 18px}
+.row:before{border-width:2px;border-radius:7px;border-color:rgba(20,33,61,.55)}
+.chips .chip{border-width:1.5px;border-radius:12px}
+.chips .chip[aria-pressed="true"]{border-color:var(--ink)}
+.price{border-radius:18px;background:linear-gradient(120deg,#ffd84d,#f2b62a)}
+footer{border-top:1px solid var(--line)}
+
+@media (min-width:980px){
+  .wrap{max-width:74rem;padding-left:40px;padding-right:40px}
+  .top{padding-top:22px}
+  .band{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"text ex" "panel ex";column-gap:56px;row-gap:22px;align-items:start;padding-top:40px;padding-bottom:56px}
+  .band:has(#example[hidden]){grid-template-areas:"text panel";align-items:center}
+  .heroText{grid-area:text}
+  .band h1{padding-top:0;font-size:clamp(3.4rem,5.4vw,4.6rem);max-width:12ch}
+  .lede{font-size:1.25rem;max-width:32ch}
+  .hero{grid-area:panel;margin-top:0;max-width:34rem}
+  .example{grid-area:ex;margin-top:0}
+  .ticket li{grid-template-columns:3.6rem 1fr;padding:11px 18px}
+  section{margin-top:72px}
+  #freeSec .rows{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+  #freeSec .rows li:nth-child(2){border-top:1px solid var(--line)}
+  #make{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:56px;align-items:start}
+  #make > h2,#make > .lede{grid-column:1}
+  #make > .q,#make > #build{grid-column:2}
+  #make > .q:first-of-type{grid-row:1 / span 2}
+  #make > h2{grid-row:1}#make > .lede{grid-row:2;align-self:start}
+  #sheet{max-width:none}
+  #sheetCard .rows{columns:2;column-gap:48px}
+  #sheetCard .rows li{break-inside:avoid}
+  .price,.honest,#paidTools{max-width:44rem}
+  .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:56px;align-items:start}
+  .faq h2{grid-column:1;grid-row:1 / span 4}
+  .faq details{grid-column:2}
+  .faq details:first-of-type{margin-top:0}
+}
+
 /* Print: the fridge version */
 @media print{
   @page{margin:12mm}
@@ -163,8 +219,10 @@ footer a{color:var(--muted)}
   <!-- First screen: one useful thing, free -->
   <div id="intro">
    <div class="band">
-    <h1 id="h1">What's for dinner this week?</h1>
-    <p class="lede" id="lede">Pick who you're cooking for. Your AI plans five easy dinners and writes the shopping list.</p>
+    <div class="heroText">
+      <h1 id="h1">What's for dinner this week?</h1>
+      <p class="lede" id="lede">Pick who you're cooking for. Your AI plans five easy dinners and writes the shopping list.</p>
+    </div>
     <div class="hero" id="heroCard">
       <p class="heroLabel" id="heroHead">Cooking for</p>
       <div class="seg" id="heroChips" role="group" aria-label="Cooking for">
@@ -183,12 +241,9 @@ footer a{color:var(--muted)}
         </select>
       </div>
     </div>
-   </div>
-    <p class="toast" id="toast" role="status"></p>
-
-    <section id="example" class="example noprint">
+    <div id="example" class="example noprint">
       <h2>What comes back</h2>
-      <p class="lede" style="color:var(--muted)">An example plan for two. Yours fits who you're cooking for, and you can ask for changes.</p>
+      <p class="exNote">An example plan for two. Yours fits who you're cooking for, and you can ask for changes.</p>
       <div class="ticket">
         <ol>
           <li><b>Mon</b><span>Sheet-pan lemon chicken and potatoes <em>30 min</em></span></li>
@@ -199,7 +254,10 @@ footer a{color:var(--muted)}
         </ol>
         <div class="shop"><b>Shopping list, by aisle</b>Produce: lemons, potatoes, broccoli, peppers, green beans, cabbage, onion. Meat and fish: chicken thighs, flank steak, salmon, Italian sausage. Pantry: rice, pasta, black beans, tortillas, soy sauce.</div>
       </div>
-    </section>
+    </div>
+   </div>
+    <p class="toast" id="toast" role="status"></p>
+
 
     <section id="freeSec" class="noprint">
       <h2>More jobs, one tap each</h2>
