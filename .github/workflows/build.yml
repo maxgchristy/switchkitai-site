@@ -1,0 +1,26 @@
+name: Build site
+# Rebuilds docs/ whenever the source changes, so edits made on github.com go live on their own.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['docs/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 build.py switchkitai@gmail.com 50f0715e-72d0-4480-b107-886be6ceffc4
+      - name: Stop if a retired name slipped in
+        run: "! grep -rli 'kitchen table' docs"
+      - name: Commit the built site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git diff --cached --quiet || (git commit -m "Build site" && git push)
