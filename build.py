@@ -291,6 +291,12 @@ for g in GUIDES:
     path = "/guides/" + g["slug"] + "/"
     guide_paths.append(path)
     more = "".join(f'<li>{tapbtn(m, m, "row")}</li>' for m in g["more"])
+    gi = GUIDES.index(g)
+    others = GUIDES[gi + 1:] + GUIDES[:gi]
+    rel = ([o for o in others if o["id"][0] == g["id"][0]] + [o for o in others if o["id"][0] != g["id"][0]])[:4]
+    related = ('<h2>More Free Shortcuts</h2><ul class="list hub">' + "".join(
+        f'<li><a class="row" href="/guides/{o["slug"]}/"><span>{html.escape(title_case(o["h1"]))}</span></a></li>' for o in rel) +
+        '</ul><p><a href="/guides/">See all free shortcuts</a></p>')
     body = ('<div class="band split">' + f'<div class="bandText fade" style="--i:0"><h1>{html.escape(title_case(g["h1"]))}</h1><p class="lede">{html.escape(g["intro"])}</p></div>'
             '<div class="panel fade" style="--i:3"><p class="label">Your AI gets these words</p>'
             f'<p class="words">{html.escape(prompt)}</p>' + tapbtn(prompt, "Try it now, free") + '<p class="toast" id="toast" role="status"></p></div></div>'
@@ -302,6 +308,7 @@ for g in GUIDES:
             '<details class="alt"><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary>' + picker() + '</details>'
             f'<p><b>Good to know:</b> {html.escape(g["know"])}</p>'
             '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button></p>'
+            + related +
             '<div class="cta grain dark"><h2>Want About 60 More Like This?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guide#make">Make my cheat sheet</a></div>')
     ld = {"@context": "https://schema.org", "@type": "HowTo", "name": g["h1"], "description": g["desc"],
@@ -313,6 +320,7 @@ for g in GUIDES:
 hub_items = "".join(f'<li><a class="row" href="/guides/{g["slug"]}/"><span>{html.escape(title_case(g["h1"]))}<small>{html.escape(g["desc"].split(". ")[0])}.</small></span></a></li>' for g in GUIDES)
 hub_body = ('<div class="band"><h1>Free Shortcuts for Everyday Jobs</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job. '
             'Each page has one button that opens your AI with the words already written.</p></div>'
+            '<p><b>New:</b> <a href="/guides/printable-ai-cheat-sheet/">a one-page printable cheat sheet</a> to keep by the computer or give to a parent.</p>'
             '<ul class="list hub">' + hub_items + '</ul>'
             '<div class="cta grain dark"><h2>Get a Cheat Sheet Made for You</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guides_hub#make">Make my cheat sheet</a></div>')
@@ -322,6 +330,38 @@ open(os.path.join(DIST, "guides", "index.html"), "w").write(guide_shell(
     "Free AI shortcuts for everyday life: what to ask ChatGPT", "One-tap requests for ChatGPT, Gemini, Claude and Copilot: dinners, emails, bills, scams, trips, gifts. Free, no typing.",
     "/guides/", hub_body, hub_ld))
 guide_paths.insert(0, "/guides/")
+
+# ---- Printable one-page cheat sheet (for the fridge, or to hand to a parent) ----
+PRINT_ITEMS = [
+    ("Plan dinners", "m1"), ("Use what's in the fridge", "m2"), ("Write a polite email", "e1"), ("Say no nicely", "e2"),
+    ("Check if a message is a scam", "p2"), ("Explain a bill or letter", "b1"), ("Find money I'm wasting", "b2"),
+    ("Something's broken at home", "h1"), ("Questions for the doctor", "w1"), ("Explain a medical word", "w2"),
+    ("Gift ideas", "f1"), ("Help with my phone", "p1"),
+]
+PRINT_CSS = ('<style>.sheet{list-style:none;padding:0;margin:24px 0 0;counter-reset:n}.sheet li{border-top:1px solid var(--hair);padding:14px 0;counter-increment:n}'
+             '.sheet li:last-child{border-bottom:1px solid var(--hair)}.sheet b{display:block;font:600 14px var(--mono);font-variant-caps:all-small-caps;letter-spacing:.048em}'
+             '.sheet b:before{content:counter(n) ". "}.sheet span{display:block;margin-top:4px}'
+             '@media (min-width:980px){.sheet{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}}'
+             '@media print{.fade{opacity:1!important;animation:none!important}.top a.small,.noprint,footer,.cta{display:none!important}body{font-size:12px}.band{padding:12px 0}.sheet{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.sheet li{padding:6px 0;break-inside:avoid}h1{font-size:28px}}</style>')
+sheet_items = "".join(f'<li><b>{html.escape(t)}</b><span>{html.escape(lib_prompt(sid))}</span></li>' for t, sid in PRINT_ITEMS)
+print_body = ('<div class="band split"><div class="bandText fade" style="--i:0"><h1>Printable AI Cheat Sheet: 12 Things to Ask</h1>'
+              '<p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Print this page and keep it by the computer, or hand it to someone who\'s just starting out. '
+              'Copy any line into your AI and press send.</p></div>'
+              '<div class="panel fade noprint" style="--i:3"><p class="label">One page, free</p><p>Fits on one sheet of paper. Every line also works as a one-tap button on our free shortcut pages.</p>'
+              '<button type="button" class="btn" onclick="window.print()">Print this sheet</button>'
+              '<p class="share">Helping a parent or friend? <button type="button" id="shareBtn">Send them the link</button></p><p class="toast" id="toast" role="status"></p></div></div>'
+              '<div hidden>' + picker() + '</div><ol class="sheet">' + sheet_items + '</ol>'
+              '<p class="noprint" style="margin-top:24px">Want these as one-tap buttons instead? <a href="/guides/">See all free shortcuts</a>.</p>'
+              '<div class="cta grain dark"><h2>Get a Cheat Sheet Made for You</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
+              '<a class="btn" href="/?utm_content=printable#make">Make my cheat sheet</a></div>')
+print_ld = {"@context": "https://schema.org", "@type": "WebPage", "name": "Printable AI cheat sheet: 12 things to ask ChatGPT",
+            "description": "A free one-page printable list of everyday things to ask ChatGPT, Gemini, Claude or Copilot."}
+os.makedirs(os.path.join(DIST, "guides", "printable-ai-cheat-sheet"), exist_ok=True)
+open(os.path.join(DIST, "guides", "printable-ai-cheat-sheet", "index.html"), "w").write(guide_shell(
+    "Printable AI cheat sheet: 12 things to ask ChatGPT (free)",
+    "A free one-page printable list of everyday things to ask ChatGPT, Gemini, Claude or Copilot: dinners, emails, bills, scams, doctor visits and more. Great for beginners.",
+    "/guides/printable-ai-cheat-sheet/", PRINT_CSS + print_body, print_ld))
+guide_paths.append("/guides/printable-ai-cheat-sheet/")
 
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
