@@ -5,6 +5,7 @@ CNAME (custom domain), .nojekyll, 404.html, old /card redirects, assets/.
 The paid page keeps its file name so Stripe's existing after-payment redirect still works.
 """
 import datetime, html, os, re, shutil, sys
+from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 EMAIL = sys.argv[1] if len(sys.argv) > 1 else "[SUPPORT EMAIL]"
@@ -307,7 +308,8 @@ for g in GUIDES:
             '<li>Answer its quick questions, or ask it to change anything.</li></ol>'
             '<details class="alt"><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary>' + picker() + '</details>'
             f'<p><b>Good to know:</b> {html.escape(g["know"])}</p>'
-            '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button></p>'
+            '<p class="share">Know someone who\'d find this handy? <button type="button" id="shareBtn">Send them the link</button>'
+            f' or <a href="https://www.pinterest.com/pin/create/button/?url={quote(SITE + path)}&amp;media={quote(SITE + "/assets/pins/" + g["slug"] + ".png")}&amp;description={quote(g["title"])}" target="_blank" rel="noopener">save it on Pinterest</a>.</p>'
             + related +
             '<div class="cta grain dark"><h2>Want About 60 More Like This?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: dinners, emails, bills, trips, home and more. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guide#make">Make my cheat sheet</a></div>')
@@ -367,4 +369,17 @@ open(os.path.join(DIST, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     "".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY.isoformat()}</lastmod></url>\n" for p in ["/"] + guide_paths + ["/help.html", "/privacy.html", "/terms.html"]) +
     "</urlset>\n")
+# ---- Pinterest images, one per free page (see pins.py). Never stops the build. ----
+try:
+    import pins
+    PIN_LIST = [{"slug": g["slug"], "headline": title_case(g["h1"]), "label": "Free AI shortcut", "card_label": "Ask your AI",
+                 "card_text": g["more"][0], "title": g["title"], "desc": g["desc"], "link": "/guides/" + g["slug"] + "/"} for g in GUIDES]
+    PIN_LIST.append({"slug": "printable-ai-cheat-sheet", "headline": "Printable AI Cheat Sheet", "label": "Free, one page",
+                     "card_label": "12 things to ask your AI", "items": [t for t, _ in PRINT_ITEMS[:7]], "more": "…and 5 more",
+                     "title": "Printable AI cheat sheet: 12 things to ask ChatGPT (free)",
+                     "desc": "A free one-page list of everyday things to ask ChatGPT, Gemini, Claude or Copilot. Print it for the fridge or give it to a parent.",
+                     "link": "/guides/printable-ai-cheat-sheet/"})
+    pins.render(PIN_LIST, DIST, SITE)
+except Exception as e:
+    print("pins: skipped", e)
 print("built", sorted(os.listdir(DIST)), len(guide_paths), "guide pages")
