@@ -322,7 +322,7 @@ for g in GUIDES:
 hub_items = "".join(f'<li><a class="row" href="/guides/{g["slug"]}/"><span>{html.escape(title_case(g["h1"]))}<small>{html.escape(g["desc"].split(". ")[0])}.</small></span></a></li>' for g in GUIDES)
 hub_body = ('<div class="band"><h1>Free Shortcuts for Everyday Jobs</h1><p class="lede">Not sure what to ask ChatGPT, Gemini, Claude or Copilot? Pick a job. '
             'Each page has one button that opens your AI with the words already written.</p></div>'
-            '<p><b>New:</b> <a href="/guides/printable-ai-cheat-sheet/">a one-page printable cheat sheet</a> to keep by the computer or give to a parent.</p>'
+            '<p><b>New for the holidays:</b> <a href="/guides/ai-christmas-photo-ideas/">AI Christmas photo ideas</a>: turn a family or pet photo into a card picture in one tap. Also: <a href="/guides/printable-ai-cheat-sheet/">a one-page printable cheat sheet</a> to give to a parent.</p>'
             '<ul class="list hub">' + hub_items + '</ul>'
             '<div class="cta grain dark"><h2>Get a Cheat Sheet Made for You</h2><p>Answer four quick questions and get one-tap shortcuts for your household. The first 10 are free.</p>'
             '<a class="btn" href="/?utm_content=guides_hub#make">Make my cheat sheet</a></div>')
@@ -365,6 +365,54 @@ open(os.path.join(DIST, "guides", "printable-ai-cheat-sheet", "index.html"), "w"
     "/guides/printable-ai-cheat-sheet/", PRINT_CSS + print_body, print_ld))
 guide_paths.append("/guides/printable-ai-cheat-sheet/")
 
+# ---- Seasonal: AI Christmas photo ideas (peak searches mid-December; pins need to go up in November) ----
+XMAS_INTRO = "I'm going to send you a photo. When I do, "
+XMAS_KEEP = " Keep everyone's faces, hair and expressions exactly as they are so they still look like themselves. If I haven't sent the photo yet, ask me for it."
+XMAS = [
+    ("Classic Christmas card", "turn it into a classic Christmas card photo: everyone together in front of a decorated tree and a fireplace, warm twinkly lights, cozy and natural. Leave space at the bottom for a short greeting."),
+    ("Santa caught in our living room", "make it look like Santa Claus was caught on camera in our living room on Christmas Eve, leaving presents by the tree, like a real night-time home photo. Keep the room looking like our room."),
+    ("Snowy cabin portrait", "put us outside a cozy log cabin in gently falling snow, wearing warm winter sweaters and scarves, soft evening light."),
+    ("Matching pajamas morning", "show us on Christmas morning in matching red plaid pajamas, sitting by the tree with mugs of cocoa and wrapped presents."),
+    ("Vintage holiday postcard", "turn it into a 1950s-style illustrated Christmas postcard with soft colors and a hand-lettered \"Merry Christmas\" at the top."),
+    ("Watercolor card", "turn it into a gentle watercolor painting for a holiday card, with a snowy background and a few holly leaves around the edge."),
+    ("Family in a snow globe", "put us inside a glass snow globe with a tiny snowy village, sitting on a wooden table with soft lights behind it."),
+    ("Pet in a Santa hat", "give my pet a little Santa hat and scarf, sitting by a decorated tree, as a cute holiday card photo."),
+]
+XMAS_MSG = "Help me write a short message for our Christmas card. Ask me who it's from and one or two things that happened this year, then give me 3 options: one funny, one warm, one short. Keep it short and simple. Use plain English."
+xp = lambda d: XMAS_INTRO + d + XMAS_KEEP
+x_rows = "".join(f'<li>{tapbtn(xp(d), t, "row")}</li>' for t, d in XMAS[1:])
+x_path = "/guides/ai-christmas-photo-ideas/"
+x_body = ('<div class="band split"><div class="bandText fade" style="--i:0"><h1>AI Christmas Photo Ideas, Ready to Tap</h1>'
+          '<p class="lede">Turn an ordinary family or pet photo into a Christmas card picture. Tap a style, your AI opens with the request already written, then send it your photo. '
+          'Works with ChatGPT and Gemini, free.</p></div>'
+          '<div class="panel fade" style="--i:3"><p class="label">Start here: classic Christmas card</p>'
+          f'<p class="words">{html.escape(xp(XMAS[0][1]))}</p>' + tapbtn(xp(XMAS[0][1]), "Try it now, free") +
+          '<p class="toast" id="toast" role="status"></p></div></div>'
+          '<p class="tip"><b>How to add your photo:</b> after your AI opens, tap the <b>+</b> or paperclip next to the message box, choose a photo from your phone, and press send. '
+          'Pick a clear photo where everyone\'s face is easy to see.</p>'
+          '<h2>More Christmas Photo Styles</h2><ul class="list">' + x_rows + '</ul>'
+          '<h2>Now Write the Card</h2><ul class="list"><li>' + tapbtn(XMAS_MSG, "Write the message inside our Christmas card", "row") + '</li></ul>'
+          '<h2>Tips for Better Pictures</h2><ol>'
+          '<li>If a face doesn\'t look right, reply: "Keep their face exactly like the original photo" and ask it to try again.</li>'
+          '<li>Words on pictures sometimes come out misspelled. Ask it to fix them, or add your greeting later in your card app.</li>'
+          '<li>Free accounts have a daily limit on pictures. If you hit it, try again tomorrow or switch to Gemini.</li></ol>'
+          '<details class="alt"><summary>I use Gemini, Claude or Copilot, not ChatGPT</summary>' + picker() + '</details>'
+          '<p><b>Good to know:</b> your photo goes straight from your phone to your own AI. Switch Kit AI never sees it. Only use photos of people who\'d be happy to see themselves on a card.</p>'
+          '<p class="share">Know someone making cards this year? <button type="button" id="shareBtn">Send them the link</button>'
+          f' or <a href="https://www.pinterest.com/pin/create/button/?url={quote(SITE + x_path)}&amp;media={quote(SITE + "/assets/pins/ai-christmas-photo-ideas.png")}&amp;description={quote("AI Christmas photo ideas: one-tap prompts for ChatGPT and Gemini")}" target="_blank" rel="noopener">save it on Pinterest</a>.</p>'
+          '<div class="cta grain dark"><h2>Want About 60 More Like This?</h2><p>Answer four quick questions and get one-tap shortcuts for your household: gifts, dinners, cards, trips and more. The first 10 are free.</p>'
+          '<a class="btn" href="/?utm_content=xmas_photo#make">Make my cheat sheet</a></div>')
+x_ld = {"@context": "https://schema.org", "@type": "HowTo", "name": "Make an AI Christmas photo with ChatGPT or Gemini",
+        "step": [{"@type": "HowToStep", "text": "Tap a style. Your AI opens with the request already written."},
+                 {"@type": "HowToStep", "text": "Attach a clear family or pet photo and press send."},
+                 {"@type": "HowToStep", "text": "Ask it to fix anything, like keeping faces exactly the same."}]}
+os.makedirs(os.path.join(DIST, "guides", "ai-christmas-photo-ideas"), exist_ok=True)
+open(os.path.join(DIST, "guides", "ai-christmas-photo-ideas", "index.html"), "w").write(guide_shell(
+    "AI Christmas photo ideas: 8 one-tap ChatGPT and Gemini prompts for family photos (free)",
+    "Turn a family or pet photo into a Christmas card picture: classic tree and fireplace, Santa caught in your living room, snowy cabin, matching pajamas and more. One tap opens ChatGPT or Gemini with the prompt written. Free.",
+    x_path, x_body, x_ld))
+guide_paths.insert(1, x_path)
+
 open(os.path.join(DIST, "sitemap.xml"), "w").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     "".join(f"  <url><loc>{SITE}{p}</loc><lastmod>{TODAY.isoformat()}</lastmod></url>\n" for p in ["/"] + guide_paths + ["/help.html", "/privacy.html", "/terms.html"]) +
@@ -379,6 +427,11 @@ try:
                      "title": "Printable AI cheat sheet: 12 things to ask ChatGPT (free)",
                      "desc": "A free one-page list of everyday things to ask ChatGPT, Gemini, Claude or Copilot. Print it for the fridge or give it to a parent.",
                      "link": "/guides/printable-ai-cheat-sheet/"})
+    PIN_LIST.insert(0, {"slug": "ai-christmas-photo-ideas", "headline": "AI Christmas Photo Ideas", "label": "Free, one tap",
+                     "card_label": "Turn a family photo into", "items": [t for t, _ in XMAS[:7]], "more": "…plus the card message",
+                     "title": "AI Christmas photo ideas: one-tap prompts for ChatGPT and Gemini",
+                     "desc": "Turn a family or pet photo into a Christmas card picture: tree and fireplace, Santa caught in your living room, snowy cabin, matching pajamas. Tap a style, add your photo. Free.",
+                     "link": "/guides/ai-christmas-photo-ideas/"})
     pins.render(PIN_LIST, DIST, SITE)
 except Exception as e:
     print("pins: skipped", e)
