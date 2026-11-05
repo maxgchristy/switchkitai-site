@@ -490,14 +490,14 @@ GUIDES = [
     {
         "slug": "video-call-family-step-by-step",
         "id": "p5",
-        "title": "How to video call family: simple step-by-step help for any phone",
+        "title": "How to video call family (FaceTime on Android, iPhone, iPad): simple step-by-step help",
         "h1": "Set up a video call with family",
         "desc": "One tap and your AI walks you through a video call with family, step by step, for iPhone, Android, iPad or computer. Plain English, free, no tech skills needed.",
         "intro": "Seeing the grandkids or a far-away friend is easier than it looks. Tap the button, tell your AI what phone or computer you and the other person have, and it walks you through the call one small step at a time.",
-        "tip": "Say what each person has, like \"I have an iPhone, my daughter has an Android\". That decides which app is easiest (FaceTime only works between Apple devices).",
+        "tip": "Say what each person has, like \"I have an iPhone, my daughter has an Android\". That decides which app is easiest. Android phones can't start a FaceTime call, but they can join one from a link an iPhone user sends.",
         "more": [
             "I have an iPad and my son has an Android phone. What's the easiest free way for us to video call? Walk me through it.",
-            "Walk me through starting a FaceTime call on my iPhone, one step at a time.",
+            "My grandkids have iPhones and I have an Android. How do I join their FaceTime call? Walk me through it.",
             "How do I set up a group video call so the whole family can join at once? We all have different phones.",
         ],
         "know": "Video calls use a lot of data, so connect to your home Wi-Fi first if you can. You never need to pay or share a password to join a family call.",
